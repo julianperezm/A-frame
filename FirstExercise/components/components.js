@@ -1,33 +1,24 @@
-AFRAME.registerComponent('textWinner', {
-    console.log("Update");
-    schema: {
-      state: {type: 'string', default: 'noWinner'},
-      
-    },
-    
-    update: function(oldData) {
-        console.log("Update");
-    },
-  });
 
-
-AFRAME.registerComponent('noWinnerToWinner', {
+AFRAME.registerComponent('nowinnertowinner', {
 schema: {
     event: {type: 'string', default: 'click'},
 },
 
 init: function () {
     this.eventHandlerClick = function () {
-        var text = document.getElementById('WinnerTxt');
+        let text = document.getElementById('WinnerTxt');
         console.log(text)
-        var value = text.getAttribute("value");
-
+        let value = text.getAttribute("value");
+        console.log(value)
         if( value === "Pulsa el boton para ganar"){
-            text.setAttribute("value", {value: '¡¡Enhorabuena has ganado!!'})
-            text.setAttribute('textWinner', {state: 'Winner'});
+            console.log("He entrado")
+            text.setAttribute('value', 'Enhorabuena!!')
+            text.setAttribute("scale",{x:3,y:3,z:3});
+            text.setAttribute('textwinner', 'Winner');
         }else{
-            text.setAttribute("value", {value: 'Pulsa el boton para ganar'})
-            text.setAttribute('textWinner', {state: 'noWinner'});
+            text.setAttribute('value','Pulsa el boton para ganar')
+            text.setAttribute("scale",{x:1,y:1,z:1});
+            text.setAttribute('textwinner','noWinner');
         }
     };
 },
@@ -41,3 +32,7 @@ update: function(oldData) {
     }
 },
 });
+
+
+  
+  

@@ -10,79 +10,104 @@
     </head>
     <body>
         <a-scene physics="debug: true">
-            <a-sky color="white"></a-sky>
-    
-            <a-plane static-body position="0 5 0" rotation="-90 0 0" width="17.5" height="60" color="yellow"></a-plane>
+            <a-assets>
+                <img id="color2" src="img/Atlas.jpg">
+                <img id="color1" src="img/Azure Pop.jpg">
+                <img id="color4" src="img/JShine.jpg">
+                <img id="color3" src="img/Summer Dog.jpg">
+            </a-assets>
+            
+            <a-sky src="#color1"></a-sky>
+
+            <a-plane static-body position="0 5 0" rotation="-90 0 0" width="17.5" height="60" color="#ebebeb""></a-plane>
 
             <a-text value=" <---- Lea las instrucciones antes de comenzar" position="-5 7.5 25"
-                    scale="2 2 2" color="red"></a-text>
+                    scale="2 2 2" color="black"></a-text>
             <a-text value="Instrucciones" position="-7.5 7.5 30" rotation="0 90 0"
-                scale="2 2 2" color="red"></a-text>
-            <a-text value="Debe llegar al final eligiendo entres tres puertas y luego tocar el boton para conseguir la victoria" 
+                scale="2 2 2" color="black"></a-text>
+            <a-text value="Debe llegar al final eligiendo entres tres puertas y luego tocar el boton para conseguir la victoria." 
                 position="-7.5 7 30" rotation="0 90 0"
-                width="2.5" scale="2 2 2" color="red"></a-text>
+                width="2.5" scale="2 2 2" color="black"></a-text>
 
             <!-- first wall -->
             <a-plane static-body position="-7.5 7.5 15" rotation="0 0 0" width="2.5" height="5"
-                color="black"></a-plane>
+                src="#color2"></a-plane>
             <a-plane static-body position="-2.5 7.5 15" rotation="0 0 0" width="2.5" height="5"
-                color="black"></a-plane>
+                src="#color2"></a-plane>
             <a-plane static-body position="2.5 7.5 15" rotation="0 0 0" width="2.5" height="5"
-                color="black"></a-plane>
+                src="#color2"></a-plane>
             <a-plane static-body position="7.5 7.5 15" rotation="0 0 0" width="2.5" height="5"
-            color="black"></a-plane>
+            src="#color2"></a-plane>
 
             <a-box dynamic-body position="0 7.5 15" width="2.3" height="5" depth="0.5">
+                <a-text value="2" color="black" position="-0.1 0 0.5" rotation="0 0 0" 
+                scale="1 1 1"></a-text>
             </a-box>
             <a-box static-body position="-5 7.5 15" width="2.3" height="5" depth="0.5">
+                <a-text value="1" color="black" position="-0.1 0 0.5" rotation="0 0 0" 
+                scale="1 1 1"></a-text>
             </a-box>
             <a-box static-body position="5 7.5 15" width="2.3" height="5" depth="0.5">
+                <a-text value="3" color="black" position="-0.1 0 0.5" rotation="0 0 0" 
+                scale="1 1 1"></a-text>
             </a-box>
 
             <!-- Second wall -->
             <a-plane static-body position="-7.5 7.5 0" rotation="0 0 0" width="2.5" height="5"
-                color="black"></a-plane>
+                src="#color3"></a-plane>
             <a-plane static-body position="-2.5 7.5 0" rotation="0 0 0" width="2.5" height="5"
-                color="black"></a-plane>
+                src="#color3"></a-plane>
             <a-plane static-body position="2.5 7.5 0" rotation="0 0 0" width="2.5" height="5"
-                color="black"></a-plane>
+                src="#color3"></a-plane>
             <a-plane static-body position="7.5 7.5 0" rotation="0 0 0" width="2.5" height="5"
-            color="black"></a-plane>
+                src="#color3"></a-plane>
 
             <a-box static-body position="0 7.5 0" width="2.3" height="5" depth="0.5">
+                <a-text value="2" color="black" position="-0.1 0 0.5" rotation="0 0 0" 
+                scale="1 1 1"></a-text>
             </a-box>
             <a-box dynamic-body position="-5 7.5 0" width="2.3" height="5" depth="0.5">
+                <a-text value="1" color="black" position="-0.1 0 0.5" rotation="0 0 0" 
+                scale="1 1 1"></a-text>
             </a-box>
             <a-box static-body position="5 7.5 0" width="2.3" height="5" depth="0.5">
+                <a-text value="3" color="black" position="-0.1 0 0.5" rotation="0 0 0" 
+                scale="1 1 1"></a-text>
             </a-box>
             
             <!-- Third wall -->
             <a-plane static-body position="-7.5 7.5 -15" rotation="0 0 0" width="2.5" height="5"
-                color="black"></a-plane>
+                src="#color1"></a-plane>
             <a-plane static-body position="-2.5 7.5 -15" rotation="0 0 0" width="2.5" height="5"
-                color="black"></a-plane>
+                src="#color1"></a-plane>
             <a-plane static-body position="2.5 7.5 -15" rotation="0 0 0" width="2.5" height="5"
-                color="black"></a-plane>
+                src="#color1"></a-plane>
             <a-plane static-body position="7.5 7.5 -15" rotation="0 0 0" width="2.5" height="5"
-            color="black"></a-plane>
+                src="#color1"></a-plane>
 
             <a-box static-body position="0 7.5 -15" width="2.3" height="5" depth="0.5">
+                <a-text value="2" color="black" position="-0.1 0 0.5" rotation="0 0 0" 
+                scale="1 1 1"></a-text>
             </a-box>
             <a-box static-body position="-5 7.5 -15" width="2.3" height="5" depth="0.5">
+                <a-text value="1" color="black" position="-0.1 0 0.5" rotation="0 0 0" 
+                scale="1 1 1"></a-text>
             </a-box>
             <a-box dynamic-body position="5 7.5 -15" width="2.3" height="5" depth="0.5">
+                <a-text value="3" color="black" position="-0.1 0 0.5" rotation="0 0 0" 
+                scale="1 1 1"></a-text>
             </a-box>
             
             <!--Final Part-->
-            <a-box static-body position="0 6.1 25" width="1" height="0.15" depth="1">
+            <a-box static-body position="0 6.1 -25" width="1" height="0.15" depth="1">
             </a-box>
-            <a-box static-body position="0 5.5 25" width="0.3" height="1" depth="0.3">
+            <a-box static-body position="0 5.5 -25" width="0.3" height="1" depth="0.3">
             </a-box>
-            <a-box static-body position="0 6.2 25" width="0.2" height="0.1" depth="0.2" color="red" noWinnerToWinner>
+            <a-box static-body position="0 6.2 -25" width="0.2" height="0.1" depth="0.2" color="black" nowinnertowinner>
             </a-box>
-            <a-text id="WinnerTxt" value="Pulsa el boton para ganar" position="-1 7 25" color="red" textWinner></a-text>
+            <a-text id="WinnerTxt" value="Pulsa el boton para ganar" position="-1.5 7 -25" color="black" sacle="1 1 1"></a-text>
             
-
+        
         <!-- Camera rig, with a camera and a cylynder -->
             <a-entity kinema-body="radius: 0.8" movement-controls="fly: false" position="0 5 30" look-controls>
                 <a-entity camera position="0 1.6 0" >
