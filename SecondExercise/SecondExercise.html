@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+	<script src="Components/Components.js"></script>
+
+</head>
+
+<body>
+	<a-scene physics="debug: true">
+		<!--Construction Zone-->
+		<a-entity id="zone" constructionzone></a-entity>
+
+		<!-- Podium -->
+		<a-entity id="podium" podium></a-entity>
+		
+		<!--Menu-->
+		<a-entity id="menu" menu></a-entity>
+
+		<!--<a-box position="-0.5 1.5 -1" width="0.1" height="0.1" depth="0.1" color="red" boxbutton></a-box>-->
+		<a-camera>
+			<a-cursor></a-cursor>
+		</a-camera>
+	</a-scene>
+</body>
+</html>

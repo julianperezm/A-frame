@@ -26,13 +26,9 @@ init: function () {
 update: function(oldData) {
     var el = this.el;
     var data = this.data;
-    
-    if(! oldData.event){ 
+
+    if(! oldData.event){
         el.addEventListener(data.event, this.eventHandlerClick);
     }
 },
 });
-
-
-  
-  
