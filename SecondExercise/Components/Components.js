@@ -1,3 +1,4 @@
+
 AFRAME.registerComponent('constructionzone',{
 	schema:{
 		event: {type: 'string', default: 'click'}
@@ -6,7 +7,7 @@ AFRAME.registerComponent('constructionzone',{
 	init: function(){
 		console.log("dentro del componente constructionzone");
 		let planePrincipal = document.createElement('a-plane');
-		planePrincipal.setAttribute('position',{x:0,y:0,z:-7});
+		planePrincipal.setAttribute('position',{x:0,y:-0.5,z:-7});
 		planePrincipal.setAttribute('rotation', {x:-90, y:0, z:0});
 		planePrincipal.setAttribute('width', '10');
 		planePrincipal.setAttribute('height', '10');
@@ -24,16 +25,129 @@ AFRAME.registerComponent('podium',{
 
 	init: function(){
 		console.log("dentro del componente podium");
-		let podium = document.createElement('a-plane');
+		let podium = document.createElement('a-sphere');
 		podium.setAttribute('position',{x:0,y:0,z:-7});
-		podium.setAttribute('rotation', {x:-90, y:0, z:0});
-		podium.setAttribute('width', '1');
-		podium.setAttribute('height', '1');
-		podium.setAttribute('color', 'white')
-		document.getElementById('podium').appendChild(podium)
-
+		podium.setAttribute('radius', 0.08)
+		podium.setAttribute('color', 'red')
+		podium.setAttribute('id', 'podium')
 		console.log(podium);
+		//document.getElementById('podium').appendChild(podium)
+		let j = document.getElementsByClassName('podium')
+		j[0].appendChild(podium)
 	},
+});
+
+AFRAME.registerComponent('boxbutton', {
+schema: {
+    event: {type: 'string', default: 'click'},
+},
+
+init: function () {
+
+	this.eventHandlerClick = function () {
+		let podium = document.getElementById('podium');
+		console.log(podium);
+		let podiumPosition = podium.getAttribute('position');
+		console.log(podiumPosition);
+		let figure = document.createElement('a-box')
+		podium.appendChild(figure)
+		figure.setAttribute('color', 'blue' )
+	}
+},
+
+update: function(oldData) {
+    var el = this.el;
+    var data = this.data;
+
+    if(! oldData.event){
+        el.addEventListener(data.event, this.eventHandlerClick);
+    }
+},
+});
+
+AFRAME.registerComponent('spherebutton', {
+schema: {
+    event: {type: 'string', default: 'click'},
+},
+
+init: function () {
+	console.log("Dentro de spherebutton");
+	this.eventHandlerClick = function () {
+		console.log("Dentro de spherebutton");
+		let podium = document.getElementById('podium');
+		console.log(podium);
+		let podiumPosition = podium.getAttribute('position');
+		console.log(podiumPosition);
+		let figure = document.createElement('a-sphere')
+		podium.appendChild(figure)
+		figure.setAttribute('color', 'yellow' )
+	}
+},
+
+update: function(oldData) {
+    var el = this.el;
+    var data = this.data;
+
+    if(! oldData.event){
+        el.addEventListener(data.event, this.eventHandlerClick);
+    }
+},
+});
+
+AFRAME.registerComponent('planebutton', {
+schema: {
+    event: {type: 'string', default: 'click'},
+},
+
+init: function () {
+
+	this.eventHandlerClick = function () {
+		let podium = document.getElementById('podium');
+		console.log(podium);
+		let podiumPosition = podium.getAttribute('position');
+		console.log(podiumPosition);
+		let figure = document.createElement('a-plane')
+		podium.appendChild(figure)
+		figure.setAttribute('color', 'red' )
+	}
+},
+
+update: function(oldData) {
+    var el = this.el;
+    var data = this.data;
+
+    if(! oldData.event){
+        el.addEventListener(data.event, this.eventHandlerClick);
+    }
+},
+});
+
+AFRAME.registerComponent('cylinderbutton', {
+schema: {
+    event: {type: 'string', default: 'click'},
+},
+
+init: function () {
+
+	this.eventHandlerClick = function () {
+		let podium = document.getElementById('podium');
+		console.log(podium);
+		let podiumPosition = podium.getAttribute('position');
+		console.log(podiumPosition);
+		let figure = document.createElement('a-cylinder')
+		podium.appendChild(figure)
+		figure.setAttribute('color', 'purple' )
+	}
+},
+
+update: function(oldData) {
+    var el = this.el;
+    var data = this.data;
+
+    if(! oldData.event){
+        el.addEventListener(data.event, this.eventHandlerClick);
+    }
+},
 });
 
 AFRAME.registerComponent('menu',{
@@ -59,7 +173,7 @@ AFRAME.registerComponent('menu',{
 		figure1.setAttribute('depth', '0.1');
 		figure1.setAttribute('color', 'blue');
 		figure1.setAttribute('id', 'box');
-		figure1.setAttribute('boxbutton')
+		figure1.setAttribute('boxbutton', {event:'click'})
 		baseMenu.appendChild(figure1);
 		console.log(figure1);
 
@@ -67,7 +181,9 @@ AFRAME.registerComponent('menu',{
 		figure2.setAttribute('position', {x:0,y:0.1,z:0.15});
 		figure2.setAttribute('radius', '0.07');
 		figure2.setAttribute('color', 'yellow');
+
 		figure2.setAttribute('id', 'sphere');
+		figure2.setAttribute('spherebutton', {event:'click'})
 		baseMenu.appendChild(figure2)
 		console.log(figure2);
 
@@ -77,6 +193,7 @@ AFRAME.registerComponent('menu',{
 		figure3.setAttribute('height', '0.1');
 		figure3.setAttribute('color', 'red');
 		figure3.setAttribute('id', 'plane');
+		figure3.setAttribute('planebutton', {event:'click'})
 		baseMenu.appendChild(figure3)
 		console.log(figure3);
 
@@ -86,37 +203,8 @@ AFRAME.registerComponent('menu',{
 		figure4.setAttribute('radius', '0.08');
 		figure4.setAttribute('color', 'purple');
 		figure4.setAttribute('id', 'cylinder');
+		figure4.setAttribute('cylinderbutton', {event:'click'})
 		baseMenu.appendChild(figure4)
 		console.log(figure4);
 	},
-});
-
-
-AFRAME.registerComponent('boxbutton', {
-schema: {
-    event: {type: 'string', default: 'click'},
-},
-
-init: function () {
-	this.eventHandlerClick = function () {
-		let podium = document.getElementById('podium');
-		let podiumPosition = podium.getAttribute('position');
-		console.log(podiumPosition);
-		let positionY = podiumPosition + 0.5
-		let figure = document.createElement('a-box')
-		podium.appendChild(figure)
-		figure.setAttribute('color', 'green' )
-	}
-
-
-},
-
-update: function(oldData) {
-    var el = this.el;
-    var data = this.data;
-
-    if(! oldData.event){
-        el.addEventListener(data.event, this.eventHandlerClick);
-    }
-},
 });
