@@ -49,9 +49,15 @@ init: function () {
 		console.log(podium);
 		let podiumPosition = podium.getAttribute('position');
 		console.log(podiumPosition);
-		let figure = document.createElement('a-box')
-		podium.appendChild(figure)
-		figure.setAttribute('color', 'blue' )
+		let newBox = document.getElementById('newbox')
+		if (newBox) {
+			newBox.remove()
+		} else {
+			let figure = document.createElement('a-box')
+			podium.appendChild(figure)
+			figure.setAttribute('color', 'blue' )
+			figure.setAttribute('id', 'newbox')
+		}
 	}
 },
 
@@ -78,9 +84,15 @@ init: function () {
 		console.log(podium);
 		let podiumPosition = podium.getAttribute('position');
 		console.log(podiumPosition);
-		let figure = document.createElement('a-sphere')
-		podium.appendChild(figure)
-		figure.setAttribute('color', 'yellow' )
+		newSphere = document.getElementById('newsphere')
+		if (newSphere) {
+			newSphere.remove()
+		} else {
+			let figure = document.createElement('a-sphere')
+			podium.appendChild(figure)
+			figure.setAttribute('color', 'yellow' )
+			figure.setAttribute('id', 'newsphere')
+		}
 	}
 },
 
@@ -106,9 +118,16 @@ init: function () {
 		console.log(podium);
 		let podiumPosition = podium.getAttribute('position');
 		console.log(podiumPosition);
-		let figure = document.createElement('a-plane')
-		podium.appendChild(figure)
-		figure.setAttribute('color', 'red' )
+		newPlane = document.getElementById('newplane')
+		if (newPlane) {
+			newPlane.remove()
+		} else {
+			let figure = document.createElement('a-plane')
+			podium.appendChild(figure)
+			figure.setAttribute('color', 'red' )
+			figure.setAttribute('id', 'newplane')
+		}
+
 	}
 },
 
@@ -130,13 +149,22 @@ schema: {
 init: function () {
 
 	this.eventHandlerClick = function () {
+
 		let podium = document.getElementById('podium');
 		console.log(podium);
 		let podiumPosition = podium.getAttribute('position');
 		console.log(podiumPosition);
-		let figure = document.createElement('a-cylinder')
-		podium.appendChild(figure)
-		figure.setAttribute('color', 'purple' )
+		let newCilinder = document.getElementById('newcilinder')
+		if (newCilinder) {
+			console.log(true);
+			newCilinder.remove()
+		} else {
+			let figure = document.createElement('a-cylinder')
+			podium.appendChild(figure)
+			figure.setAttribute('color', 'purple' )
+			figure.setAttribute('id', 'newcilinder')
+		}
+
 	}
 },
 
@@ -154,15 +182,17 @@ AFRAME.registerComponent('menu',{
 	schema:{
 		event: {type: 'string', default: 'click'}
 	},
-
+	//animation="property: rotation; to: 0 360 0; loop: true; dur: 10000">
+	//animation="property: object3D.position.y; to: 2.2; dir: alternate; dur: 2000; loop: true"
 	init: function(){
 		console.log("dentro del componente menu");
 		let baseMenu = document.createElement('a-cylinder');
-		baseMenu.setAttribute('position',{x:-0.5,y:1.5,z:-1});
-		baseMenu.setAttribute('rotation', {x:45, y:0, z:0});
-		baseMenu.setAttribute('height', '0.07');
+		baseMenu.setAttribute('position',{x:-0.5,y:1,z:-1});
+		baseMenu.setAttribute('rotation', {x:0, y:0, z:0});
+		baseMenu.setAttribute('height', '0.02');
 		baseMenu.setAttribute('radius', '0.3');
 		baseMenu.setAttribute('color', 'green');
+		baseMenu.setAttribute('animation', 'property:rotation;to:0 360 0;loop:true;dur:10000')
 		document.getElementById('menu').appendChild(baseMenu)
 		console.log(baseMenu);
 
@@ -174,6 +204,7 @@ AFRAME.registerComponent('menu',{
 		figure1.setAttribute('color', 'blue');
 		figure1.setAttribute('id', 'box');
 		figure1.setAttribute('boxbutton', {event:'click'})
+		figure1.setAttribute('animation', 'property: object3D.position.y; to: 0.15; dir: alternate; dur: 2000; loop: true')
 		baseMenu.appendChild(figure1);
 		console.log(figure1);
 
@@ -181,9 +212,9 @@ AFRAME.registerComponent('menu',{
 		figure2.setAttribute('position', {x:0,y:0.1,z:0.15});
 		figure2.setAttribute('radius', '0.07');
 		figure2.setAttribute('color', 'yellow');
-
 		figure2.setAttribute('id', 'sphere');
 		figure2.setAttribute('spherebutton', {event:'click'})
+		figure2.setAttribute('animation', 'property: object3D.position.y; to: 0.15; dir: alternate; dur: 2000; loop: true')
 		baseMenu.appendChild(figure2)
 		console.log(figure2);
 
@@ -194,6 +225,7 @@ AFRAME.registerComponent('menu',{
 		figure3.setAttribute('color', 'red');
 		figure3.setAttribute('id', 'plane');
 		figure3.setAttribute('planebutton', {event:'click'})
+		figure3.setAttribute('animation', 'property: object3D.position.y; to: 0.15; dir: alternate; dur: 2000; loop: true')
 		baseMenu.appendChild(figure3)
 		console.log(figure3);
 
@@ -204,6 +236,7 @@ AFRAME.registerComponent('menu',{
 		figure4.setAttribute('color', 'purple');
 		figure4.setAttribute('id', 'cylinder');
 		figure4.setAttribute('cylinderbutton', {event:'click'})
+		figure4.setAttribute('animation', 'property: object3D.position.y; to: 0.15; dir: alternate; dur: 2000; loop: true')
 		baseMenu.appendChild(figure4)
 		console.log(figure4);
 	},
