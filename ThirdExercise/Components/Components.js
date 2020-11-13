@@ -1,4 +1,55 @@
 
+function createEntity(entity){
+
+	let podium = document.getElementById('podium');
+	let newEntity = document.createElement('a-entity');
+	newEntity.setAttribute('static-body', {});
+	newEntity.setAttribute('class', "remote");
+
+	switch (entity) {
+		case 'cube':
+			newEntity.setAttribute('mixin', 'cube')
+			break;
+		case 'sphere':
+			newEntity.setAttribute('mixin', 'sphere')
+			break;
+		case 'plane':
+			newEntity.setAttribute('mixin', 'plane')
+			break;
+		case 'cylinder':
+			newEntity.setAttribute('mixin', 'cylinder')
+			break;
+	}
+
+	podium.appendChild(newEntity)
+}
+
+function setClickable(){
+	console.log('dentro de clickable')
+	let cubeFig = document.querySelector('#cubeClick')
+	console.log(cubeFig);
+	let sphereFig = document.querySelector('#sphereClick')
+	let planeFig = document.querySelector('#planeClick')
+	let cylinderFig = document.querySelector('#cylinderClick')
+
+	cubeFig.addEventListener('grab-start', function(){
+		createEntity('cube')
+		console.log('dentro1')
+	})
+
+	sphereFig.addEventListener('grab-start', function(){
+		createEntity('sphere')
+	})
+
+	planeFig.addEventListener('grab-start', function(){
+		createEntity('plane')
+	})
+
+	cylinderFig.addEventListener('grab-start', function(){
+		createEntity('cylinder')
+	})
+}
+
 AFRAME.registerComponent('base',{
 	schema:{
 		event: {type: 'string', default: 'click'}
@@ -44,6 +95,7 @@ AFRAME.registerComponent('podium',{
 	},
 });
 
+/*
 AFRAME.registerComponent('boxbutton', {
 	schema: {
     	active: {type: 'boolean', default: false},
@@ -60,108 +112,15 @@ AFRAME.registerComponent('boxbutton', {
 			console.log(podium);
 			let podiumPosition = podium.getAttribute('position');
 			console.log(podiumPosition);
-			let newBox = document.getElementById('newbox')
-			if (newBox) {
-				newBox.remove()
-			} else {
-				let figure = document.createElement('a-box')
-				podium.appendChild(figure)
-				figure.setAttribute('color', 'blue')
-				figure.setAttribute('id', 'newbox')
-			}
+			let newEl = document.createElement('a-entity');
+			newEl.setAttribute('mixin', 'cube');
+			newEl.setAttribute('static-body', '');
+			newEl.setAttribute('class', " remote");
+			podium.appendChild(newEl)
 		});
 	}
 });
-
-
-
-AFRAME.registerComponent('spherebutton', {
-	schema: {
-    	active: {type: 'boolean', default: false},
-	},
-
-	init: function () {
-		let el = this.el;
-		let data = this.data;
-		console.log("dentro de boxbutton")
-
-		el.addEventListener('grab-start', function () {
-			console.log("has clickado en la esfera")
-			let podium = document.getElementById('podium');
-			console.log(podium);
-			let podiumPosition = podium.getAttribute('position');
-			console.log(podiumPosition);
-			let newsphere = document.getElementById('newsphere')
-			if (newsphere) {
-				newsphere.remove()
-			} else {
-				let figure = document.createElement('a-sphere')
-				podium.appendChild(figure)
-				figure.setAttribute('color', 'yellow')
-				figure.setAttribute('id', 'newsphere')
-			}
-		});
-	}
-});
-
-AFRAME.registerComponent('planebutton', {
-	schema: {
-    	active: {type: 'boolean', default: false},
-	},
-
-	init: function () {
-		let el = this.el;
-		let data = this.data;
-		console.log("dentro de planebutton")
-
-		el.addEventListener('grab-start', function () {
-			console.log("has clickado en el plano")
-			let podium = document.getElementById('podium');
-			console.log(podium);
-			let podiumPosition = podium.getAttribute('position');
-			console.log(podiumPosition);
-			let newPlane = document.getElementById('newplane')
-			if (newPlane) {
-				newPlane.remove()
-			} else {
-				let figure = document.createElement('a-plane')
-				podium.appendChild(figure)
-				figure.setAttribute('color', 'red')
-				figure.setAttribute('id', 'newplane')
-			}
-		});
-	}
-
-});
-
-AFRAME.registerComponent('cylinderbutton', {
-	schema: {
-    	active: {type: 'boolean', default: false},
-	},
-
-	init: function () {
-		let el = this.el;
-		let data = this.data;
-		console.log("dentro de cylinderbutton")
-
-		el.addEventListener('grab-start', function () {
-			console.log("has clickado en el cylindro")
-			let podium = document.getElementById('podium');
-			console.log(podium);
-			let podiumPosition = podium.getAttribute('position');
-			console.log(podiumPosition);
-			let newCylinder = document.getElementById('newcylinder')
-			if (newCylinder) {
-				newCylinder.remove()
-			} else {
-				let figure = document.createElement('a-cylinder')
-				podium.appendChild(figure)
-				figure.setAttribute('color', 'purple')
-				figure.setAttribute('id', 'newcylinder')
-			}
-		});
-	}
-});
+*/
 
 AFRAME.registerComponent('menu',{
 	schema:{
@@ -187,9 +146,8 @@ AFRAME.registerComponent('menu',{
 		figure1.setAttribute('height', '0.1');
 		figure1.setAttribute('depth', '0.1');
 		figure1.setAttribute('color', 'blue');
-		figure1.setAttribute('id', 'box');
+		figure1.setAttribute('id', 'cubeClick');
 		figure1.setAttribute('class', 'button')
-		figure1.setAttribute('boxbutton', true)
 		figure1.setAttribute('clickable', {})
 		figure1.setAttribute('animation', 'property: object3D.position.y; to: 0.15; dir: alternate; dur: 2000; loop: true')
 		baseMenu.appendChild(figure1);
@@ -199,7 +157,7 @@ AFRAME.registerComponent('menu',{
 		figure2.setAttribute('position', {x:0,y:0.1,z:0.15});
 		figure2.setAttribute('radius', '0.07');
 		figure2.setAttribute('color', 'yellow');
-		figure2.setAttribute('id', 'sphere');
+		figure2.setAttribute('id', 'sphereClick');
 		figure2.setAttribute('class', 'button')
 		figure2.setAttribute('clickable', {})
 		figure2.setAttribute('spherebutton', {active: true})
@@ -212,7 +170,7 @@ AFRAME.registerComponent('menu',{
 		figure3.setAttribute('width', '0.1');
 		figure3.setAttribute('height', '0.1');
 		figure3.setAttribute('color', 'red');
-		figure3.setAttribute('id', 'plane');
+		figure3.setAttribute('id', 'planeClick');
 		figure3.setAttribute('planebutton', {active: true})
 		figure3.setAttribute('class', 'button')
 		figure3.setAttribute('clickable', {})
@@ -225,12 +183,14 @@ AFRAME.registerComponent('menu',{
 		figure4.setAttribute('height', '0.07');
 		figure4.setAttribute('radius', '0.08');
 		figure4.setAttribute('color', 'purple');
-		figure4.setAttribute('id', 'cylinder');
+		figure4.setAttribute('id', 'cylinderClick');
 		figure4.setAttribute('cylinderbutton', {active:true})
 		figure4.setAttribute('class', 'button')
 		figure4.setAttribute('clickable', {})
 		figure4.setAttribute('animation', 'property: object3D.position.y; to: 0.15; dir: alternate; dur: 2000; loop: true')
 		baseMenu.appendChild(figure4)
 		console.log(figure4);
+
+		setClickable()
 	},
 });
