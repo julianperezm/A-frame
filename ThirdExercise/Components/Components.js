@@ -5,6 +5,8 @@ function createEntity(entity){
 	let newEntity = document.createElement('a-entity');
 	newEntity.setAttribute('static-body', {});
 	newEntity.setAttribute('class', "remote");
+	newEntity.setAttribute('editentity',{} );
+	newEntity.setAttribute('material', 'color:white')
 
 	switch (entity) {
 		case 'cube':
@@ -35,20 +37,65 @@ function setClickable(){
 	cubeFig.addEventListener('grab-start', function(){
 		createEntity('cube')
 		console.log('dentro1')
-	})
+	});
 
 	sphereFig.addEventListener('grab-start', function(){
 		createEntity('sphere')
-	})
+	});
 
 	planeFig.addEventListener('grab-start', function(){
 		createEntity('plane')
-	})
+	});
 
 	cylinderFig.addEventListener('grab-start', function(){
 		createEntity('cylinder')
-	})
+	});
 }
+AFRAME.registerComponent('changeattribute',{
+	init:function(){
+		let el = this.el;
+
+		el.addEventListener('grab-start', function () {
+			let entityToChange = el.parentNode.parentNode
+			entityToChange.setAttribute('material', el.getAttribute('material'))
+		});
+	}
+});
+AFRAME.registerComponent('editentity', {
+	schema:{
+		colors: {default: ['blue', 'yellow', 'purple','black',]}
+	},
+
+	init: function () {
+		let el = this.el;
+		let data = this.data;
+
+		this.el.addEventListener('grab-start', function(){
+			let tableForEdit = document.createElement('a-entity')
+			tableForEdit.setAttribute('geometry', {primitive:'plane', width:1, height:0.5});
+			tableForEdit.setAttribute('material','color:white');
+			tableForEdit.setAttribute('stretchable', {});
+			tableForEdit.setAttribute('position', '0 1 0');
+
+			let colors = data.colors
+
+			for (let color of colors){
+				let colorButton = document.createElement('a-entity');
+				colorButton.setAttribute('geometry', {primitive:'box', width:0.1, height:0.1, depth:0.025});
+				colorButton.setAttribute('class', 'button');
+				colorButton.setAttribute('position', ((colors.indexOf(color)*0.2)-0.3)+" 0.125 0.01");
+				colorButton.setAttribute('material','color :' + color);
+				colorButton.setAttribute('clickable', {});
+				colorButton.setAttribute('changeattribute', {})
+				tableForEdit.appendChild(colorButton)
+			}
+
+			el.appendChild(tableForEdit)
+		});
+
+	}
+});
+
 
 AFRAME.registerComponent('base',{
 	schema:{
