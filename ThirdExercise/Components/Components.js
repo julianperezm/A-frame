@@ -63,7 +63,8 @@ AFRAME.registerComponent('changeattribute',{
 });
 AFRAME.registerComponent('editentity', {
 	schema:{
-		colors: {default: ['blue', 'yellow', 'purple','black',]}
+		colors: {default: ['#ff2828', '#fcb235', '#fff240','#aaff4f','#39ff28','#35fc9a','#40f9ff',
+			'#4f9bff','#6328ff','#dd35fc','#ff40cf','#ff4f71']}
 	},
 
 	init: function () {
@@ -77,7 +78,7 @@ AFRAME.registerComponent('editentity', {
 				let colorButton = document.createElement('a-entity');
 				colorButton.setAttribute('geometry', {primitive:'box', width:0.1, height:0.1, depth:0.025});
 				colorButton.setAttribute('class', 'button');
-				colorButton.setAttribute('position', ((colors.indexOf(color)*0.2)-0.3)+" 0.7 0.01");
+				colorButton.setAttribute('position', ((colors.indexOf(color)*0.2)-1.1)+" 0.7 0.01");
 				colorButton.setAttribute('material','color :' + color);
 				colorButton.setAttribute('clickable', {});
 				colorButton.setAttribute('changeattribute', {})
@@ -181,7 +182,7 @@ AFRAME.registerComponent('boxbutton', {
 	}
 });
 */
-
+/*
 AFRAME.registerComponent('menu',{
 	schema:{
 		event: {type: 'string', default: 'click'}
@@ -243,6 +244,80 @@ AFRAME.registerComponent('menu',{
 		figure4.setAttribute('height', '0.07');
 		figure4.setAttribute('radius', '0.08');
 		figure4.setAttribute('color', 'purple');
+		figure4.setAttribute('id', 'cylinderClick');
+		figure4.setAttribute('cylinderbutton', {active:true})
+		figure4.setAttribute('class', 'button')
+		figure4.setAttribute('clickable', {})
+		figure4.setAttribute('animation', 'property: object3D.position.y; to: 0.15; dir: alternate; dur: 2000; loop: true')
+		baseMenu.appendChild(figure4)
+		console.log(figure4);
+
+		setClickable()
+	},
+});*/
+
+AFRAME.registerComponent('menu',{
+	schema:{
+		event: {type: 'string', default: 'click'}
+	},
+	//animation="property: rotation; to: 0 360 0; loop: true; dur: 10000">
+	//animation="property: object3D.position.y; to: 2.2; dir: alternate; dur: 2000; loop: true"
+	init: function(){
+		console.log("dentro del componente menu");
+		let baseMenu = document.createElement('a-plane');
+		baseMenu.setAttribute('position',{x:-2,y:1.25,z:0});
+		baseMenu.setAttribute('rotation', {x:0, y:0, z:0});
+		baseMenu.setAttribute('height', '1.5');
+		baseMenu.setAttribute('width', '1.5');
+		baseMenu.setAttribute('rotation', {x:-90,y:0,z:0});
+		baseMenu.setAttribute('src', '#FiguresSelectorImg');
+		//baseMenu.setAttribute('animation', 'property:rotation;to:0 360 0;loop:true;dur:10000')
+		document.getElementById('menu').appendChild(baseMenu)
+		console.log(baseMenu);
+
+		let figure1 = document.createElement('a-box')
+		figure1.setAttribute('position', {x:-0.35,y:0.4,z:0});
+		figure1.setAttribute('width', '0.15');
+		figure1.setAttribute('height', '0.15');
+		figure1.setAttribute('depth', '0.15');
+		figure1.setAttribute('color', '#c1c1c1');
+		figure1.setAttribute('id', 'cubeClick');
+		figure1.setAttribute('class', 'button')
+		figure1.setAttribute('clickable', {})
+		//figure1.setAttribute('animation', 'property: object3D.position.z; to: 0.15; dir: alternate; dur: 2000; loop: true')
+		baseMenu.appendChild(figure1);
+		console.log(figure1);
+
+		let figure2 = document.createElement('a-sphere')
+		figure2.setAttribute('position', {x:-0.35,y:-0.5,z:0});
+		figure2.setAttribute('radius', '0.1');
+		figure2.setAttribute('color', '#c1c1c1');
+		figure2.setAttribute('id', 'sphereClick');
+		figure2.setAttribute('class', 'button')
+		figure2.setAttribute('clickable', {})
+		figure2.setAttribute('spherebutton', {active: true})
+		//figure2.setAttribute('animation', 'property: object3D.position.y; to: 0.15; dir: alternate; dur: 2000; loop: true')
+		baseMenu.appendChild(figure2)
+		console.log(figure2);
+
+		let figure3 = document.createElement('a-plane')
+		figure3.setAttribute('position', {x:-0.35,y:-0.13,z:0.05});
+		figure3.setAttribute('width', '0.2');
+		figure3.setAttribute('height', '0.2');
+		figure3.setAttribute('color', '#c1c1c1');
+		figure3.setAttribute('id', 'planeClick');
+		figure3.setAttribute('planebutton', {active: true})
+		figure3.setAttribute('class', 'button')
+		figure3.setAttribute('clickable', {})
+		//figure3.setAttribute('animation', 'property: object3D.position.y; to: 0.15; dir: alternate; dur: 2000; loop: true')
+		baseMenu.appendChild(figure3)
+		console.log(figure3);
+
+		let figure4 = document.createElement('a-cylinder')
+		figure4.setAttribute('position', {x:-0.35,y:0.15,z:0});
+		figure4.setAttribute('height', '0.07');
+		figure4.setAttribute('radius', '0.08');
+		figure4.setAttribute('color', '#c1c1c1');
 		figure4.setAttribute('id', 'cylinderClick');
 		figure4.setAttribute('cylinderbutton', {active:true})
 		figure4.setAttribute('class', 'button')

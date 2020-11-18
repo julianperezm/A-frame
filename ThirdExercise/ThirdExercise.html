@@ -22,6 +22,7 @@
     <body>
 		<a-scene>
             <a-assets>
+                <img id="FiguresSelectorImg" src="../assets/FiguresSelector.jpg">
                 <a-mixin id="cube" geometry="primitive: box; width: 0.25; height: 0.25; depth: 0.25"
                          hoverable grabbable stretchable draggable droppable
                          shadow
@@ -86,6 +87,7 @@
 
             </a-entity>
 
+            <!--<a-plane src="#FiguresSelectorImg" position="-2 1.25 0" width="1.5" height="1.5" rotation="-90 0 0"></a-plane>-->
             <!--Construction Zone-->
             <a-entity id="index" base></a-entity>
 
@@ -96,7 +98,7 @@
             <a-entity id="menu" menu></a-entity>
 
             <!--User Camera-->
-            <a-entity movement-controls="fly: false" position="0 0 4" look-controls
+            <a-entity movement-controls="fly: true" position="0 1.5 6" look-controls
                     progressive-controls="objects: [grabbable], [droppable], [clickable];">
                 <a-entity camera position="0 2 0" capture-mouse
                     raycaster="objects: .button, .remote;" cursor="rayOrigin:mouse"
