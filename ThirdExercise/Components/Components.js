@@ -4,7 +4,7 @@ function createEntity(entity){
 	let podium = document.getElementById('podium');
 	let newEntity = document.createElement('a-entity');
 	newEntity.setAttribute('static-body', {});
-	newEntity.setAttribute('class', "remote");
+	newEntity.setAttribute('class', entity + " remote");
 	newEntity.setAttribute('editentity',{} );
 	newEntity.setAttribute('material', 'color:white')
 
@@ -24,6 +24,8 @@ function createEntity(entity){
 	}
 
 	podium.appendChild(newEntity)
+
+	//setEditable()
 }
 
 function setClickable(){
@@ -58,9 +60,11 @@ AFRAME.registerComponent('changeattribute',{
 		el.addEventListener('grab-start', function () {
 			let entityToChange = el.parentNode
 			entityToChange.setAttribute('material', el.getAttribute('material'))
+			//document.querySelectorAll('#colours').forEach(e => e.parentNode.removeChild(e));
 		});
 	}
 });
+
 AFRAME.registerComponent('editentity', {
 	schema:{
 		colors: {default: ['#ff2828', '#fcb235', '#fff240','#aaff4f','#39ff28','#35fc9a','#40f9ff',
@@ -72,12 +76,23 @@ AFRAME.registerComponent('editentity', {
 		let data = this.data;
 
 		this.el.addEventListener('grab-start', function(){
-			let colors = data.colors
+			let colors = data.colors;
+			console.log(el.getAttribute('class'));
+
 
 			for (let color of colors){
 				let colorButton = document.createElement('a-entity');
-				colorButton.setAttribute('geometry', {primitive:'box', width:0.1, height:0.1, depth:0.025});
+				if (el.getAttribute('class').search('sphere') >= 0){
+					colorButton.setAttribute('geometry', {primitive:'sphere', radius:0.08});
+				}else if (el.getAttribute('class').search('plane') >= 0){
+					colorButton.setAttribute('geometry', {primitive:'plane', width:0.15, height:0.15});
+				}else if (el.getAttribute('class').search('cube') >= 0){
+					colorButton.setAttribute('geometry', {primitive:'box', width:0.15, height:0.15, depth:0.15});
+				} else {
+					colorButton.setAttribute('geometry', {primitive:'cylinder', radius:0.08, height:0.1});
+				}
 				colorButton.setAttribute('class', 'button');
+				colorButton.setAttribute('id', 'colours');
 				colorButton.setAttribute('position', ((colors.indexOf(color)*0.2)-1.1)+" 0.7 0.01");
 				colorButton.setAttribute('material','color :' + color);
 				colorButton.setAttribute('clickable', {});
