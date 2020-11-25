@@ -70,8 +70,8 @@
             <!--Table-->
             <a-entity id="table" geometry="primitive:box; width: 6; height: 0.1; depth: 1.5" position="0 1.2 0" material="color:white">
                 <a-entity geometry="primitive:box; width: 5.8; height: 0.1; depth: 1.3" position="0 -0.1 0" material="color:white"></a-entity>
-                <a-entity class="remote" gltf-model="#iphone11" position="1 0.8 0.3" scale="0.003 0.008 0.003" grabbable stretchable kinema-body="radius: 0.5"></a-entity>
-                <a-entity class="remote" gltf-model="#iMac" position="2 0.8 0.5" grabbable stretchable kinema-body="radius: 0.5" rotation="0 160 0"></a-entity>
+                <!--<a-entity class="remote" gltf-model="#iphone11" position="1 0.8 0.3" scale="0.003 0.008 0.003" grabbable stretchable kinema-body="radius: 0.5"></a-entity>
+                <a-entity class="remote" gltf-model="#iMac" position="2 0.8 0.5" grabbable stretchable kinema-body="radius: 0.5" rotation="0 160 0"></a-entity>-->
                 <a-entity geometry="primitive:cylinder; radius: 0.05; height: 1.2;" position="0 -0.6 -0.6" material="color:white"></a-entity>
                 <a-entity geometry="primitive:cylinder; radius: 0.05; height: 1.2;" position="0 -0.6 0.6" material="color:white"></a-entity>
                 <a-entity geometry="primitive:cylinder; radius: 0.05; height: 1.2;" position="2.6 -0.6 -0.6" material="color:white"></a-entity>
@@ -84,6 +84,9 @@
                 <a-entity geometry="primitive:box; width: 0.08; height: 0.1; depth: 1.2" position="0 -0.8 0" rotation="0 0 90" material="color:white"></a-entity>
                 <a-entity geometry="primitive:cylinder; radius: 0.5; height: 0.04;" position="-0.4 0.1 0" material="color:white"></a-entity>
                 <a-entity geometry="primitive:cylinder; radius: 0.4; height: 0.04;" position="-0.4 0.15 0" material="color:white"></a-entity>
+                <a-entity geometry="primitive:box; width: 1; height: 0.3; depth:0.1" position="1.7 0.2 -0.3" rotation="0 0 0" material="color:#c1c1c1">
+                    <a-text id="mode" value="Mode: Normal" rotation="0 0 0" position="-0.45 0 0.05" color="black" scale="0.6 0.6 0.6"></a-text>
+                </a-entity>
 
             </a-entity>
 

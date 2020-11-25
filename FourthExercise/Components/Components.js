@@ -1,3 +1,21 @@
+document.addEventListener('keypress', function(e) {
+  if (e.keyCode === 113 || e.keyCode === 81){
+  	let mode = document.getElementById('mode');
+  	let text = mode.getAttribute('value')
+  	if (text === 'Mode: Normal' ){
+		mode.setAttribute('value', 'Mode: Group');
+		let newEntity = document.createElement('a-entity');
+		newEntity.setAttribute('static-body', {});
+		newEntity.setAttribute('class', "fatherofgroup remote");
+		newEntity.setAttribute('material', 'color:#c1c1c1');
+		newEntity.setAttribute('position', {x:0.6,y:0,z:1})
+		newEntity.setAttribute('mixin', 'cube');
+		mode.appendChild(newEntity)
+	}else{
+  		mode.setAttribute('value', 'Mode: Normal');
+	}
+  }
+});
 
 function createEntity(entity){
 
@@ -6,11 +24,11 @@ function createEntity(entity){
 	newEntity.setAttribute('static-body', {});
 	newEntity.setAttribute('class', entity + " remote");
 	newEntity.setAttribute('editentity',{} );
-	newEntity.setAttribute('material', 'color:white')
+	newEntity.setAttribute('material', 'color:white');
 
 	switch (entity) {
 		case 'cube':
-			newEntity.setAttribute('mixin', 'cube')
+			newEntity.setAttribute('mixin', 'cube');
 			break;
 		case 'sphere':
 			newEntity.setAttribute('mixin', 'sphere')
@@ -61,18 +79,17 @@ AFRAME.registerComponent('changeattribute',{
             console.log(entityToChange.hasChildNodes());
             console.log(entityToChange.childNodes.length);
             console.log(entityToChange.firstChild)
-            entityToChange.removeChild(entityToChange.firstChild)
             entityToChange.setAttribute('material', el.getAttribute('material'))
+			//entityToChange.removeChild(entityToChange.firstChild)
             /*if (entityToChange.hasChildNodes()){
                 console.log('he entrado en el if');
                 console.log(entityToChange.childNodes.length);
                 while (entityToChange.childNodes.length >= 1){
-                    console.log(entityToChange.childNodes.length);
-                    entityToChange.removeChild(entityToChange.firstChild);
-                    //console.log('hola')
+					console.log(entityToChange.childNodes.length);
+					entityToChange.removeChild(entityToChange.firstChild);
+					//console.log('hola')
                 }
             }*/
-            //entityToChange.setAttribute('editenity',{active: false})
 		});
 	}
 });
@@ -89,7 +106,8 @@ AFRAME.registerComponent('editentity', {
 		let data = this.data;
 
 		this.el.addEventListener('grab-start', function(){
-            console.log(el.hasChildNodes())
+            console.log(el.hasChildNodes());
+
 		    if (data.active === false){
 		        data.active = true;
 		        let colors = data.colors;
