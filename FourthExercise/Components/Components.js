@@ -1,3 +1,4 @@
+
 document.addEventListener('keypress', function(e) {
   if (e.keyCode === 113 || e.keyCode === 81){
   	let mode = document.getElementById('mode');
@@ -10,9 +11,16 @@ document.addEventListener('keypress', function(e) {
 		newEntity.setAttribute('material', 'color:#c1c1c1');
 		newEntity.setAttribute('position', {x:0.6,y:0,z:1})
 		newEntity.setAttribute('mixin', 'cube');
-		mode.appendChild(newEntity)
+		mode.appendChild(newEntity);
+		mode.addEventListener('click' ,function (event) {
+			console.log(event.srcElement)
+		})
+
 	}else{
   		mode.setAttribute('value', 'Mode: Normal');
+  		document.removeEventListener('click' ,function (event) {
+
+		})
 	}
   }
 });
@@ -25,7 +33,6 @@ function createEntity(entity){
 	newEntity.setAttribute('class', entity + " remote");
 	newEntity.setAttribute('editentity',{} );
 	newEntity.setAttribute('material', 'color:white');
-
 	switch (entity) {
 		case 'cube':
 			newEntity.setAttribute('mixin', 'cube');
