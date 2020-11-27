@@ -2,9 +2,9 @@
 document.addEventListener('keypress', function(e) {
   if (e.keyCode === 113 || e.keyCode === 81){
   	let mode = document.getElementById('mode');
-  	let text = mode.getAttribute('value')
-  	if (text === 'Mode: Normal' ){
-		mode.setAttribute('value', 'Mode: Group');
+  	let text = mode.getAttribute('src')
+  	if (text === '#modeImgNormal' ){
+		mode.setAttribute('src', '#modeImgGroup');
 		let newEntity = document.createElement('a-entity');
 		newEntity.setAttribute('static-body', {});
 		newEntity.setAttribute('class', "fatherofgroup remote");
@@ -17,7 +17,7 @@ document.addEventListener('keypress', function(e) {
 		})
 
 	}else{
-  		mode.setAttribute('value', 'Mode: Normal');
+  		mode.setAttribute('src', '#modeImgNormal');
   		document.removeEventListener('click' ,function (event) {
 
 		})
@@ -32,7 +32,7 @@ function createEntity(entity){
 	newEntity.setAttribute('static-body', {});
 	newEntity.setAttribute('class', entity + " remote");
 	newEntity.setAttribute('editentity',{} );
-	newEntity.setAttribute('material', 'color:white');
+	newEntity.setAttribute('material', 'color:#c1c1c1');
 	switch (entity) {
 		case 'cube':
 			newEntity.setAttribute('mixin', 'cube');
@@ -208,10 +208,11 @@ AFRAME.registerComponent('podium',{
 	init: function(){
 		console.log("dentro del componente podium");
 		let podium = document.createElement('a-sphere');
-		podium.setAttribute('position',{x:-0.4,y:2,z:0});
+		podium.setAttribute('position',{x:6.8,y:2.98,z:4.2});
 		podium.setAttribute('radius', 0.01);
 		podium.setAttribute('color', 'red');
 		podium.setAttribute('id', 'podium');
+
 		console.log(podium);
 		//document.getElementById('podium').appendChild(podium)
 		let j = document.getElementsByClassName('podium');
@@ -398,9 +399,9 @@ AFRAME.registerComponent('menu',{
 	init: function(){
 		console.log("dentro del componente menu");
 		let baseMenu = document.createElement('a-plane');
-		baseMenu.setAttribute('position',{x:0,y:6.55,z:4});
-		baseMenu.setAttribute('height', '3');
-		baseMenu.setAttribute('width', '5.98');
+		baseMenu.setAttribute('position',{x:2.5,y:7.55,z:4});
+		baseMenu.setAttribute('height', '5');
+		baseMenu.setAttribute('width', '11');
 		baseMenu.setAttribute('src', '#FiguresSelectorImg');
 		document.getElementById('menu').appendChild(baseMenu)
 
@@ -443,6 +444,13 @@ AFRAME.registerComponent('menu',{
 		figure4.setAttribute('clickable', {});
 		figure4.setAttribute('src', '#sphereImg');
 		document.getElementById('menu').appendChild(figure4)
+
+		let figure5 = document.createElement('a-plane');
+		figure5.setAttribute('position', {x:5.53,y:2.98,z:4});
+		figure5.setAttribute('width', '5');
+		figure5.setAttribute('height', '4.05');
+		figure5.setAttribute('src', '#figureSelectedImg')
+		document.getElementById('menu').appendChild(figure5)
 
 		setClickable()
 	},
