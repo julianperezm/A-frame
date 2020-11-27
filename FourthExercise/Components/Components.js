@@ -318,7 +318,7 @@ AFRAME.registerComponent('menu',{
 		setClickable()
 	},
 });*/
-
+/*
 AFRAME.registerComponent('menu',{
 	schema:{
 		event: {type: 'string', default: 'click'}
@@ -388,6 +388,61 @@ AFRAME.registerComponent('menu',{
 		figure4.setAttribute('animation', 'property: object3D.position.y; to: 0.15; dir: alternate; dur: 2000; loop: true')
 		baseMenu.appendChild(figure4)
 		console.log(figure4);
+
+		setClickable()
+	},
+});
+*/
+AFRAME.registerComponent('menu',{
+
+	init: function(){
+		console.log("dentro del componente menu");
+		let baseMenu = document.createElement('a-plane');
+		baseMenu.setAttribute('position',{x:0,y:6.55,z:4});
+		baseMenu.setAttribute('height', '3');
+		baseMenu.setAttribute('width', '5.98');
+		baseMenu.setAttribute('src', '#FiguresSelectorImg');
+		document.getElementById('menu').appendChild(baseMenu)
+
+		let figure1 = document.createElement('a-plane');
+		figure1.setAttribute('position', {x:1.5,y:4,z:4});
+		figure1.setAttribute('width', '2.98');
+		figure1.setAttribute('height', '2');
+		figure1.setAttribute('id', 'cubeClick');
+		figure1.setAttribute('class', 'button');
+		figure1.setAttribute('clickable', {});
+		figure1.setAttribute('src', '#cubeImg');
+		document.getElementById('menu').appendChild(figure1)
+
+		let figure2 = document.createElement('a-plane');
+		figure2.setAttribute('position', {x:-1.5,y:4,z:4});
+		figure2.setAttribute('width', '2.98');
+		figure2.setAttribute('height', '2');
+		figure2.setAttribute('id', 'cylinderClick');
+		figure2.setAttribute('class', 'button');
+		figure2.setAttribute('clickable', {});
+		figure2.setAttribute('src', '#cylinderImg');
+		document.getElementById('menu').appendChild(figure2)
+
+		let figure3 = document.createElement('a-plane');
+		figure3.setAttribute('position', {x:-1.5,y:1.96,z:4});
+		figure3.setAttribute('width', '2.98');
+		figure3.setAttribute('height', '2');
+		figure3.setAttribute('id', 'planeClick');
+		figure3.setAttribute('class', 'button');
+		figure3.setAttribute('clickable', {});
+		figure3.setAttribute('src', '#planeImg');
+		document.getElementById('menu').appendChild(figure3)
+
+		let figure4 = document.createElement('a-plane');
+		figure4.setAttribute('position', {x:1.5,y:1.96,z:4});
+		figure4.setAttribute('width', '2.98');
+		figure4.setAttribute('height', '2');
+		figure4.setAttribute('id', 'sphereClick');
+		figure4.setAttribute('class', 'button');
+		figure4.setAttribute('clickable', {});
+		figure4.setAttribute('src', '#sphereImg');
+		document.getElementById('menu').appendChild(figure4)
 
 		setClickable()
 	},
