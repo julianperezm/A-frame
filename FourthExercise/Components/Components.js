@@ -119,8 +119,8 @@ AFRAME.registerComponent('sizeupx',{
 		el.addEventListener('grab-start', function () {
 			let entityToChange = document.getElementById('entitytochange')
 			entityToChange.object3D.scale.x += 1;
-			let textX = document.getElementById('textx')
-			console.log(textX.getAttribute('value'))
+			let textX = document.getElementById('textx');
+			console.log(textX.getAttribute('value'));
 			textX.setAttribute('value',entityToChange.object3D.scale.x )
 		});
 	}
@@ -132,9 +132,11 @@ AFRAME.registerComponent('sizedownx',{
 		el.addEventListener('grab-start', function () {
 			let entityToChange = document.getElementById('entitytochange')
 			entityToChange.object3D.scale.x -= 1;
-			let textX = document.getElementById('textx')
-			console.log(textX.getAttribute('value'))
+			let textX = document.getElementById('textx');
+			textX.removeAttribute('value')
+			console.log(textX.getAttribute('value'));
 			textX.setAttribute('value',entityToChange.object3D.scale.x )
+
 		});
 	}
 });
@@ -145,6 +147,23 @@ AFRAME.registerComponent('sizeupy',{
 		el.addEventListener('grab-start', function () {
 			let entityToChange = document.getElementById('entitytochange')
 			entityToChange.object3D.scale.y += 1;
+			let textX = document.getElementById('texty');
+			textX.removeAttribute('value')
+			console.log(textX.getAttribute('value'));
+			textX.setAttribute('value',entityToChange.object3D.scale.y )
+		});
+	}
+});
+
+AFRAME.registerComponent('sizedowny',{
+	init:function(){
+		let el = this.el;
+		el.addEventListener('grab-start', function () {
+			let entityToChange = document.getElementById('entitytochange')
+			entityToChange.object3D.scale.y -= 1;
+			let textX = document.getElementById('texty');
+			console.log(textX.getAttribute('value'));
+			textX.setAttribute('value',entityToChange.object3D.scale.y )
 		});
 	}
 });
@@ -156,7 +175,23 @@ AFRAME.registerComponent('sizeupz',{
 			let entityToChange = document.getElementById('entitytochange')
 			entityToChange.object3D.scale.z += 1;
 			console.log(entityToChange.object3D.scale.z)
+			let textX = document.getElementById('textz');
+			console.log(textX.getAttribute('value'));
+			textX.setAttribute('value',entityToChange.object3D.scale.z)
+		});
+	}
+});
 
+AFRAME.registerComponent('sizedownz',{
+	init:function(){
+		let el = this.el;
+		el.addEventListener('grab-start', function () {
+			let entityToChange = document.getElementById('entitytochange')
+			entityToChange.object3D.scale.z -= 1;
+			console.log(entityToChange.object3D.scale.z)
+			let textX = document.getElementById('textz');
+			console.log(textX.getAttribute('value'));
+			textX.setAttribute('value',entityToChange.object3D.scale.z)
 		});
 	}
 });
@@ -174,7 +209,6 @@ AFRAME.registerComponent('editentity', {
 
 		this.el.addEventListener('grab-start', function(){
             console.log(el.hasChildNodes());
-			let entityToChange = document.getElementById('entitytochange')
 			let colors = data.colors;
 			console.log(el.getAttribute('class'));
 
@@ -191,7 +225,7 @@ AFRAME.registerComponent('editentity', {
 			for (let color of colors) {
 				let colorButton = document.createElement('a-entity');
 				if (el.getAttribute('class').search('sphere') >= 0) {
-					colorButton.setAttribute('geometry', {primitive: 'sphere', radius: 0.25});
+					colorButton.setAttribute('geometry', {primitive: 'sphere', radius: 0.2});
 				} else if (el.getAttribute('class').search('plane') >= 0) {
 					colorButton.setAttribute('geometry', {primitive: 'plane', width: 0.25, height: 0.25});
 				} else if (el.getAttribute('class').search('cube') >= 0) {
@@ -202,11 +236,11 @@ AFRAME.registerComponent('editentity', {
 						depth: 0.25
 					});
 				} else {
-					colorButton.setAttribute('geometry', {primitive: 'cylinder', radius: 0.25, height: 0.25});
+					colorButton.setAttribute('geometry', {primitive: 'cylinder', radius: 0.2, height: 0.25});
 				}
 				colorButton.setAttribute('class', 'button');
 				//colorButton.setAttribute('id', 'colours');
-				colorButton.setAttribute('position', ((colors.indexOf(color) * 0.45) - 2.5) + " -1 0.01");
+				colorButton.setAttribute('position', ((colors.indexOf(color) * 0.47) - 2.6) + " -1.82 0.01");
 				colorButton.setAttribute('material', 'color :' + color);
 				colorButton.setAttribute('clickable', {});
 				colorButton.setAttribute('changeattribute', {})
@@ -216,49 +250,72 @@ AFRAME.registerComponent('editentity', {
                 let sizeChooserUpx = document.createElement('a-text');
                 sizeChooserUpx.setAttribute('id', 'buttonupx');
                 sizeChooserUpx.setAttribute('class', 'remote');
-                sizeChooserUpx.setAttribute('position', '-2.11 0.54 0');
-                sizeChooserUpx.setAttribute('scale', '2.5 2.5 2.5');
+                sizeChooserUpx.setAttribute('position', '-1.25 1.5 0');
                 sizeChooserUpx.setAttribute('value', '+');
                 sizeChooserUpx.setAttribute('sizeupx', {});
                 sizeChooserUpx.setAttribute('clickable', {});
                 attributesSelector.appendChild(sizeChooserUpx);
 
-                let sizeChooserDownY = document.createElement('a-text');
-                sizeChooserDownY.setAttribute('id', 'buttondownx');
-                sizeChooserDownY.setAttribute('class', 'remote');
-                sizeChooserDownY.setAttribute('position', '-1.45 0.57 0');
-                sizeChooserDownY.setAttribute('scale', '3 3 3');
-                sizeChooserDownY.setAttribute('value', '-');
-                sizeChooserDownY.setAttribute('sizedownx', {});
-                sizeChooserDownY.setAttribute('clickable', {});
-                attributesSelector.appendChild(sizeChooserDownY);
+                let sizeChooserDownX = document.createElement('a-text');
+                sizeChooserDownX.setAttribute('id', 'buttondownx');
+                sizeChooserDownX.setAttribute('class', 'remote');
+                sizeChooserDownX.setAttribute('position', '-0.8 1.5 0');
+                sizeChooserDownX.setAttribute('value', '-');
+                sizeChooserDownX.setAttribute('sizedownx', {});
+                sizeChooserDownX.setAttribute('clickable', {});
+                attributesSelector.appendChild(sizeChooserDownX);
 
                 let sizex = document.createElement('a-text');
                 sizex.setAttribute('id', 'textx');
-                sizex.setAttribute('position', '-1.725 0 0');
-                sizex.setAttribute('scale', '1.5 1.5 1.5');
+                sizex.setAttribute('position', '-0.35 2.25 0');
                 attributesSelector.appendChild(sizex);
 
 
                 let sizeChooserUpY = document.createElement('a-text');
                 sizeChooserUpY.setAttribute('id', 'buttonupY');
                 sizeChooserUpY.setAttribute('class', 'remote');
-                sizeChooserUpY.setAttribute('position', '-0.4 0.54 0');
-                sizeChooserUpY.setAttribute('scale', '2.5 2.5 2.5');
+                sizeChooserUpY.setAttribute('position', '-0.3 0.54 0');
                 sizeChooserUpY.setAttribute('value', '+');
                 sizeChooserUpY.setAttribute('sizeupy', {});
                 sizeChooserUpY.setAttribute('clickable', {});
                 attributesSelector.appendChild(sizeChooserUpY);
 
+                let sizeChooserDownY = document.createElement('a-text');
+                sizeChooserDownY.setAttribute('id', 'buttondowny');
+                sizeChooserDownY.setAttribute('class', 'remote');
+                sizeChooserDownY.setAttribute('position', '0.2 0.54 0');
+                sizeChooserDownY.setAttribute('value', '-');
+                sizeChooserDownY.setAttribute('sizedownY', {});
+                sizeChooserDownY.setAttribute('clickable', {});
+                attributesSelector.appendChild(sizeChooserDownY);
+
+                let sizey = document.createElement('a-text');
+                sizey.setAttribute('id', 'texty');
+                sizey.setAttribute('position', '-0.1 2.25 0');
+                attributesSelector.appendChild(sizey);
+
                 let sizeChooserUpZ = document.createElement('a-text');
                 sizeChooserUpZ.setAttribute('id', 'buttonupZ');
                 sizeChooserUpZ.setAttribute('class', 'remote');
-                sizeChooserUpZ.setAttribute('position', '1.3 0.54 0');
-                sizeChooserUpZ.setAttribute('scale', '2.5 2.5 2.5');
+                sizeChooserUpZ.setAttribute('position', '0.7 1.5 0');
                 sizeChooserUpZ.setAttribute('value', '+');
                 sizeChooserUpZ.setAttribute('sizeupz', {});
                 sizeChooserUpZ.setAttribute('clickable', {});
                 attributesSelector.appendChild(sizeChooserUpZ);
+
+                let sizeChooserDownZ = document.createElement('a-text');
+                sizeChooserDownZ.setAttribute('id', 'buttondownz');
+                sizeChooserDownZ.setAttribute('class', 'remote');
+                sizeChooserDownZ.setAttribute('position', '1.1 1.5 0');
+                sizeChooserDownZ.setAttribute('value', '-');
+                sizeChooserDownZ.setAttribute('sizedownz', {});
+                sizeChooserDownZ.setAttribute('clickable', {});
+                attributesSelector.appendChild(sizeChooserDownZ);
+
+                let sizez = document.createElement('a-text');
+                sizez.setAttribute('id', 'textz');
+                sizez.setAttribute('position', '0.15 2.25 0');
+                attributesSelector.appendChild(sizez);
 
             }
 		});
