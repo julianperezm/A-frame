@@ -1,29 +1,38 @@
-
+let group = false;
 document.addEventListener('keypress', function(e) {
   if (e.keyCode === 113 || e.keyCode === 81){
   	let mode = document.getElementById('mode');
   	let text = mode.getAttribute('src')
-  	if (text === '#modeImgNormal' ){
+  	if (group === false ){
 		mode.setAttribute('src', '#modeImgGroup');
-		let newEntity = document.createElement('a-entity');
-		newEntity.setAttribute('static-body', {});
-		newEntity.setAttribute('class', "fatherofgroup remote");
-		newEntity.setAttribute('material', 'color:#c1c1c1');
-		newEntity.setAttribute('position', {x:0.6,y:0,z:1})
-		newEntity.setAttribute('mixin', 'cube');
-		mode.appendChild(newEntity);
-		mode.addEventListener('click' ,function (event) {
-			console.log(event.srcElement)
-		})
+		//let entityToCopy = document.getElementById('newentity');
+		//if (entityToCopy){
+			let newEntity = document.createElement('a-entity');
+			let podium = document.getElementById('podium');
+			let scene = document.querySelector('a-scene');
+			newEntity.setAttribute('static-body', {});
+			newEntity.setAttribute('class', "remote");
+			newEntity.setAttribute('id', "fatherofgroup");
+			newEntity.setAttribute('material', 'color:#c1c1c1');
+			newEntity.setAttribute('position', podium.getAttribute('position'));
+			newEntity.setAttribute('mixin', 'cube');
+			scene.appendChild(newEntity);
+			console.log('group');
+			group = true;
+			console.log(group);
+		//}
 
 	}else{
   		mode.setAttribute('src', '#modeImgNormal');
-  		document.removeEventListener('click' ,function (event) {
-
-		})
+  		let father = document.getElementById('fatherofgroup');
+  		console.log(father);
+  		father.removeAttribute('id');
+  		group=false;
+		console.log('group');
 	}
   }
 });
+
 
 function createEntity(entity){
 
@@ -32,8 +41,11 @@ function createEntity(entity){
 	newEntity.setAttribute('static-body', {});
 	newEntity.setAttribute('class', entity + " remote");
 	newEntity.setAttribute('removeattributemenu',{} );
+	newEntity.setAttribute('posibilityofgroup',{} );
+	newEntity.setAttribute('position',{x:0,y:0,z:0} );
 	newEntity.setAttribute('id', 'entitytochange')
 	newEntity.setAttribute('material', 'color:#c1c1c1');
+	newEntity.setAttribute('clickable', {});
 	switch (entity) {
 		case 'cube':
 			newEntity.setAttribute('mixin', 'cube');
@@ -79,6 +91,40 @@ function setClickable(){
 		createEntity('cylinder')
 	});
 }
+
+AFRAME.registerComponent('posibilityofgroup',{
+	init:function(){
+		let el = this.el;
+		el.addEventListener('grab-start', function () {
+			if (group === true) {
+				let father = document.getElementById('fatherofgroup');
+				console.log(father)
+				elX = el.object3D.position.x;
+				elY = el.object3D.position.y;
+				elZ = el.object3D.position.z;
+				console.log(el.object3D.position.x)
+				console.log(el.object3D.position.y)
+				console.log(el.object3D.position.z)
+				let newEl = document.createElement('a-entity');
+				newEl.setAttribute('position', {x:elX,y:elY,z:elZ});
+				newEl.setAttribute('id', 'newentity');
+				newEl.setAttribute('mixin', el.getAttribute('mixin'));
+				newEl.setAttribute('scale', el.getAttribute('scale'));
+				newEl.setAttribute('material', el.getAttribute('material'));
+				newEl.setAttribute('color', el.getAttribute('color'));
+				newEl.setAttribute('class', "remote");
+				newEl.setAttribute('editable', {});
+				console.log(newEl.object3D.position.x);
+				console.log(newEl.object3D.position.y);
+				console.log(newEl.object3D.position.z);
+				console.log('prueba')
+				el.remove()
+				father.appendChild(newEl)
+			}
+		});
+	}
+});
+
 AFRAME.registerComponent('changeattribute',{
 	init:function(){
 		let el = this.el;
@@ -86,7 +132,7 @@ AFRAME.registerComponent('changeattribute',{
 			let entityToChange = document.getElementById('entitytochange')
             console.log(entityToChange.hasChildNodes());
             console.log(entityToChange.childNodes.length);
-            console.log(entityToChange.firstChild)
+            console.log(entityToChange.firstChild);
             entityToChange.setAttribute('material', el.getAttribute('material'))
 			//entityToChange.removeChild(entityToChange.firstChild)
             /*if (entityToChange.hasChildNodes()){
@@ -107,7 +153,9 @@ AFRAME.registerComponent('removeattributemenu',{
 		let el = this.el;
 		el.addEventListener('grab-start', function () {
 			let menu = document.getElementById('attributemenu')
-			menu.remove();
+			if (menu){
+				menu.remove();
+			}
 			el.removeAttribute('id')
 		});
 	}
