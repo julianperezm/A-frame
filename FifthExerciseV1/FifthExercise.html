@@ -29,10 +29,10 @@
                 <img id="planeImg" src="../assets/planeImg.jpg">
                 <img id="modeImgNormal" src="../assets/modeImgNormal.jpg">
                 <img id="modeImgGroup" src="../assets/modeImgGroup.jpg">
-                <img id="figureSelectedImg" src="../assets/figureSelectedImg2.jpg">
+                <img id="figureSelectedImg" src="../assets/figSele.jpg">
                 <img id="attributeSelectorImg" src="../assets/AttributesSelector.jpg">
 
-                <a-mixin id="cube" geometry="primitive: box; width: 0.25; height: 0.25; depth: 0.25"
+                <a-mixin id="cube" geometry="primitive: box; width: 1; height: 1; depth: 1"
                          hoverable grabbable stretchable draggable droppable
                          shadow
                          event-set__dragdrop="_event: drag-drop; geometry.radius: 0.25; geometry.primitive: sphere"
@@ -41,7 +41,7 @@
                          event-set__dragon="_event: dragover-start; material.wireframe: true"
                          event-set__dragoff="_event: dragover-end; material.wireframe: false">
                 </a-mixin>
-                <a-mixin id="sphere" geometry="primitive: sphere; radius: 0.25"
+                <a-mixin id="sphere" geometry="primitive: sphere; radius: 0.5"
                          hoverable grabbable stretchable draggable droppable
                          shadow
                          event-set__dragdrop="_event: drag-drop; geometry.radius: 0.25; geometry.primitive: sphere"
@@ -50,7 +50,7 @@
                          event-set__dragon="_event: dragover-start; material.wireframe: true"
                          event-set__dragoff="_event: dragover-end; material.wireframe: false">
                 </a-mixin>
-                <a-mixin id="cylinder" geometry="primitive: cylinder; radius: 0.25; height: 0.25"
+                <a-mixin id="cylinder" geometry="primitive: cylinder; radius: 0.5; height: 1"
                          hoverable grabbable stretchable draggable droppable
                          shadow
                          event-set__dragdrop="_event: drag-drop; geometry.radius: 0.25; geometry.primitive: sphere"
@@ -59,7 +59,7 @@
                          event-set__dragon="_event: dragover-start; material.wireframe: true"
                          event-set__dragoff="_event: dragover-end; material.wireframe: false">
                 </a-mixin>
-                <a-mixin id="plane" geometry="primitive: plane; width: 0.25; height: 0.25"
+                <a-mixin id="plane" geometry="primitive: plane; width: 1; height: 1"
                          hoverable grabbable stretchable draggable droppable
                          shadow
                          event-set__dragdrop="_event: drag-drop; geometry.radius: 0.25; geometry.primitive: sphere"
@@ -75,7 +75,7 @@
 
             </a-assets>
 
-            <a-box  id="mode" src="#modeImgNormal" position="11.1 8.55 4" width="6" height="3" depth="2" rotation="0 0 0"></a-box>
+            <a-box  id="mode" src="#modeImgNormal" position="11.3 10 4" width="6" height="3" depth="0.5" rotation="0 0 0"></a-box>
 
             <!--Construction Zone-->
             <a-entity id="index" base></a-entity>

@@ -422,40 +422,42 @@ AFRAME.registerComponent('menu',{
 	init: function(){
 		console.log("dentro del componente menu");
 		let baseMenu = document.createElement('a-box');
-		baseMenu.setAttribute('position',{x:2.5,y:7.55,z:4});
+		baseMenu.setAttribute('position',{x:2.5,y:8,z:4});
 		baseMenu.setAttribute('id','basemenu');
 		baseMenu.setAttribute('height', '5');
-		baseMenu.setAttribute('depth', '2');
+		baseMenu.setAttribute('depth', '0.5');
 		baseMenu.setAttribute('width', '11');
 		baseMenu.setAttribute('color', 'black');
 		document.getElementById('menu').appendChild(baseMenu)
 		let baseMenuImg = document.createElement('a-plane');
-		baseMenuImg.setAttribute('position',{x:0,y:0,z:1.01});
+		baseMenuImg.setAttribute('position',{x:0,y:0,z:0.26});
 		baseMenuImg.setAttribute('height', '5');
 		baseMenuImg.setAttribute('width', '11');
 		baseMenuImg.setAttribute('src', '#FiguresSelectorImg');
 		document.getElementById('basemenu').appendChild(baseMenuImg)
 
-		let figure1 = document.createElement('a-box');
-		figure1.setAttribute('position', {x:1.5,y:3,z:4});
-		figure1.setAttribute('width', '2.5');
-		figure1.setAttribute('height', '0.5');
-		figure1.setAttribute('depth', '2');
+		let figure1 = document.createElement('a-cylinder');
+		figure1.setAttribute('position', {x:1.5,y:2.8,z:4});
+		//figure1.setAttribute('width', '1');
+		figure1.setAttribute('height', '0.15');
+		figure1.setAttribute('radius', '0.3');
+		figure1.setAttribute('color', '#dbdbdb');
 		figure1.setAttribute('id', 'figure1');
 		document.getElementById('menu').appendChild(figure1);
-		let figure11 = document.createElement('a-plane');
+		/*let figure11 = document.createElement('a-plane');
 		figure11.setAttribute('position', {x:0,y:0,z:1.01});
 		figure11.setAttribute('width', '2.5');
-		figure11.setAttribute('height', '0.5');
+		figure11.setAttribute('height', '0.2');
 		figure11.setAttribute('src', '#cubeImg');
-		document.getElementById('figure1').appendChild(figure11)
+		document.getElementById('figure1').appendChild(figure11)*/
 		let figure12 = document.createElement('a-box');
 		figure12.setAttribute('position', {x:0,y:1,z:0});
-		figure12.setAttribute('width', '0.7');
-		figure12.setAttribute('depth', '0.7');
-		figure12.setAttribute('height', '0.7');
+		figure12.setAttribute('width', '1');
+		figure12.setAttribute('depth', '1');
+		figure12.setAttribute('height', '1');
 		figure12.setAttribute('id', 'cubeClick');
 		figure12.setAttribute('class', ' cube button');
+		figure12.setAttribute('animation__position',"property: object3D.position.y; to: 1.1; dir: alternate; dur: 2000; loop: true")
 		figure12.setAttribute('animation', 'property:rotation;to:0 360 180;loop:true;dur:20000')
 		figure12.setAttribute('clickable', {});
 		figure12.setAttribute('editentity',{} );
@@ -507,6 +509,7 @@ AFRAME.registerComponent('menu',{
 		figure32.setAttribute('class', 'plane button');
 		figure32.setAttribute('clickable', {});
 		figure32.setAttribute('editentity',{} );
+
 		figure32.setAttribute('animation', 'property:rotation;to:0 0 180;loop:true;dur:20000');
 		document.getElementById('figure3').appendChild(figure32);
 
@@ -533,6 +536,8 @@ AFRAME.registerComponent('menu',{
 		figure42.setAttribute('editentity',{} );
 		figure42.setAttribute('animation', 'property:rotation;to:0 360 180;loop:true;dur:20000');
 		document.getElementById('figure4').appendChild(figure42)
+
+
 
 		let figure5 = document.createElement('a-cylinder');
 		figure5.setAttribute('position', {x:5.53,y:2.5,z:3.5});
@@ -574,7 +579,7 @@ AFRAME.registerComponent('menu',{
 		figure10.setAttribute('rotation', {x:90,y:0,z:0});
 		figure10.setAttribute('radius', '0.5');
 		figure10.setAttribute('height', '0.2');
-		figure10.setAttribute('color', '#26E1FA');
+		figure10.setAttribute('color', '#2bb5ff');
 		document.getElementById('menu').appendChild(figure10);
 		setClickable()
 	},
