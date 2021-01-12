@@ -209,9 +209,9 @@ AFRAME.registerComponent('editentity', {
 			let attributesSelector= document.createElement('a-box');
 			attributesSelector.setAttribute('src', '#attributeSelectorImg');
 			attributesSelector.setAttribute('id', 'attributemenu');
-			attributesSelector.setAttribute('position', {x:11.2,y:4.1,z:4});
+			attributesSelector.setAttribute('position', {x:11.2,y:4.6,z:4});
 			attributesSelector.setAttribute('width', '6');
-			attributesSelector.setAttribute('height', '6');
+			attributesSelector.setAttribute('height', '7');
 			attributesSelector.setAttribute('depth', '0.5');
 
 			let sliderX = document.createElement('a-gui-slider');
@@ -224,7 +224,7 @@ AFRAME.registerComponent('editentity', {
 			sliderX.setAttribute('gui-interactable', "");
 			sliderX.setAttribute('gui-item', "");
 			sliderX.setAttribute('gui-slider', "");
-			sliderX.setAttribute('position', "-1.75 1.6 0.24");
+			sliderX.setAttribute('position', "-1.75 1.9 0.24");
 			sliderX.setAttribute('clickable', "");
 			sliderX.setAttribute('hoverable', "");
 			sliderX.setAttribute('onclick', "sliderActionX");
@@ -243,7 +243,7 @@ AFRAME.registerComponent('editentity', {
 			sliderY.setAttribute('gui-interactable', "");
 			sliderY.setAttribute('gui-item', "");
 			sliderY.setAttribute('gui-slider', "");
-			sliderY.setAttribute('position', "0 0.2 0.24");
+			sliderY.setAttribute('position', "0 0.3 0.24");
 			sliderY.setAttribute('clickable', "");
 			sliderY.setAttribute('hoverable', "");
 			sliderY.setAttribute('onclick', "sliderActionY");
@@ -262,7 +262,7 @@ AFRAME.registerComponent('editentity', {
 			sliderZ.setAttribute('gui-interactable', "");
 			sliderZ.setAttribute('gui-item', "");
 			sliderZ.setAttribute('gui-slider', "");
-			sliderZ.setAttribute('position', "1.75 1.6 0.24");
+			sliderZ.setAttribute('position', "1.75 1.9 0.24");
 			sliderZ.setAttribute('clickable', "");
 			sliderZ.setAttribute('hoverable', "");
 			sliderZ.setAttribute('onclick', "sliderActionZ");
@@ -281,8 +281,10 @@ AFRAME.registerComponent('editentity', {
 				let colorButton = document.createElement('a-entity');
 				if (el.getAttribute('class').search('sphere') >= 0) {
 					colorButton.setAttribute('geometry', {primitive: 'sphere', radius: 0.3});
+					colorButton.setAttribute('position', ((colors.indexOf(color) * 0.47) - 2.6) + " -2.78 0.01");
 				} else if (el.getAttribute('class').search('plane') >= 0) {
 					colorButton.setAttribute('geometry', {primitive: 'plane', width: 0.25, height: 0.25});
+					colorButton.setAttribute('position', ((colors.indexOf(color) * 0.47) - 2.6) + " -2.78 0.26");
 				} else if (el.getAttribute('class').search('cube') >= 0) {
 					colorButton.setAttribute('geometry', {
 						primitive: 'box',
@@ -290,12 +292,13 @@ AFRAME.registerComponent('editentity', {
 						height: 0.25,
 						depth: 0.5
 					});
+					colorButton.setAttribute('position', ((colors.indexOf(color) * 0.47) - 2.6) + " -2.78 0.01");
 				} else {
 					colorButton.setAttribute('geometry', {primitive: 'cylinder', radius: 0.3, height: 0.25});
+					colorButton.setAttribute('position', ((colors.indexOf(color) * 0.47) - 2.6) + " -2.78 0.01");
 				}
 				colorButton.setAttribute('class', 'button');
 				//colorButton.setAttribute('id', 'colours');
-				colorButton.setAttribute('position', ((colors.indexOf(color) * 0.47) - 2.6) + " -2.38 0.01");
 				colorButton.setAttribute('material', 'color :' + color);
 				colorButton.setAttribute('clickable', {});
 				colorButton.setAttribute('changeattribute', {})
