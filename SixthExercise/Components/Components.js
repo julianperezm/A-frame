@@ -1,4 +1,6 @@
 let group = false;
+let created = false;
+
 document.addEventListener('keypress', function(e) {
   if (e.keyCode === 113 || e.keyCode === 81){
   	let mode = document.getElementById('mode');
@@ -37,6 +39,21 @@ document.addEventListener('keypress', function(e) {
 function createEntity(entity){
 
 	let podium = document.getElementById('podium');
+	//let podiumEntity = document.querySelector('#entitytochange');
+
+	if (created){
+		let elToChange = document.getElementById('entitytochange');
+		let menu = document.getElementById('attributemenu')
+			if (menu){
+				menu.remove();
+			}
+			console.log("Dentro de posibilidad de cambio");
+			console.log(elToChange);
+			if (elToChange){
+				elToChange.remove()
+			}
+	}
+
 	let newEntity = document.createElement('a-entity');
 	newEntity.setAttribute('static-body', {});
 	newEntity.setAttribute('class', entity + " remote");
@@ -61,6 +78,7 @@ function createEntity(entity){
 			break;
 	}
 
+	created = true;
 	podium.appendChild(newEntity)
 
 	//setEditable()
@@ -482,6 +500,7 @@ AFRAME.registerComponent('menu',{
 		figure12.setAttribute('animation', 'property:rotation;to:0 360 180;loop:true;dur:20000')
 		figure12.setAttribute('clickable', {});
 		figure12.setAttribute('editentity',{} );
+		figure12.setAttribute('posibilityofchange',{} );
 		figure12.setAttribute('color','#c1c1c1' );
 		document.getElementById('figure1').appendChild(figure12)
 
@@ -508,6 +527,7 @@ AFRAME.registerComponent('menu',{
 		figure22.setAttribute('animation', 'property:rotation;to:0 360 180;loop:true;dur:20000')
 		figure22.setAttribute('clickable', {});
 		figure22.setAttribute('editentity',{} );
+		figure22.setAttribute('posibilityofchange',{} );
 		figure22.setAttribute('color','#c1c1c1' );
 		document.getElementById('figure2').appendChild(figure22);
 
@@ -530,6 +550,7 @@ AFRAME.registerComponent('menu',{
 		figure32.setAttribute('height', '0.3');
 		figure32.setAttribute('id', 'planeClick');
 		figure32.setAttribute('class', 'plane button');
+		figure32.setAttribute('posibilityofchange',{} );
 		figure32.setAttribute('clickable', {});
 		figure32.setAttribute('editentity',{} );
 		figure32.setAttribute('color','#c1c1c1' );
@@ -555,6 +576,7 @@ AFRAME.registerComponent('menu',{
 		figure42.setAttribute('radius', '0.2');
 		figure42.setAttribute('id', 'sphereClick');
 		figure42.setAttribute('class', 'sphere button');
+		figure42.setAttribute('posibilityofchange',{} );
 		figure42.setAttribute('clickable', {});
 		figure42.setAttribute('editentity',{} );
 		figure42.setAttribute('color','#c1c1c1' );
