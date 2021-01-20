@@ -33,6 +33,7 @@
                 <img id="figureSelectedImg" src="../assets/figSele.jpg">
                 <img id="attributeSelectorImg" src="../assets/AttributesSelector.jpg">
                 <img id="attributeAxisImg" src="../assets/AxisSelector.jpg">
+                <img id="handlerImg" src="../assets/handlerImg.jpg">
 
                 <a-mixin id="cube" geometry="primitive: box; width: 0.3; height: 0.3; depth: 0.3"
                          hoverable grabbable stretchable draggable droppable
@@ -50,6 +51,8 @@
                          hoverable grabbable stretchable draggable droppable
                          shadow
                 </a-mixin>
+
+                <a-asset-item id="handler" src="../handler/hand.gltf" ></a-asset-item>
             </a-assets>
 
             <a-box  id="mode" src="#modeImgNormal" position="0.7 5.75 4" width="1" height="0.5" depth="0.2" rotation="0 0 0"></a-box>
@@ -58,10 +61,14 @@
             <a-entity id="index" base></a-entity>
 
             <!-- Podium -->
-            <a-entity class="podium" podium></a-entity>
+            <a-entity class="podium" podium>
+
+            </a-entity>
 
             <!--Menu-->
             <a-entity id="menu" menu></a-entity>
+
+
 
             <!--User Camera-->
             <a-entity movement-controls="fly: false" position="2.5 4 9" look-controls

@@ -1,31 +1,45 @@
 let group = false;
 let created = false;
+let color
 
 document.addEventListener('keypress', function(e) {
   if (e.keyCode === 113 || e.keyCode === 81){
   	let mode = document.getElementById('mode');
+  	let img = document.getElementById('imghand');
+
   	let text = mode.getAttribute('src')
   	if (group === false ){
 		mode.setAttribute('src', '#modeImgGroup');
+		img.setAttribute('src', '#handlerImg');
+		img.setAttribute('width', '1');
 		//let entityToCopy = document.getElementById('newentity');
 		//if (entityToCopy){
-			let newEntity = document.createElement('a-entity');
-			let podium = document.getElementById('podium');
-			let scene = document.querySelector('a-scene');
-			newEntity.setAttribute('static-body', {});
-			newEntity.setAttribute('class', "remote");
-			newEntity.setAttribute('id', "fatherofgroup");
-			newEntity.setAttribute('material', 'color:#c1c1c1');
-			newEntity.setAttribute('position', podium.getAttribute('position'));
-			newEntity.setAttribute('mixin', 'cube');
-			scene.appendChild(newEntity);
-			console.log('group');
-			group = true;
-			console.log(group);
+		//<a-entity class="remote" gltf-model="#handler" position="3.7 0.3 4.4"  scale="0.003 0.008 0.003" rotation="0 90 0" grabbable stretchable ></a-entity>
+		let newEntity = document.createElement('a-box');
+		let podium = document.getElementById('podium');
+		let scene = document.querySelector('a-scene');
+		newEntity.setAttribute('static-body', {});
+		newEntity.setAttribute('class', "remote");
+		newEntity.setAttribute('mixin', 'cube');
+		newEntity.setAttribute('src', '#handlerImg');
+		newEntity.setAttribute('id', "fatherofgroup");
+		newEntity.setAttribute('position', podium.getAttribute('position'));
+		scene.appendChild(newEntity);
+		console.log('group');
+		group = true;
+		console.log(group);
 		//}
 
 	}else{
   		mode.setAttribute('src', '#modeImgNormal');
+  		img.setAttribute('src', '#figureSelectedImg');
+		img.setAttribute('width', '2');
+		let newEl = document.getElementsByClassName('newen');
+		for (let elem of newEl){
+			elem.removeAttribute('animation');
+		}
+		//console.log(newEl)
+		//console.log(newEl)
   		let father = document.getElementById('fatherofgroup');
   		console.log(father);
   		father.removeAttribute('id');
@@ -110,6 +124,13 @@ function setClickable(){
 	});
 }
 
+ AFRAME.registerComponent('wireframe', {
+   dependencies: ['material'],
+   init: function () {
+     this.el.components.material.material.wireframe = true;
+   }
+ });
+
 AFRAME.registerComponent('posibilityofgroup',{
 	init:function(){
 		let el = this.el;
@@ -125,12 +146,14 @@ AFRAME.registerComponent('posibilityofgroup',{
 				console.log(el.object3D.position.z)
 				let newEl = document.createElement('a-entity');
 				newEl.setAttribute('position', {x:elX,y:elY,z:elZ});
+				newEl.setAttribute('animation', 'property: object3D.position.y; to: 0.1; dir: alternate; dur: 800; loop: true')
+				newEl.setAttribute('src', '#handlerImg');
 				newEl.setAttribute('id', 'newentity');
 				newEl.setAttribute('mixin', el.getAttribute('mixin'));
 				newEl.setAttribute('scale', el.getAttribute('scale'));
-				newEl.setAttribute('material', el.getAttribute('material'));
-				newEl.setAttribute('color', el.getAttribute('color'));
-				newEl.setAttribute('class', "remote");
+				newEl.setAttribute('opacity', '0.5');
+				newEl.setAttribute('material', el.getAttribute('material') );
+				newEl.setAttribute('class', "remote newen");
 				newEl.setAttribute('editable', {});
 				console.log(newEl.object3D.position.x);
 				console.log(newEl.object3D.position.y);
@@ -593,9 +616,12 @@ AFRAME.registerComponent('menu',{
 		document.getElementById('menu').appendChild(fig);
 		let fig31 = document.createElement('a-plane');
 		fig31.setAttribute('position', {x:0,y:0,z:0.11});
-		fig31.setAttribute('width', '2');
+		fig31.setAttribute('id', 'imghand');
 		fig31.setAttribute('height', '0.5');
 		fig31.setAttribute('src', '#figureSelectedImg');
+		fig31.setAttribute('width', '2');
+
+
 		document.getElementById('fig').appendChild(fig31);
 
 		let figure5 = document.createElement('a-cylinder');
