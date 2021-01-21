@@ -11,14 +11,16 @@ function coloredOnSelect() {
 		showeditor.setAttribute('depth', "0.01");*/
 
 		//showeditor.setAttribute('material','opacity: 0');
-		showeditor.setAttribute('rotation',{x:0,y:2.5,z:0});
+		//showeditor.setAttribute('rotation',{x:0,y:2.5,z:0});
+		showeditor.setAttribute('material',"color:white; opacity: 0.25");
 	});
 	showeditor.addEventListener('raycaster-intersected-cleared', function () {
 		/*showeditor.setAttribute('width', "0.4");
 		showeditor.setAttribute('height', "0.1");
 		showeditor.setAttribute('depth', "0.01");*/
 		//showeditor.setAttribute('material','opacity: 0.25');
-		showeditor.setAttribute('rotation',{x:0,y:0,z:0});
+		//showeditor.setAttribute('rotation',{x:0,y:0,z:0});
+		showeditor.setAttribute('material',"color:#adadad; opacity: 0.25");
 	});
 }
 
