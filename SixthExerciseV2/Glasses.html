@@ -27,6 +27,8 @@
                 <img id="attributeSelectorImg" src="../assets/AttributesSelector.jpg">
                 <img id="attributeAxisImg" src="../assets/AxisSelector.jpg">
                 <img id="handlerImg" src="../assets/handlerImg.jpg">
+                <img id="openeditorImg" src="../assets/openeditorA.jpg">
+                <img id="closeeditorImg" src="../assets/closeeditorA.jpg">
 
                 <a-mixin id="cube" geometry="primitive: box; width: 0.3; height: 0.3; depth: 0.3"
                          hoverable grabbable stretchable draggable droppable
@@ -70,8 +72,6 @@
     			<a-asset-item id="righthand" src="../assets/oculus-touch-controller-right.obj"></a-asset-item>
             </a-assets>
 
-            <a-box  id="mode" src="#modeImgNormal" position="0.7 5.75 4" width="1" height="0.5" depth="0.2" rotation="0 0 0"></a-box>
-
             <!--Construction Zone-->
             <a-entity id="index" base></a-entity>
 
@@ -79,10 +79,6 @@
             <a-entity class="podium" podium>
 
             </a-entity>
-
-            <!--Menu-->
-            <a-entity id="menu" menu></a-entity>
-
 
 
             <!--User Camera-->
@@ -109,6 +105,16 @@
 					   		 colliderEndEvent:raycaster-intersection-cleared;
 					   	 	 colliderEndEventProperty: clearedEls;">
 				</a-entity>
+                <a-box id="showeditor" class="remote" position="-1 3 -1" width="0.35" height="0.15" depth="0.015" rotation="0 0 0" material="color:#adadad; opacity: 0.25" showeditor>
+                    <a-plane id="showphoto" src="#openeditorImg" width="0.35" height="0.15"></a-plane>
+                </a-box>
+                <!--Menu-->
+                <a-entity id="menu" menu position="-1 3 -1"></a-entity>
+
+                <a-box class="remote" position="-0.6 3 -1" width="0.35" height="0.15" depth="0.015" rotation="0 0 0" material="color:#adadad;opacity: 0.25" showeditor>
+                    <a-plane id="mode" src="#modeImgNormal" width="0.35" height="0.15"></a-plane>
+                </a-box>
+
 				<a-entity id="rh" mixin="controller-right"></a-entity>
         		<a-entity id="lh" mixin="controller-left"></a-entity>
             </a-entity>
