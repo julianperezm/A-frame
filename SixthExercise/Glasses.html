@@ -52,7 +52,7 @@
                               	  colliderEventProperty: els;
                               	  colliderEndEvent: collisions;
                               	  colliderEndEventProperty: clearedEls;">
-				<a-mixin id="pointer" raycaster="showLine: true; objects: .cube, .remote, .button, .holo, a-link"
+				<a-mixin id="pointer" raycaster="showLine: true; objects: .cube, .remote"
 				     super-hands="colliderEvent: raycaster-intersection;
 				                  colliderEventProperty: els;
 				                  colliderEndEvent:raycaster-intersection-cleared;
@@ -103,7 +103,7 @@
 				<a-entity camera position="0 2.5 0" look-controls
 				capture-mouse
 				static-body
-				raycaster="objects: .button, .remote, .holo; showLine: true" cursor="rayOrigin:mouse"
+				raycaster="objects: .button, .remote; showLine: true" cursor="rayOrigin:mouse"
 				super-hands="colliderEvent: raycaster-intersection;
 					   		 colliderEventProperty: els;
 					   		 colliderEndEvent:raycaster-intersection-cleared;
