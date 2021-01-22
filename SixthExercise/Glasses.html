@@ -52,7 +52,7 @@
                               	  colliderEventProperty: els;
                               	  colliderEndEvent: collisions;
                               	  colliderEndEventProperty: clearedEls;">
-				<a-mixin id="pointer" raycaster="showLine: true; objects: .cube, .remote"
+				<a-mixin id="pointer" raycaster="showLine: true; objects: .cube, .remote,, a-link"
 				     super-hands="colliderEvent: raycaster-intersection;
 				                  colliderEventProperty: els;
 				                  colliderEndEvent:raycaster-intersection-cleared;
@@ -60,7 +60,7 @@
 				<a-mixin id="controller-right" mixin="pointer" line="color: blue; opacity: 0.75"
 				     vive-controls="hand: right" oculus-touch-controls="hand: right"
 				     windows-motion-controls="hand: right"
-				     ></a-mixin>
+				     gearvr-controls daydream-controls oculus-go-controls></a-mixin>
 				<a-mixin id="controller-left" mixin="pointer" line="color: blue; opacity: 0.75"
 				     vive-controls="hand: left" oculus-touch-controls="hand: left"
 				     windows-motion-controls="hand: left"></a-mixin>
