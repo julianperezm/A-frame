@@ -514,14 +514,14 @@ AFRAME.registerComponent('podium',{
 			//document.getElementById('podium').appendChild(podium)
 			let j = document.getElementsByClassName('podium');
 			let podium = document.createElement('a-sphere');
-			podium.setAttribute('position',{x:3.7,y:4,z:5});
+			podium.setAttribute('position',{x:0,y:4,z:5});
 			podium.setAttribute('radius', 0.01);
 			podium.setAttribute('color', 'red');
 			podium.setAttribute('id', 'podium');
 			j[0].appendChild(podium)
 
 			let fig = document.createElement('a-box');
-			fig.setAttribute('position', {x:3.7,y:5.3,z:4});
+			fig.setAttribute('position', {x:0,y:5.3,z:4});
 			fig.setAttribute('width', '2.1');
 			fig.setAttribute('height', '0.5');
 			fig.setAttribute('depth', '0.2');
@@ -537,42 +537,42 @@ AFRAME.registerComponent('podium',{
 			document.getElementById('fig').appendChild(fig31);
 
 			let figure5 = document.createElement('a-cylinder');
-			figure5.setAttribute('position', {x:3.7,y:4,z:4.1});
+			figure5.setAttribute('position', {x:0,y:4,z:4.1});
 			figure5.setAttribute('rotation', {x:90,y:0,z:0});
 			figure5.setAttribute('radius', '0.8');
 			figure5.setAttribute('height', '0.05');
 			figure5.setAttribute('color', '#92D95D')
 			j[0].appendChild(figure5);
 			let figure6 = document.createElement('a-cylinder');
-			figure6.setAttribute('position', {x:3.7,y:4,z:4.15});
+			figure6.setAttribute('position', {x:0,y:4,z:4.15});
 			figure6.setAttribute('rotation', {x:90,y:0,z:0});
 			figure6.setAttribute('radius', '0.7');
 			figure6.setAttribute('height', '0.05');
 			figure6.setAttribute('color', '#F7B739')
 			j[0].appendChild(figure6);
 			let figure7 = document.createElement('a-cylinder');
-			figure7.setAttribute('position', {x:3.7,y:4,z:4.20});
+			figure7.setAttribute('position', {x:0,y:4,z:4.20});
 			figure7.setAttribute('rotation', {x:90,y:0,z:0});
 			figure7.setAttribute('radius', '0.6');
 			figure7.setAttribute('height', '0.05');
 			figure7.setAttribute('color', '#FF1247')
 			j[0].appendChild(figure7);
 			let figure8 = document.createElement('a-cylinder');
-			figure8.setAttribute('position', {x:3.7,y:4,z:4.25});
+			figure8.setAttribute('position', {x:0,y:4,z:4.25});
 			figure8.setAttribute('rotation', {x:90,y:0,z:0});
 			figure8.setAttribute('radius', '0.5');
 			figure8.setAttribute('height', '0.05');
 			figure8.setAttribute('color', '#EE157A')
 			j[0].appendChild(figure8);
 			let figure9 = document.createElement('a-cylinder');
-			figure9.setAttribute('position', {x:3.7,y:4,z:4.3});
+			figure9.setAttribute('position', {x:0,y:4,z:4.3});
 			figure9.setAttribute('rotation', {x:90,y:0,z:0});
 			figure9.setAttribute('radius', '0.4');
 			figure9.setAttribute('height', '0.05');
 			figure9.setAttribute('color', '#BC36F6')
 			j[0].appendChild(figure9);
 			let figure10 = document.createElement('a-cylinder');
-			figure10.setAttribute('position', {x:3.7,y:4,z:4.35});
+			figure10.setAttribute('position', {x:0,y:4,z:4.35});
 			figure10.setAttribute('rotation', {x:90,y:0,z:0});
 			figure10.setAttribute('radius', '0.3');
 			figure10.setAttribute('height', '0.05');
