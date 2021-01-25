@@ -63,31 +63,32 @@
             <a-entity id="index" base></a-entity>
 
             <!-- Podium -->
-            <a-entity class="podium" podium>
+            <a-entity class="podium" position="-3.7 -1 0" podium>
 
             </a-entity>
 
 
 
             <!--User Camera-->
-            <a-entity movement-controls="fly: false" position="2.5 4 9" look-controls
+            <a-entity movement-controls="fly: false" position="0 0 8"
                     progressive-controls="objects: [grabbable], [droppable], [clickable];">
-                <a-entity camera capture-mouse
-                    raycaster="objects: .button, .remote;showLine: true" cursor="rayOrigin:mouse"as
+                <a-entity camera position="0 2 0" capture-mouse look-controls
+                    raycaster="objects: .button, .remote;showLine: true" cursor="rayOrigin:mouse"
                     static-body
                     super-hands="colliderEvent: raycaster-intersection;
                         colliderEventProperty: els;
                         colliderEndEvent:raycaster-intersection-cleared;
                         colliderEndEventProperty: clearedEls;">
                 </a-entity>
-                <a-box id="showeditor" class="remote" position="-1 0.7 -1" width="0.35" height="0.15" depth="0.015" rotation="0 0 0" material="color:#adadad; opacity: 0.25" showeditor>
-                    <a-plane id="showphoto" src="#openeditorImg" width="0.35" height="0.15"></a-plane>
+                <a-box position="0 1.5 0" material="color:white; opacity: 0.75" width="1.5" height="0.25" depth="1" ></a-box>
+                <a-box id="showeditor" class="remote" position="-0.4 1.7 -0.3" width="0.15" height="0.05" depth="0.015" rotation="-90 0 0" material="color:#adadad; opacity: 0.25" showeditor>
+                    <a-plane id="showphoto" src="#openeditorImg" width="0.15" height="0.05"></a-plane>
                 </a-box>
                 <!--Menu-->
-                <a-entity id="menu" menu position="-1 0.7 -1"></a-entity>
+                <a-entity id="menu" menu position="-0.4 2.35 -0.3" Rotation="0 45 0"></a-entity>
 
-                <a-box class="remote" position="-0.6 0.7 -1" width="0.35" height="0.15" depth="0.015" rotation="0 0 0" material="color:#adadad;opacity: 0.25" showeditor>
-                    <a-plane id="mode" src="#modeImgNormal" width="0.35" height="0.15"></a-plane>
+                <a-box class="remote" position="0.4 1.7 -0.3" width="0.15" height="0.05" depth="0.015" rotation="-90 0 0" material="color:#adadad;opacity: 0.25" showeditor>
+                    <a-plane id="mode" src="#modeImgNormal" width="0.15" height="0.05"></a-plane>
                 </a-box>
 
             </a-entity>
