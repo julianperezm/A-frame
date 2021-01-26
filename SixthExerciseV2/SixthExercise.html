@@ -55,6 +55,7 @@
                 </a-mixin>
 
                 <a-asset-item id="handler" src="../handler/hand.gltf" ></a-asset-item>
+                <a-asset-item id="geometric" src="../geometric_bodies/scene.gltf" ></a-asset-item>
             </a-assets>
 
 
@@ -65,15 +66,19 @@
             <!-- Podium -->
             <a-entity class="podium" podium>
             </a-entity>
-dsa
+
             <a-box position="0 -0.25 0" color="white" width="15" height="1" depth="10">
                 <a-text value="Construction Zone" position="0 4 0" align="center"></a-text>
             </a-box>
 
+
+            <!--<a-entity id="showeditor" class="remote" gltf-model="#geometric" position="1 0.8 0.3" scale="0.001 0.001 0.001" showeditor></a-entity>-->
+
+
             <!--User Camera-->
             <a-entity movement-controls="fly: false" position="0 0 8"
                     progressive-controls="objects: [grabbable], [droppable], [clickable];">
-                <a-entity camera position="0 2 0" capture-mouse look-controls
+                <a-entity camera position="0 1.7 0" capture-mouse look-controls
                     raycaster="objects: .button, .remote;showLine: true" cursor="rayOrigin:mouse"
                     static-body
                     super-hands="colliderEvent: raycaster-intersection;
@@ -81,15 +86,17 @@ dsa
                         colliderEndEvent:raycaster-intersection-cleared;
                         colliderEndEventProperty: clearedEls;">
                 </a-entity>
-                <a-box position="0 1.5 0" material="color:white; opacity: 0.75" width="1.5" height="0.25" depth="1" ></a-box>
-                <a-box id="showeditor" class="remote" position="-0.4 1.7 -0.3" width="0.15" height="0.05" depth="0.015" rotation="-90 0 0" material="color:#adadad; opacity: 0.25" showeditor>
-                    <a-plane id="showphoto" src="#openeditorImg" width="0.15" height="0.05"></a-plane>
+
+               <a-box position="0 1.1 -0.5" material="color:white; opacity: 0.25" width="1" height="0.01" depth="0.1" rotation="45 0 0" ></a-box>
+
+                <a-box id="showeditor" class="remote" position="-0.5 1.1 -0.5" width="0.15" height="0.1" depth="0.01" rotation="-45 0 0" material="color:white; opacity: 0.25" showeditor>
+                    <a-plane id="showphoto" src="#openeditorImg" width="0.15" height="0.1"></a-plane>
                 </a-box>
                 <!--Menu-->
-                <a-entity id="menu" menu position="-0.4 2.35 -0.3" Rotation="0 45 0"></a-entity>
+                <a-entity id="menu" menu position="-0.5 1.7 -0.5" Rotation="0 45 0"></a-entity>
 
-                <a-box id="showhandler" class="remote" position="0.4 1.7 -0.3" width="0.15" height="0.05" depth="0.015" rotation="-90 0 0" material="color:#adadad;opacity: 0.25" handlereditor>
-                    <a-plane id="mode" src="#modeImgNormal" width="0.15" height="0.05"></a-plane>
+                <a-box id="showhandler" class="remote" position="0.5 1.1 -0.5" width="0.15" height="0.1" depth="0.01" rotation="-45 0 0" material="color:white;opacity: 0.25" handlereditor>
+                    <a-plane id="mode" src="#modeImgNormal" width="0.15" height="0.1"></a-plane>
                 </a-box>
 
             </a-entity>

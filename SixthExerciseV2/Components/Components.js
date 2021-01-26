@@ -14,7 +14,8 @@ function coloredOnSelect() {
 
 		//showeditor.setAttribute('material','opacity: 0');
 		//showeditor.setAttribute('rotation',{x:0,y:2.5,z:0});
-		showeditor.setAttribute('material',"color:white; opacity: 0.25");
+		showeditor.setAttribute('material',"color:#adadad; opacity: 0.5");
+		//showeditor.setAttribute('scale',"0.004 0.004 0.004");
 	});
 	showeditor.addEventListener('raycaster-intersected-cleared', function () {
 		/*showeditor.setAttribute('width', "0.4");
@@ -22,7 +23,8 @@ function coloredOnSelect() {
 		showeditor.setAttribute('depth', "0.01");*/
 		//showeditor.setAttribute('material','opacity: 0.25');
 		//showeditor.setAttribute('rotation',{x:0,y:0,z:0});
-		showeditor.setAttribute('material',"color:#adadad; opacity: 0.25");
+		showeditor.setAttribute('material',"color:white; opacity: 0.25");
+		//showeditor.setAttribute('scale',"0.001 0.001 0.001");
 	});
 	showhandler.addEventListener('raycaster-intersected', function () {
 		/*showeditor.setAttribute('width', "0.45");
@@ -31,7 +33,7 @@ function coloredOnSelect() {
 
 		//showeditor.setAttribute('material','opacity: 0');
 		//showeditor.setAttribute('rotation',{x:0,y:2.5,z:0});
-		showhandler.setAttribute('material',"color:white; opacity: 0.25");
+		showhandler.setAttribute('material',"color:#adadad; opacity: 0.25");
 	});
 	showhandler.addEventListener('raycaster-intersected-cleared', function () {
 		/*showeditor.setAttribute('width', "0.4");
@@ -39,7 +41,7 @@ function coloredOnSelect() {
 		showeditor.setAttribute('depth', "0.01");*/
 		//showeditor.setAttribute('material','opacity: 0.25');
 		//showeditor.setAttribute('rotation',{x:0,y:0,z:0});
-		showhandler.setAttribute('material',"color:#adadad; opacity: 0.25");
+		showhandler.setAttribute('material',"color:white; opacity: 0.25");
 	});
 }
 
