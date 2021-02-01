@@ -490,7 +490,7 @@ AFRAME.registerComponent('editentity', {
 			let attributesSelector= document.createElement('a-box');
 			attributesSelector.setAttribute('src', '#attributeSelectorImg');
 			attributesSelector.setAttribute('id', 'attributemenu');
-			attributesSelector.setAttribute('position', {x:-0.15,y:1.425,z:-0.5});
+			attributesSelector.setAttribute('position', {x:-0.15,y:1.425,z:-0.6});
 			attributesSelector.setAttribute('width', '0.3');
 			attributesSelector.setAttribute('height', '0.3');
 			attributesSelector.setAttribute('depth', '0.01');
