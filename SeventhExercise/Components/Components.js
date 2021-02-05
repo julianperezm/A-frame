@@ -8,39 +8,15 @@ function coloredOnSelect() {
 	//let cubeclick = document.getElementById('cubeClick');
 
 	showeditor.addEventListener('raycaster-intersected', function () {
-		/*showeditor.setAttribute('width', "0.45");
-		showeditor.setAttribute('height', "0.15");
-		showeditor.setAttribute('depth', "0.01");*/
-
-		//showeditor.setAttribute('material','opacity: 0');
-		//showeditor.setAttribute('rotation',{x:0,y:2.5,z:0});
 		showeditor.setAttribute('material',"color:#adadad; opacity: 0.5");
-		//showeditor.setAttribute('scale',"0.004 0.004 0.004");
 	});
 	showeditor.addEventListener('raycaster-intersected-cleared', function () {
-		/*showeditor.setAttribute('width', "0.4");
-		showeditor.setAttribute('height', "0.1");
-		showeditor.setAttribute('depth', "0.01");*/
-		//showeditor.setAttribute('material','opacity: 0.25');
-		//showeditor.setAttribute('rotation',{x:0,y:0,z:0});
 		showeditor.setAttribute('material',"color:white; opacity: 0.25");
-		//showeditor.setAttribute('scale',"0.001 0.001 0.001");
 	});
 	showhandler.addEventListener('raycaster-intersected', function () {
-		/*showeditor.setAttribute('width', "0.45");
-		showeditor.setAttribute('height', "0.15");
-		showeditor.setAttribute('depth', "0.01");*/
-
-		//showeditor.setAttribute('material','opacity: 0');
-		//showeditor.setAttribute('rotation',{x:0,y:2.5,z:0});
 		showhandler.setAttribute('material',"color:#adadad; opacity: 0.25");
 	});
 	showhandler.addEventListener('raycaster-intersected-cleared', function () {
-		/*showeditor.setAttribute('width', "0.4");
-		showeditor.setAttribute('height', "0.1");
-		showeditor.setAttribute('depth', "0.01");*/
-		//showeditor.setAttribute('material','opacity: 0.25');
-		//showeditor.setAttribute('rotation',{x:0,y:0,z:0});
 		showhandler.setAttribute('material',"color:white; opacity: 0.25");
 	});
 }
@@ -50,18 +26,13 @@ AFRAME.registerComponent('handlereditor',{
 		let el = this.el;
 		el.addEventListener('grab-start', function () {
 			let mode = document.getElementById('mode');
-			let img = document.getElementById('imghand');
 
 			let text = mode.getAttribute('src')
 			if (group === false ){
 				mode.setAttribute('src', '#modeImgGroup');
-				img.setAttribute('src', '#handlerImg');
-				img.setAttribute('width', '1');
-				//let entityToCopy = document.getElementById('newentity');
-				//if (entityToCopy){
-				//<a-entity class="remote" gltf-model="#handler" position="3.7 0.3 4.4"  scale="0.003 0.008 0.003" rotation="0 90 0" grabbable stretchable ></a-entity>
 				let newEntity = document.createElement('a-box');
 				let podium = document.getElementById('podium');
+				console.log(podium)
 				let scene = document.querySelector('a-scene');
 				newEntity.setAttribute('static-body', {});
 				newEntity.setAttribute('class', "remote");
@@ -75,8 +46,6 @@ AFRAME.registerComponent('handlereditor',{
 				console.log(group);
 			}else{
 				mode.setAttribute('src', '#modeImgNormal');
-				img.setAttribute('src', '#figureSelectedImg');
-				img.setAttribute('width', '2');
 				let newEl = document.getElementsByClassName('newen');
 				for (let elem of newEl){
 					elem.removeAttribute('animation');
@@ -89,8 +58,6 @@ AFRAME.registerComponent('handlereditor',{
 				group=false;
 				console.log('group');
 	}
-
-
 		});
 	}
 });
@@ -169,26 +136,44 @@ function createEntity(entity){
 	newEntity.setAttribute('position',{x:0,y:0,z:0} );
 	newEntity.setAttribute('id', 'entitytochange')
 	newEntity.setAttribute('material', 'color:#c1c1c1');
-	newEntity.setAttribute('clickable', {});
 	switch (entity) {
 		case 'cube':
 			newEntity.setAttribute('mixin', 'cube');
 			break;
 		case 'sphere':
-			newEntity.setAttribute('mixin', 'sphere')
+			newEntity.setAttribute('mixin', 'sphere');
 			break;
 		case 'plane':
-			newEntity.setAttribute('mixin', 'plane')
+			newEntity.setAttribute('mixin', 'plane');
 			break;
 		case 'cylinder':
-			newEntity.setAttribute('mixin', 'cylinder')
+			newEntity.setAttribute('mixin', 'cylinder');
+			break;
+		case 'car':
+			newEntity.setAttribute('gltf-model', '#model3');
+			newEntity.setAttribute('scale',{x:0.001,y:0.001,z:0.001});
+			newEntity.setAttribute('grabbable',{});
+			newEntity.setAttribute('stretchable',{});
+			newEntity.setAttribute('hoverable',{});
+			newEntity.setAttribute('draggable',{});
+			newEntity.setAttribute('droppable',{});
+			newEntity.setAttribute('shadow',{});
+			console.log(newEntity)
+			break;
+		case 'tree':
+			newEntity.setAttribute('gltf-model', '#trees');
+			newEntity.setAttribute('scale',{x:0.001,y:0.001,z:0.001});
+			newEntity.setAttribute('grabbable',{});
+			newEntity.setAttribute('stretchable',{});
+			newEntity.setAttribute('hoverable',{});
+			newEntity.setAttribute('draggable',{});
+			newEntity.setAttribute('droppable',{});
+			newEntity.setAttribute('shadow',{});
 			break;
 	}
 
 	created = true;
 	podium.appendChild(newEntity)
-
-	//setEditable()
 }
 
 function setClickable(){
@@ -198,24 +183,71 @@ function setClickable(){
 	let sphereFig = document.querySelector('#sphereClick')
 	let planeFig = document.querySelector('#planeClick')
 	let cylinderFig = document.querySelector('#cylinderClick')
+	let car = document.querySelector('#car')
+	let tree = document.querySelector('#tree')
 
 	cubeFig.addEventListener('grab-start', function(){
 		createEntity('cube')
 		console.log('dentro1')
 	});
+	cubeFig.addEventListener('raycaster-intersected', function () {
+		cubeFig.setAttribute('scale',{x:1.5,y:1.5,z:1.5});
+	});
+	cubeFig.addEventListener('raycaster-intersected-cleared', function () {
+		cubeFig.setAttribute('scale',{x:1,y:1,z:1});
+	});
 
 	sphereFig.addEventListener('grab-start', function(){
 		createEntity('sphere')
+	});
+	sphereFig.addEventListener('raycaster-intersected', function () {
+		sphereFig.setAttribute('scale',{x:1.5,y:1.5,z:1.5});
+	});
+	sphereFig.addEventListener('raycaster-intersected-cleared', function () {
+		sphereFig.setAttribute('scale',{x:1,y:1,z:1});
 	});
 
 	planeFig.addEventListener('grab-start', function(){
 		createEntity('plane')
 	});
-
+	planeFig.addEventListener('raycaster-intersected', function () {
+		planeFig.setAttribute('scale',{x:1.5,y:1.5,z:1.5});
+	});
+	planeFig.addEventListener('raycaster-intersected-cleared', function () {
+		planeFig.setAttribute('scale',{x:1,y:1,z:1});
+	});
 	cylinderFig.addEventListener('grab-start', function(){
 		createEntity('cylinder')
 		console.log('dentro2')
 	});
+	cylinderFig.addEventListener('raycaster-intersected', function () {
+		cylinderFig.setAttribute('scale',{x:1.5,y:1.5,z:1.5});
+	});
+	cylinderFig.addEventListener('raycaster-intersected-cleared', function () {
+		cylinderFig.setAttribute('scale',{x:1,y:1,z:1});
+	});
+	car.addEventListener('grab-start', function(){
+		createEntity('car')
+		console.log('dentro2')
+	});
+	car.addEventListener('raycaster-intersected', function () {
+		car.setAttribute('scale',{x:0.00016,y:0.00016,z:0.00016});
+	});
+	car.addEventListener('raycaster-intersected-cleared', function () {
+		car.setAttribute('scale',{x:0.00015,y:0.00015,z:0.00015});
+	});
+
+	tree.addEventListener('grab-start', function(){
+		createEntity('tree')
+		console.log('dentro2')
+	});
+	tree.addEventListener('raycaster-intersected', function () {
+		tree.setAttribute('scale',{x:0.00016,y:0.00016,z:0.00016});
+	});
+	tree.addEventListener('raycaster-intersected-cleared', function () {
+		tree.setAttribute('scale',{x:0.00015,y:0.00015,z:0.00015});
+	});
+
 }
 
  AFRAME.registerComponent('wireframe', {
@@ -271,6 +303,14 @@ AFRAME.registerComponent('changeattribute',{
             console.log(entityToChange.firstChild);
             entityToChange.setAttribute('material', el.getAttribute('material'))
 		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('scale',{x:2,y:2,z:2});
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('scale',{x:1,y:1,z:1});
+		});
+
+
 	}
 });
 
@@ -294,6 +334,12 @@ AFRAME.registerComponent('sizeupx',{
 			let entityToChange = document.getElementById('entitytochange')
 			entityToChange.object3D.scale.x += 1;
 		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('scale',{x:0.17,y:0.17,z:0.17});
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('scale',{x:0.12,y:0.12,z:0.12});
+		});
 	}
 });
 
@@ -303,6 +349,12 @@ AFRAME.registerComponent('sizedownx',{
 		el.addEventListener('grab-start', function () {
 			let entityToChange = document.getElementById('entitytochange')
 			entityToChange.object3D.scale.x -= 1;
+		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('scale',{x:0.2,y:0.2,z:0.2});
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('scale',{x:0.14,y:0.14,z:0.14});
 		});
 	}
 });
@@ -314,6 +366,12 @@ AFRAME.registerComponent('sizeupy',{
 			let entityToChange = document.getElementById('entitytochange')
 			entityToChange.object3D.scale.y += 1;
 		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('scale',{x:0.17,y:0.17,z:0.17});
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('scale',{x:0.12,y:0.12,z:0.12});
+		});
 	}
 });
 
@@ -323,6 +381,12 @@ AFRAME.registerComponent('sizedowny',{
 		el.addEventListener('grab-start', function () {
 			let entityToChange = document.getElementById('entitytochange')
 			entityToChange.object3D.scale.y -= 1;
+		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('scale',{x:0.2,y:0.2,z:0.2});
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('scale',{x:0.14,y:0.14,z:0.14});
 		});
 	}
 });
@@ -335,6 +399,12 @@ AFRAME.registerComponent('sizeupz',{
 			entityToChange.object3D.scale.z += 1;
 			console.log(entityToChange.object3D.scale.z)
 		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('scale',{x:0.17,y:0.17,z:0.17});
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('scale',{x:0.12,y:0.12,z:0.12});
+		});
 	}
 });
 
@@ -345,6 +415,12 @@ AFRAME.registerComponent('sizedownz',{
 			let entityToChange = document.getElementById('entitytochange')
 			entityToChange.object3D.scale.z -= 1;
 			console.log(entityToChange.object3D.scale.z)
+		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('scale',{x:0.2,y:0.2,z:0.2});
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('scale',{x:0.14,y:0.14,z:0.14});
 		});
 	}
 });
@@ -438,6 +514,12 @@ AFRAME.registerComponent('axisselector',{
 			sizeChooserDownZ.setAttribute('sizedownz', {});
 			sizeChooserDownZ.setAttribute('clickable', {});
 			att.appendChild(sizeChooserDownZ);
+		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('scale',{x:1.5,y:1.5,z:1.5});
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('scale',{x:1,y:1,z:1});
 		});
 	}
 });
@@ -568,7 +650,6 @@ AFRAME.registerComponent('editentity', {
 	}
 });
 
-
 AFRAME.registerComponent('base',{
 	schema:{
 		event: {type: 'string', default: 'click'}
@@ -590,7 +671,6 @@ AFRAME.registerComponent('base',{
 		skyPrincipal.setAttribute('radius',30 )
 		skyPrincipal.setAttribute('color', '#b5e5ff')
 		document.getElementById('index').appendChild(skyPrincipal)
-
 
 	},
 });
@@ -659,6 +739,59 @@ AFRAME.registerComponent('podium',{
 	},
 });
 
+AFRAME.registerComponent('showmorefigure',{
+	init:function(){
+		let el = this.el;
+		let show = false;
+		el.addEventListener('grab-start', function () {
+			if (show === false) {
+				//text.setAttribute('src', '#closeeditorImg');
+				show = true;
+				let car = document.createElement('a-entity');
+				car.setAttribute('position', {x:-0.25,y:-0.23,z:0});
+				car.setAttribute('scale', {x:0.00015,y:0.00015,z:0.00015});
+				car.setAttribute('id', 'car');
+				car.setAttribute('class', 'remote');
+				car.setAttribute('gltf-model', '#model3');
+				car.setAttribute('animation', 'property:rotation;to:0 360 0;loop:true;dur:20000')
+				car.setAttribute('clickable', {});
+				car.setAttribute('selectentity',{} );
+				//model3.setAttribute('posibilityofchange',{} );
+				document.getElementById('menu').appendChild(car)
+
+				let tree = document.createElement('a-entity');
+				tree.setAttribute('position', {x:-0.25,y:-0.35,z:0});
+				tree.setAttribute('scale', {x:0.00015,y:0.00015,z:0.00015});
+				tree.setAttribute('id', 'tree');
+				tree.setAttribute('class', 'remote');
+				tree.setAttribute('gltf-model', '#trees');
+				tree.setAttribute('animation', 'property:rotation;to:0 360 0;loop:true;dur:20000')
+				tree.setAttribute('clickable', {});
+				tree.setAttribute('selectentity',{} );
+				//model3.setAttribute('posibilityofchange',{} );
+				document.getElementById('menu').appendChild(tree)
+
+				setClickable()
+
+			}else{
+				console.log('no muestra')
+
+				document.getElementById('car').remove();
+				document.getElementById('tree').remove();
+				show = false;
+			}
+
+		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('material',"color:#adadad; opacity: 0.5");
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('material',"color:white; opacity: 0.25");
+		});
+	}
+});
+
+
 AFRAME.registerComponent('showeditor',{
 	init:function(){
 		let el = this.el;
@@ -668,6 +801,17 @@ AFRAME.registerComponent('showeditor',{
 			if (showed === false){
 				text.setAttribute('src', '#closeeditorImg');
 				showed = true;
+
+				let moreFigureMenu = document.createElement('a-box');
+				moreFigureMenu.setAttribute('position',{x:-0.16,y:-0.225,z:0});
+				moreFigureMenu.setAttribute('id','morefiguremenu');
+				moreFigureMenu.setAttribute('class','remote');
+				moreFigureMenu.setAttribute('height', '0.05');
+				moreFigureMenu.setAttribute('depth', '0.015');
+				moreFigureMenu.setAttribute('width', '0.05');
+				moreFigureMenu.setAttribute('material', 'color:white; opacity:0.25');
+				moreFigureMenu.setAttribute('showmorefigure', {});
+				document.getElementById('menu').appendChild(moreFigureMenu)
 
 				let baseMenu = document.createElement('a-box');
 				baseMenu.setAttribute('position',{x:0,y:-0.25,z:0});
@@ -682,7 +826,7 @@ AFRAME.registerComponent('showeditor',{
 				baseMenuImg.setAttribute('height', '0.1');
 				baseMenuImg.setAttribute('width', '0.25');
 				baseMenuImg.setAttribute('src', '#FiguresSelectorImg');
-				document.getElementById('basemenu').appendChild(baseMenuImg)
+				document.getElementById('basemenu').appendChild(baseMenuImg);
 
 				let figure1 = document.createElement('a-box');
 				figure1.setAttribute('position', {x:-0.065,y:-0.37,z:0});
@@ -803,6 +947,7 @@ AFRAME.registerComponent('showeditor',{
 				document.getElementById('figure3').remove();
 				document.getElementById('figure4').remove();
 				document.getElementById('basemenu').remove();
+				document.getElementById('morefiguremenu').remove();
 				showed = false;
 			}
 
