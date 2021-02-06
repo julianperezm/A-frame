@@ -4,6 +4,8 @@ let hasVehiclesGltfs= false;
 let hasVehicles= false;
 let hasPlants= false;
 let hasPlantsGltfs= false;
+let hasAnimals= false;
+let hasAnimalsGltfs = false;
 
 function coloredOnSelect() {
 	let showeditor = document.getElementById('showeditor');
@@ -169,6 +171,16 @@ function createEntity(entity){
 			newEntity.setAttribute('droppable',{});
 			newEntity.setAttribute('shadow',{});
 			break;
+		case 'animal1':
+			newEntity.setAttribute('gltf-model', '#shiba');
+			newEntity.setAttribute('scale',{x:0.1,y:0.1,z:0.1});
+			newEntity.setAttribute('grabbable',{});
+			newEntity.setAttribute('stretchable',{});
+			newEntity.setAttribute('hoverable',{});
+			newEntity.setAttribute('draggable',{});
+			newEntity.setAttribute('droppable',{});
+			newEntity.setAttribute('shadow',{});
+			break;
 	}
 
 	created = true;
@@ -203,6 +215,18 @@ function setClickable(){
 			tree1.setAttribute('scale',{x:0.00015,y:0.00015,z:0.00015});
 		});
 
+	}else if(hasAnimalsGltfs){
+		animal1.addEventListener('grab-start', function(){
+			createEntity('animal1')
+			console.log('dentro2')
+		});
+		animal1.addEventListener('raycaster-intersected', function () {
+			animal1.setAttribute('scale',{x:0.008,y:0.008,z:0.008});
+		});
+		animal1.addEventListener('raycaster-intersected-cleared', function () {
+			animal1.setAttribute('scale',{x:0.007,y:0.007,z:0.007});
+		});
+
 	}else{
 		console.log('dentro de clickable')
 		let cubeFig = document.querySelector('#cubeClick')
@@ -232,7 +256,7 @@ function setClickable(){
 		sphereFig.addEventListener('raycaster-intersected-cleared', function () {
 			sphereFig.setAttribute('scale',{x:1,y:1,z:1});
 		});
-
+/*
 		planeFig.addEventListener('grab-start', function(){
 			createEntity('plane')
 		});
@@ -242,6 +266,7 @@ function setClickable(){
 		planeFig.addEventListener('raycaster-intersected-cleared', function () {
 			planeFig.setAttribute('scale',{x:1,y:1,z:1});
 		});
+ */
 		cylinderFig.addEventListener('grab-start', function(){
 			createEntity('cylinder')
 			console.log('dentro2')
@@ -992,6 +1017,51 @@ AFRAME.registerComponent('showplants',{
 	}
 });
 
+
+AFRAME.registerComponent('showanimals',{
+	init:function(){
+		let el = this.el;
+		let showAnimals = false;
+		let img = document.getElementById('animalsimg');
+		el.addEventListener('grab-start', function () {
+			if (showAnimals === false) {
+				//text.setAttribute('src', '#closeeditorImg');
+				img.setAttribute('src', '#closeanimals')
+				showAnimals = true;
+
+				let animal1 = document.createElement('a-entity');
+				animal1.setAttribute('position', {x:-0.3,y:-0.4,z:0});
+				animal1.setAttribute('scale', {x:0.007,y:0.007,z:0.007});
+				animal1.setAttribute('id', 'animal1');
+				animal1.setAttribute('class', 'remote');
+				animal1.setAttribute('gltf-model', '#shiba');
+				animal1.setAttribute('animation', 'property:rotation;to:0 360 0;loop:true;dur:20000')
+				animal1.setAttribute('clickable', {});
+				animal1.setAttribute('editgltf',{} );
+				//model3.setAttribute('posibilityofchange',{} );
+				document.getElementById('menu').appendChild(animal1);
+				hasAnimalsGltfs = true;
+				setClickable();
+			}else{
+				console.log('no muestra');
+				img.setAttribute('src', '#openanimals');
+				document.getElementById('animal1').remove();
+				//document.getElementById('tree1').remove();
+				showAnimals = false;
+				hasAnimalsGltfs = false;
+
+			}
+
+		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('material',"color:#adadad; opacity: 0.5");
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('material',"color:white; opacity: 0.25");
+		});
+	}
+});
+
 AFRAME.registerComponent('showmorefigure',{
 	init:function(){
 		let el = this.el;
@@ -1039,32 +1109,41 @@ AFRAME.registerComponent('showmorefigure',{
 				document.getElementById('plants').appendChild(plantsImg);
 				hasPlants = true;
 
-				/*
-				let tree1 = document.createElement('a-entity');
-				tree1.setAttribute('position', {x:-0.25,y:-0.35,z:0});
-				tree1.setAttribute('scale', {x:0.00015,y:0.00015,z:0.00015});
-				tree1.setAttribute('id', 'tree1');
-				tree1.setAttribute('class', 'remote');
-				tree1.setAttribute('gltf-model', '#tree1s');
-				tree1.setAttribute('animation', 'property:rotation;to:0 360 0;loop:true;dur:20000')
-				tree1.setAttribute('clickable', {});
-				tree1.setAttribute('editgltf',{} );
-				//model3.setAttribute('posibilityofchange',{} );
-				document.getElementById('menu').appendChild(tree1);
-				hasVehiclesGltfs = true;
-				setClickable();
-				*/
+				let animals = document.createElement('a-box');
+				animals.setAttribute('position',{x:-0.225,y:-0.375,z:0});
+				animals.setAttribute('id','animals');
+				animals.setAttribute('class','remote');
+				animals.setAttribute('height', '0.05');
+				animals.setAttribute('depth', '0.015');
+				animals.setAttribute('width', '0.05');
+				animals.setAttribute('material', 'color:white; opacity:0.25');
+				animals.setAttribute('showanimals', {});
+				document.getElementById('menu').appendChild(animals)
+				let animalsImg = document.createElement('a-plane');
+				animalsImg.setAttribute('position',{x:0,y:0,z:0.0076});
+				animalsImg.setAttribute('height', '0.05');
+				animalsImg.setAttribute('id', 'animalsimg');
+				animalsImg.setAttribute('width', '0.05');
+				animalsImg.setAttribute('src', '#openanimals');
+				document.getElementById('animals').appendChild(animalsImg);
+				hasAnimals = true;
+
 			}else{
 				console.log('no muestra');
-				img.setAttribute('src', '#closemore');
+				img.setAttribute('src', '#openmore');
 				document.getElementById('vehicles').remove();
 				document.getElementById('plants').remove();
+				document.getElementById('animals').remove();
 				if (hasVehiclesGltfs){
 					document.getElementById('car1').remove();
 				}
 				if (hasPlantsGltfs){
 					document.getElementById('tree1').remove();
 				}
+				if (hasAnimalsGltfs){
+					document.getElementById('animal1').remove();
+				}
+
 
 				//document.getElementById('tree1').remove();
 				show = false;
@@ -1072,6 +1151,8 @@ AFRAME.registerComponent('showmorefigure',{
 				hasPlantsGltfs = false;
 				hasVehicles = false;
 				hasPlants = false;
+				hasAnimals = false;
+				hasAnimalsGltfs = false;
 			}
 
 		});
@@ -1112,7 +1193,7 @@ AFRAME.registerComponent('showeditor',{
 				moreFigureMenuImg.setAttribute('width', '0.05');
 				moreFigureMenuImg.setAttribute('src', '#openmore');
 				document.getElementById('morefiguremenu').appendChild(moreFigureMenuImg);
-
+/*
 				let baseMenu = document.createElement('a-box');
 				baseMenu.setAttribute('position',{x:0,y:-0.25,z:0});
 				baseMenu.setAttribute('id','basemenu');
@@ -1142,20 +1223,22 @@ AFRAME.registerComponent('showeditor',{
 				figure11.setAttribute('height', '0.12');
 				figure11.setAttribute('src', '#cubeImg');
 				document.getElementById('figure1').appendChild(figure11)
+
+ */
 				let figure12 = document.createElement('a-box');
-				figure12.setAttribute('position', {x:0,y:-0.03,z:0.01});
-				figure12.setAttribute('width', '0.03');
-				figure12.setAttribute('depth', '0.03');
-				figure12.setAttribute('height', '0.03');
+				figure12.setAttribute('position', {x:-0.09,y:-0.225,z:-0.025});
+				figure12.setAttribute('width', '0.05');
+				figure12.setAttribute('depth', '0.05');
+				figure12.setAttribute('height', '0.05');
 				figure12.setAttribute('id', 'cubeClick');
 				figure12.setAttribute('class', ' cube button');
-				figure12.setAttribute('animation', 'property:rotation;to:0 360 180;loop:true;dur:20000')
+				//figure12.setAttribute('animation', 'property:rotation;to:0 360 0;loop:true;dur:20000')
 				figure12.setAttribute('clickable', {});
 				figure12.setAttribute('editentity',{} );
 				figure12.setAttribute('posibilityofchange',{} );
 				figure12.setAttribute('color','#c1c1c1' );
-				document.getElementById('figure1').appendChild(figure12)
-
+				document.getElementById('menu').appendChild(figure12)
+				/*
 				let figure2 = document.createElement('a-box');
 				figure2.setAttribute('position', {x:0.065,y:-0.37,z:0});
 				figure2.setAttribute('width', '0.12');
@@ -1170,19 +1253,21 @@ AFRAME.registerComponent('showeditor',{
 				figure21.setAttribute('height', '0.12');
 				figure21.setAttribute('src', '#cylinderImg');
 				document.getElementById('figure2').appendChild(figure21);
+
+				 */
 				let figure22 = document.createElement('a-cylinder');
-				figure22.setAttribute('position', {x:0,y:-0.03,z:0.01});
-				figure22.setAttribute('radius', '0.02');
-				figure22.setAttribute('height', '0.03');
+				figure22.setAttribute('position', {x:-0.02,y:-0.225,z:-0.025});
+				figure22.setAttribute('radius', '0.03');
+				figure22.setAttribute('height', '0.05');
 				figure22.setAttribute('id', 'cylinderClick');
 				figure22.setAttribute('class', 'cylinder button');
-				figure22.setAttribute('animation', 'property:rotation;to:0 360 180;loop:true;dur:20000')
+				//figure22.setAttribute('animation', 'property:rotation;to:0 360 0;loop:true;dur:20000')
 				figure22.setAttribute('clickable', {});
 				figure22.setAttribute('editentity',{} );
 				figure22.setAttribute('posibilityofchange',{} );
 				figure22.setAttribute('color','#c1c1c1' );
-				document.getElementById('figure2').appendChild(figure22);
-
+				document.getElementById('menu').appendChild(figure22);
+/*
 				let figure3 = document.createElement('a-box');
 				figure3.setAttribute('position', {x:0.065,y:-0.5,z:0});
 				figure3.setAttribute('width', '0.12');
@@ -1197,19 +1282,23 @@ AFRAME.registerComponent('showeditor',{
 				figure31.setAttribute('height', '0.12');
 				figure31.setAttribute('src', '#planeImg');
 				document.getElementById('figure3').appendChild(figure31);
+
+
 				let figure32 = document.createElement('a-plane');
-				figure32.setAttribute('position', {x:0,y:-0.03,z:0.0077});
-				figure32.setAttribute('width', '0.03');
-				figure32.setAttribute('height', '0.03');
+				figure32.setAttribute('position', {x:0.05,y:-0.225,z:-0.0225});
+				figure32.setAttribute('width', '0.05');
+				figure32.setAttribute('height', '0.05');
 				figure32.setAttribute('id', 'planeClick');
 				figure32.setAttribute('class', 'plane button');
 				figure32.setAttribute('posibilityofchange',{} );
 				figure32.setAttribute('clickable', {});
 				figure32.setAttribute('editentity',{} );
 				figure32.setAttribute('color','#c1c1c1' );
-				figure32.setAttribute('animation', 'property:rotation;to:0 0 180;loop:true;dur:20000');
-				document.getElementById('figure3').appendChild(figure32);
+				//figure32.setAttribute('animation', 'property:rotation;to:0 0 180;loop:true;dur:20000');
+				document.getElementById('menu').appendChild(figure32);
 
+ */
+/*
 				let figure4 = document.createElement('a-box');
 				figure4.setAttribute('position', {x:-0.065,y:-0.5,z:0});
 				figure4.setAttribute('width', '0.12');
@@ -1224,17 +1313,19 @@ AFRAME.registerComponent('showeditor',{
 				figure41.setAttribute('height', '0.12');
 				figure41.setAttribute('src', '#sphereImg');
 				document.getElementById('figure4').appendChild(figure41);
+
+ */
 				let figure42 = document.createElement('a-sphere');
-				figure42.setAttribute('position', {x:0,y:-0.03,z:0});
-				figure42.setAttribute('radius', '0.02');
+				figure42.setAttribute('position', {x:0.06,y:-0.225,z:-0.0225});
+				figure42.setAttribute('radius', '0.035');
 				figure42.setAttribute('id', 'sphereClick');
 				figure42.setAttribute('class', 'sphere button');
 				figure42.setAttribute('posibilityofchange',{} );
 				figure42.setAttribute('clickable', {});
 				figure42.setAttribute('editentity',{} );
 				figure42.setAttribute('color','#c1c1c1' );
-				figure42.setAttribute('animation', 'property:rotation;to:0 360 180;loop:true;dur:20000');
-				document.getElementById('figure4').appendChild(figure42)
+				//figure42.setAttribute('animation', 'property:rotation;to:0 360 180;loop:true;dur:20000');
+				document.getElementById('menu').appendChild(figure42)
 
 
 				setClickable()
@@ -1242,11 +1333,11 @@ AFRAME.registerComponent('showeditor',{
 
 			}else{
 				text.setAttribute('src', '#openeditorImg');
-				document.getElementById('figure1').remove();
-				document.getElementById('figure2').remove();
-				document.getElementById('figure3').remove();
-				document.getElementById('figure4').remove();
-				document.getElementById('basemenu').remove();
+				document.getElementById('cubeClick').remove();
+				document.getElementById('cylinderClick').remove();
+				//document.getElementById('figure32').remove();
+				document.getElementById('sphereClick').remove();
+				//document.getElementById('basemenu').remove();
 				document.getElementById('morefiguremenu').remove();
 				if(hasVehiclesGltfs){
 					document.getElementById('car1').remove();
@@ -1265,6 +1356,15 @@ AFRAME.registerComponent('showeditor',{
 				}
 				hasPlantsGltfs=false;
 				hasPlants=false;
+
+				if (hasAnimals){
+					document.getElementById('animals').remove();
+				}
+				if (hasAnimalsGltfs){
+					document.getElementById('animal1').remove();
+				}
+				hasAnimals = false;
+
 
 				showed = false;
 			}
