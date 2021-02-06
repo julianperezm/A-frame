@@ -912,7 +912,7 @@ AFRAME.registerComponent('showvehicles',{
 		el.addEventListener('grab-start', function () {
 			if (showVehicles === false) {
 				//text.setAttribute('src', '#closeeditorImg');
-				img.setAttribute('src', '#closemore')
+				img.setAttribute('src', '#closevehicles')
 				showVehicles = true;
 
 				let car1 = document.createElement('a-entity');
@@ -930,7 +930,7 @@ AFRAME.registerComponent('showvehicles',{
 				setClickable();
 			}else{
 				console.log('no muestra');
-				img.setAttribute('src', '#openmore');
+				img.setAttribute('src', '#openvehicles');
 				document.getElementById('car1').remove();
 				//document.getElementById('tree1').remove();
 				showVehicles = false;
@@ -956,7 +956,7 @@ AFRAME.registerComponent('showplants',{
 		el.addEventListener('grab-start', function () {
 			if (showPlants === false) {
 				//text.setAttribute('src', '#closeeditorImg');
-				img.setAttribute('src', '#closemore')
+				img.setAttribute('src', '#closeplants')
 				showPlants = true;
 
 				let tree1 = document.createElement('a-entity');
@@ -974,7 +974,7 @@ AFRAME.registerComponent('showplants',{
 				setClickable();
 			}else{
 				console.log('no muestra');
-				img.setAttribute('src', '#openmore');
+				img.setAttribute('src', '#openplants');
 				document.getElementById('tree1').remove();
 				//document.getElementById('tree1').remove();
 				showPlants = false;
@@ -1000,7 +1000,7 @@ AFRAME.registerComponent('showmorefigure',{
 		el.addEventListener('grab-start', function () {
 			if (show === false) {
 				show = true;
-				img.setAttribute('src', '#closemore')
+				img.setAttribute('src', '#closemore');
 				let vehicles = document.createElement('a-box');
 				vehicles.setAttribute('position',{x:-0.225,y:-0.225,z:0});
 				vehicles.setAttribute('id','vehicles');
@@ -1016,7 +1016,7 @@ AFRAME.registerComponent('showmorefigure',{
 				vehiclesImg.setAttribute('height', '0.05');
 				vehiclesImg.setAttribute('id', 'vehiclesimg');
 				vehiclesImg.setAttribute('width', '0.05');
-				vehiclesImg.setAttribute('src', '#openmore');
+				vehiclesImg.setAttribute('src', '#openvehicles');
 				document.getElementById('vehicles').appendChild(vehiclesImg);
 				hasVehicles = true;
 
@@ -1035,7 +1035,7 @@ AFRAME.registerComponent('showmorefigure',{
 				plantsImg.setAttribute('height', '0.05');
 				plantsImg.setAttribute('id', 'plantsimg');
 				plantsImg.setAttribute('width', '0.05');
-				plantsImg.setAttribute('src', '#openmore');
+				plantsImg.setAttribute('src', '#openplants');
 				document.getElementById('plants').appendChild(plantsImg);
 				hasPlants = true;
 
@@ -1056,7 +1056,7 @@ AFRAME.registerComponent('showmorefigure',{
 				*/
 			}else{
 				console.log('no muestra');
-				img.setAttribute('src', '#openmore');
+				img.setAttribute('src', '#closemore');
 				document.getElementById('vehicles').remove();
 				document.getElementById('plants').remove();
 				if (hasVehiclesGltfs){
