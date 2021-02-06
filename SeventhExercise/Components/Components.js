@@ -1,6 +1,9 @@
 let group = false;
 let created = false;
-
+let hasVehiclesGltfs= false;
+let hasVehicles= false;
+let hasPlants= false;
+let hasPlantsGltfs= false;
 
 function coloredOnSelect() {
 	let showeditor = document.getElementById('showeditor');
@@ -65,13 +68,10 @@ AFRAME.registerComponent('handlereditor',{
 document.addEventListener('keypress', function(e) {
   if (e.keyCode === 113 || e.keyCode === 81){
   	let mode = document.getElementById('mode');
-  	let img = document.getElementById('imghand');
 
   	let text = mode.getAttribute('src')
   	if (group === false ){
 		mode.setAttribute('src', '#modeImgGroup');
-		img.setAttribute('src', '#handlerImg');
-		img.setAttribute('width', '1');
 		//let entityToCopy = document.getElementById('newentity');
 		//if (entityToCopy){
 		//<a-entity class="remote" gltf-model="#handler" position="3.7 0.3 4.4"  scale="0.003 0.008 0.003" rotation="0 90 0" grabbable stretchable ></a-entity>
@@ -92,8 +92,6 @@ document.addEventListener('keypress', function(e) {
 
 	}else{
   		mode.setAttribute('src', '#modeImgNormal');
-  		img.setAttribute('src', '#figureSelectedImg');
-		img.setAttribute('width', '2');
 		let newEl = document.getElementsByClassName('newen');
 		for (let elem of newEl){
 			elem.removeAttribute('animation');
@@ -117,7 +115,8 @@ function createEntity(entity){
 
 	if (created){
 		let elToChange = document.getElementById('entitytochange');
-		let menu = document.getElementById('attributemenu')
+		let menu = document.getElementById('attributemenu');
+		console.log(menu)
 			if (menu){
 				menu.remove();
 			}
@@ -149,7 +148,7 @@ function createEntity(entity){
 		case 'cylinder':
 			newEntity.setAttribute('mixin', 'cylinder');
 			break;
-		case 'car':
+		case 'car1':
 			newEntity.setAttribute('gltf-model', '#model3');
 			newEntity.setAttribute('scale',{x:0.001,y:0.001,z:0.001});
 			newEntity.setAttribute('grabbable',{});
@@ -160,7 +159,7 @@ function createEntity(entity){
 			newEntity.setAttribute('shadow',{});
 			console.log(newEntity)
 			break;
-		case 'tree':
+		case 'tree1':
 			newEntity.setAttribute('gltf-model', '#trees');
 			newEntity.setAttribute('scale',{x:0.001,y:0.001,z:0.001});
 			newEntity.setAttribute('grabbable',{});
@@ -177,78 +176,86 @@ function createEntity(entity){
 }
 
 function setClickable(){
-	console.log('dentro de clickable')
-	let cubeFig = document.querySelector('#cubeClick')
-	console.log(cubeFig);
-	let sphereFig = document.querySelector('#sphereClick')
-	let planeFig = document.querySelector('#planeClick')
-	let cylinderFig = document.querySelector('#cylinderClick')
-	let car = document.querySelector('#car')
-	let tree = document.querySelector('#tree')
+	if (hasVehiclesGltfs) {
+		let car1 = document.getElementById('car1');
+		console.log('dentro de clickable con gltfs')
+		//let tree1 = document.querySelector('#tree1');
 
-	cubeFig.addEventListener('grab-start', function(){
-		createEntity('cube')
-		console.log('dentro1')
-	});
-	cubeFig.addEventListener('raycaster-intersected', function () {
-		cubeFig.setAttribute('scale',{x:1.5,y:1.5,z:1.5});
-	});
-	cubeFig.addEventListener('raycaster-intersected-cleared', function () {
-		cubeFig.setAttribute('scale',{x:1,y:1,z:1});
-	});
+		car1.addEventListener('grab-start', function () {
+			createEntity('car1')
+			console.log('dentro2')
+		});
+		car1.addEventListener('raycaster-intersected', function () {
+			car1.setAttribute('scale', {x: 0.00016, y: 0.00016, z: 0.00016});
+		});
+		car1.addEventListener('raycaster-intersected-cleared', function () {
+			car1.setAttribute('scale', {x: 0.00015, y: 0.00015, z: 0.00015});
+		});
+	}else if(hasPlantsGltfs){
+		tree1.addEventListener('grab-start', function(){
+			createEntity('tree1')
+			console.log('dentro2')
+		});
+		tree1.addEventListener('raycaster-intersected', function () {
+			tree1.setAttribute('scale',{x:0.00016,y:0.00016,z:0.00016});
+		});
+		tree1.addEventListener('raycaster-intersected-cleared', function () {
+			tree1.setAttribute('scale',{x:0.00015,y:0.00015,z:0.00015});
+		});
 
-	sphereFig.addEventListener('grab-start', function(){
-		createEntity('sphere')
-	});
-	sphereFig.addEventListener('raycaster-intersected', function () {
-		sphereFig.setAttribute('scale',{x:1.5,y:1.5,z:1.5});
-	});
-	sphereFig.addEventListener('raycaster-intersected-cleared', function () {
-		sphereFig.setAttribute('scale',{x:1,y:1,z:1});
-	});
+	}else{
+		console.log('dentro de clickable')
+		let cubeFig = document.querySelector('#cubeClick')
+		console.log(cubeFig);
+		let sphereFig = document.querySelector('#sphereClick')
+		let planeFig = document.querySelector('#planeClick')
+		let cylinderFig = document.querySelector('#cylinderClick')
 
-	planeFig.addEventListener('grab-start', function(){
-		createEntity('plane')
-	});
-	planeFig.addEventListener('raycaster-intersected', function () {
-		planeFig.setAttribute('scale',{x:1.5,y:1.5,z:1.5});
-	});
-	planeFig.addEventListener('raycaster-intersected-cleared', function () {
-		planeFig.setAttribute('scale',{x:1,y:1,z:1});
-	});
-	cylinderFig.addEventListener('grab-start', function(){
-		createEntity('cylinder')
-		console.log('dentro2')
-	});
-	cylinderFig.addEventListener('raycaster-intersected', function () {
-		cylinderFig.setAttribute('scale',{x:1.5,y:1.5,z:1.5});
-	});
-	cylinderFig.addEventListener('raycaster-intersected-cleared', function () {
-		cylinderFig.setAttribute('scale',{x:1,y:1,z:1});
-	});
-	car.addEventListener('grab-start', function(){
-		createEntity('car')
-		console.log('dentro2')
-	});
-	car.addEventListener('raycaster-intersected', function () {
-		car.setAttribute('scale',{x:0.00016,y:0.00016,z:0.00016});
-	});
-	car.addEventListener('raycaster-intersected-cleared', function () {
-		car.setAttribute('scale',{x:0.00015,y:0.00015,z:0.00015});
-	});
 
-	tree.addEventListener('grab-start', function(){
-		createEntity('tree')
-		console.log('dentro2')
-	});
-	tree.addEventListener('raycaster-intersected', function () {
-		tree.setAttribute('scale',{x:0.00016,y:0.00016,z:0.00016});
-	});
-	tree.addEventListener('raycaster-intersected-cleared', function () {
-		tree.setAttribute('scale',{x:0.00015,y:0.00015,z:0.00015});
-	});
+		cubeFig.addEventListener('grab-start', function(){
+			createEntity('cube')
+			console.log('dentro1')
+		});
+		cubeFig.addEventListener('raycaster-intersected', function () {
+			cubeFig.setAttribute('scale',{x:1.5,y:1.5,z:1.5});
+		});
+		cubeFig.addEventListener('raycaster-intersected-cleared', function () {
+			cubeFig.setAttribute('scale',{x:1,y:1,z:1});
+		});
 
+		sphereFig.addEventListener('grab-start', function(){
+			createEntity('sphere')
+		});
+		sphereFig.addEventListener('raycaster-intersected', function () {
+			sphereFig.setAttribute('scale',{x:1.5,y:1.5,z:1.5});
+		});
+		sphereFig.addEventListener('raycaster-intersected-cleared', function () {
+			sphereFig.setAttribute('scale',{x:1,y:1,z:1});
+		});
+
+		planeFig.addEventListener('grab-start', function(){
+			createEntity('plane')
+		});
+		planeFig.addEventListener('raycaster-intersected', function () {
+			planeFig.setAttribute('scale',{x:1.5,y:1.5,z:1.5});
+		});
+		planeFig.addEventListener('raycaster-intersected-cleared', function () {
+			planeFig.setAttribute('scale',{x:1,y:1,z:1});
+		});
+		cylinderFig.addEventListener('grab-start', function(){
+			createEntity('cylinder')
+			console.log('dentro2')
+		});
+		cylinderFig.addEventListener('raycaster-intersected', function () {
+			cylinderFig.setAttribute('scale',{x:1.5,y:1.5,z:1.5});
+		});
+		cylinderFig.addEventListener('raycaster-intersected-cleared', function () {
+			cylinderFig.setAttribute('scale',{x:1,y:1,z:1});
+		});
+
+	}
 }
+
 
  AFRAME.registerComponent('wireframe', {
    dependencies: ['material'],
@@ -640,11 +647,6 @@ AFRAME.registerComponent('editentity', {
 				colorButton.setAttribute('clickable', {});
 				colorButton.setAttribute('changeattribute', {})
 				attributesSelector.appendChild(colorButton)
-
-				 let sizex = document.createElement('a-text');
-                sizex.setAttribute('id', 'textx');
-                sizex.setAttribute('position', '-0.35 2.25 1');
-                attributesSelector.appendChild(sizex);
             }
 		});
 	}
@@ -662,10 +664,10 @@ AFRAME.registerComponent('sizeupxgltf',{
 			console.log(entityToChange.object3D.scale.x)
 		});
 		el.addEventListener('raycaster-intersected', function () {
-			el.setAttribute('scale',{x:0.17,y:0.17,z:0.17});
+			el.setAttribute('scale',{x:0.2,y:0.2,z:0.2});
 		});
 		el.addEventListener('raycaster-intersected-cleared', function () {
-			el.setAttribute('scale',{x:0.12,y:0.12,z:0.12});
+			el.setAttribute('scale',{x:0.14,y:0.14,z:0.14});
 		});
 	}
 });
@@ -680,14 +682,15 @@ AFRAME.registerComponent('sizedownxgltf',{
 			entityToChange.object3D.scale.z -= 0.001;
 		});
 		el.addEventListener('raycaster-intersected', function () {
-			el.setAttribute('scale',{x:0.2,y:0.2,z:0.2});
+			el.setAttribute('scale',{x:0.23,y:0.23,z:0.23});
 		});
 		el.addEventListener('raycaster-intersected-cleared', function () {
-			el.setAttribute('scale',{x:0.14,y:0.14,z:0.14});
+			el.setAttribute('scale',{x:0.17,y:0.17,z:0.17});
 		});
 	}
 });
 
+/*
 AFRAME.registerComponent('axisselectorgltf',{
 	init:function(){
 		let el = this.el;
@@ -763,14 +766,12 @@ AFRAME.registerComponent('axisselectorgltf',{
 			sizeChooserDownZ.setAttribute('clickable', {});
 			att.appendChild(sizeChooserDownZ);
 		});
-		el.addEventListener('raycaster-intersected', function () {
-			el.setAttribute('scale',{x:1.5,y:1.5,z:1.5});
-		});
-		el.addEventListener('raycaster-intersected-cleared', function () {
-			el.setAttribute('scale',{x:1,y:1,z:1});
-		});
+
 	}
 });
+
+*/
+
 AFRAME.registerComponent('base',{
 	schema:{
 		event: {type: 'string', default: 'click'}
@@ -855,8 +856,6 @@ AFRAME.registerComponent('podium',{
 			figure13.setAttribute('height', '0.05');
 			figure13.setAttribute('color', 'white');
 			j[0].appendChild(figure13);
-
-
 	},
 });
 
@@ -870,72 +869,209 @@ AFRAME.registerComponent('editgltf', {
 		this.el.addEventListener('grab-start', function(){
 
 			let attributesSelector= document.createElement('a-box');
-			attributesSelector.setAttribute('src', '#attributeSelectorImg');
+			attributesSelector.setAttribute('src', '#sizes');
 			attributesSelector.setAttribute('id', 'attributemenu');
 			attributesSelector.setAttribute('position', {x:-0.225,y:1.4,z:-0.6});
 			attributesSelector.setAttribute('width', '0.3');
-			attributesSelector.setAttribute('height', '0.3');
+			attributesSelector.setAttribute('height', '0.15');
 			attributesSelector.setAttribute('depth', '0.01');
-
-			let axisBtn= document.createElement('a-sphere');
-			axisBtn.setAttribute('id', 'attributemenu');
-			axisBtn.setAttribute('axisselectorgltf', "");
-			axisBtn.setAttribute('position', {x:0.1,y:0.105,z:0});
-			axisBtn.setAttribute('radius', '0.01');
-			axisBtn.setAttribute('color', 'white');
-			axisBtn.setAttribute('clickable', "");
-			axisBtn.setAttribute('static-body', {});
-			axisBtn.setAttribute('class', " remote");
 
 			let scene = document.querySelector('#editor');
 			scene.appendChild(attributesSelector);
-			attributesSelector.appendChild(axisBtn);
 
+			let sizeChooserUpx = document.createElement('a-text');
+			sizeChooserUpx.setAttribute('id', 'buttonupxgltf');
+			sizeChooserUpx.setAttribute('class', 'remote');
+			sizeChooserUpx.setAttribute('position', '-0.05 -0.01 0.011');
+			sizeChooserUpx.setAttribute('value', '+');
+			sizeChooserUpx.setAttribute('scale', '0.15 0.15 0.15');
+			sizeChooserUpx.setAttribute('sizeupxgltf', {});
+			sizeChooserUpx.setAttribute('clickable', {});
+			attributesSelector.appendChild(sizeChooserUpx);
+
+			let sizeChooserDownX = document.createElement('a-text');
+			sizeChooserDownX.setAttribute('id', 'buttondownxgltf');
+			sizeChooserDownX.setAttribute('class', 'remote');
+			sizeChooserDownX.setAttribute('position', '0.04 -0.01 0.011');
+			sizeChooserDownX.setAttribute('value', '-');
+			sizeChooserDownX.setAttribute('scale', '0.17 0.17 0.17');
+			sizeChooserDownX.setAttribute('sizedownxgltf', {});
+			sizeChooserDownX.setAttribute('clickable', {});
+			attributesSelector.appendChild(sizeChooserDownX);
 		});
 	}
 });
 
 
+
+AFRAME.registerComponent('showvehicles',{
+	init:function(){
+		let el = this.el;
+		let showVehicles = false;
+		let img = document.getElementById('vehiclesimg');
+		el.addEventListener('grab-start', function () {
+			if (showVehicles === false) {
+				//text.setAttribute('src', '#closeeditorImg');
+				img.setAttribute('src', '#closemore')
+				showVehicles = true;
+
+				let car1 = document.createElement('a-entity');
+				car1.setAttribute('position', {x:-0.3,y:-0.23,z:0});
+				car1.setAttribute('scale', {x:0.00015,y:0.00015,z:0.00015});
+				car1.setAttribute('id', 'car1');
+				car1.setAttribute('class', 'remote');
+				car1.setAttribute('gltf-model', '#model3');
+				car1.setAttribute('animation', 'property:rotation;to:0 360 0;loop:true;dur:20000')
+				car1.setAttribute('clickable', {});
+				car1.setAttribute('editgltf',{} );
+				//model3.setAttribute('posibilityofchange',{} );
+				document.getElementById('menu').appendChild(car1)
+				hasVehiclesGltfs = true;
+				setClickable();
+			}else{
+				console.log('no muestra');
+				img.setAttribute('src', '#openmore');
+				document.getElementById('car1').remove();
+				//document.getElementById('tree1').remove();
+				showVehicles = false;
+				hasVehiclesGltfs = false;
+
+			}
+
+		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('material',"color:#adadad; opacity: 0.5");
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('material',"color:white; opacity: 0.25");
+		});
+	}
+});
+
+AFRAME.registerComponent('showplants',{
+	init:function(){
+		let el = this.el;
+		let showPlants = false;
+		let img = document.getElementById('plantsimg');
+		el.addEventListener('grab-start', function () {
+			if (showPlants === false) {
+				//text.setAttribute('src', '#closeeditorImg');
+				img.setAttribute('src', '#closemore')
+				showPlants = true;
+
+				let tree1 = document.createElement('a-entity');
+				tree1.setAttribute('position', {x:-0.3,y:-0.35,z:0});
+				tree1.setAttribute('scale', {x:0.00015,y:0.00015,z:0.00015});
+				tree1.setAttribute('id', 'tree1');
+				tree1.setAttribute('class', 'remote');
+				tree1.setAttribute('gltf-model', '#trees');
+				tree1.setAttribute('animation', 'property:rotation;to:0 360 0;loop:true;dur:20000')
+				tree1.setAttribute('clickable', {});
+				tree1.setAttribute('editgltf',{} );
+				//model3.setAttribute('posibilityofchange',{} );
+				document.getElementById('menu').appendChild(tree1);
+				hasPlantsGltfs = true;
+				setClickable();
+			}else{
+				console.log('no muestra');
+				img.setAttribute('src', '#openmore');
+				document.getElementById('tree1').remove();
+				//document.getElementById('tree1').remove();
+				showPlants = false;
+				hasPlantsGltfs = false;
+
+			}
+
+		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('material',"color:#adadad; opacity: 0.5");
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('material',"color:white; opacity: 0.25");
+		});
+	}
+});
+
 AFRAME.registerComponent('showmorefigure',{
 	init:function(){
 		let el = this.el;
 		let show = false;
+		let img = document.getElementById('morefiguremenuimg');
 		el.addEventListener('grab-start', function () {
 			if (show === false) {
-				//text.setAttribute('src', '#closeeditorImg');
 				show = true;
-				let car = document.createElement('a-entity');
-				car.setAttribute('position', {x:-0.25,y:-0.23,z:0});
-				car.setAttribute('scale', {x:0.00015,y:0.00015,z:0.00015});
-				car.setAttribute('id', 'car');
-				car.setAttribute('class', 'remote');
-				car.setAttribute('gltf-model', '#model3');
-				car.setAttribute('animation', 'property:rotation;to:0 360 0;loop:true;dur:20000')
-				car.setAttribute('clickable', {});
-				car.setAttribute('editgltf',{} );
+				img.setAttribute('src', '#closemore')
+				let vehicles = document.createElement('a-box');
+				vehicles.setAttribute('position',{x:-0.225,y:-0.225,z:0});
+				vehicles.setAttribute('id','vehicles');
+				vehicles.setAttribute('class','remote');
+				vehicles.setAttribute('height', '0.05');
+				vehicles.setAttribute('depth', '0.015');
+				vehicles.setAttribute('width', '0.05');
+				vehicles.setAttribute('material', 'color:white; opacity:0.25');
+				vehicles.setAttribute('showvehicles', {});
+				document.getElementById('menu').appendChild(vehicles)
+				let vehiclesImg = document.createElement('a-plane');
+				vehiclesImg.setAttribute('position',{x:0,y:0,z:0.0076});
+				vehiclesImg.setAttribute('height', '0.05');
+				vehiclesImg.setAttribute('id', 'vehiclesimg');
+				vehiclesImg.setAttribute('width', '0.05');
+				vehiclesImg.setAttribute('src', '#openmore');
+				document.getElementById('vehicles').appendChild(vehiclesImg);
+				hasVehicles = true;
+
+				let Plants = document.createElement('a-box');
+				Plants.setAttribute('position',{x:-0.225,y:-0.3,z:0});
+				Plants.setAttribute('id','plants');
+				Plants.setAttribute('class','remote');
+				Plants.setAttribute('height', '0.05');
+				Plants.setAttribute('depth', '0.015');
+				Plants.setAttribute('width', '0.05');
+				Plants.setAttribute('material', 'color:white; opacity:0.25');
+				Plants.setAttribute('showplants', {});
+				document.getElementById('menu').appendChild(Plants)
+				let plantsImg = document.createElement('a-plane');
+				plantsImg.setAttribute('position',{x:0,y:0,z:0.0076});
+				plantsImg.setAttribute('height', '0.05');
+				plantsImg.setAttribute('id', 'plantsimg');
+				plantsImg.setAttribute('width', '0.05');
+				plantsImg.setAttribute('src', '#openmore');
+				document.getElementById('plants').appendChild(plantsImg);
+				hasPlants = true;
+
+				/*
+				let tree1 = document.createElement('a-entity');
+				tree1.setAttribute('position', {x:-0.25,y:-0.35,z:0});
+				tree1.setAttribute('scale', {x:0.00015,y:0.00015,z:0.00015});
+				tree1.setAttribute('id', 'tree1');
+				tree1.setAttribute('class', 'remote');
+				tree1.setAttribute('gltf-model', '#tree1s');
+				tree1.setAttribute('animation', 'property:rotation;to:0 360 0;loop:true;dur:20000')
+				tree1.setAttribute('clickable', {});
+				tree1.setAttribute('editgltf',{} );
 				//model3.setAttribute('posibilityofchange',{} );
-				document.getElementById('menu').appendChild(car)
-
-				let tree = document.createElement('a-entity');
-				tree.setAttribute('position', {x:-0.25,y:-0.35,z:0});
-				tree.setAttribute('scale', {x:0.00015,y:0.00015,z:0.00015});
-				tree.setAttribute('id', 'tree');
-				tree.setAttribute('class', 'remote');
-				tree.setAttribute('gltf-model', '#trees');
-				tree.setAttribute('animation', 'property:rotation;to:0 360 0;loop:true;dur:20000')
-				tree.setAttribute('clickable', {});
-				tree.setAttribute('editgltf',{} );
-				//model3.setAttribute('posibilityofchange',{} );
-				document.getElementById('menu').appendChild(tree)
-
-				setClickable()
-
+				document.getElementById('menu').appendChild(tree1);
+				hasVehiclesGltfs = true;
+				setClickable();
+				*/
 			}else{
-				console.log('no muestra')
+				console.log('no muestra');
+				img.setAttribute('src', '#openmore');
+				document.getElementById('vehicles').remove();
+				document.getElementById('plants').remove();
+				if (hasVehiclesGltfs){
+					document.getElementById('car1').remove();
+				}
+				if (hasPlantsGltfs){
+					document.getElementById('tree1').remove();
+				}
 
-				document.getElementById('car').remove();
-				document.getElementById('tree').remove();
+				//document.getElementById('tree1').remove();
 				show = false;
+				hasVehiclesGltfs = false;
+				hasPlantsGltfs = false;
+				hasVehicles = false;
+				hasPlants = false;
 			}
 
 		});
@@ -969,6 +1105,13 @@ AFRAME.registerComponent('showeditor',{
 				moreFigureMenu.setAttribute('material', 'color:white; opacity:0.25');
 				moreFigureMenu.setAttribute('showmorefigure', {});
 				document.getElementById('menu').appendChild(moreFigureMenu)
+				let moreFigureMenuImg = document.createElement('a-plane');
+				moreFigureMenuImg.setAttribute('position',{x:0,y:0,z:0.0076});
+				moreFigureMenuImg.setAttribute('height', '0.05');
+				moreFigureMenuImg.setAttribute('id', 'morefiguremenuimg');
+				moreFigureMenuImg.setAttribute('width', '0.05');
+				moreFigureMenuImg.setAttribute('src', '#openmore');
+				document.getElementById('morefiguremenu').appendChild(moreFigureMenuImg);
 
 				let baseMenu = document.createElement('a-box');
 				baseMenu.setAttribute('position',{x:0,y:-0.25,z:0});
@@ -1105,6 +1248,24 @@ AFRAME.registerComponent('showeditor',{
 				document.getElementById('figure4').remove();
 				document.getElementById('basemenu').remove();
 				document.getElementById('morefiguremenu').remove();
+				if(hasVehiclesGltfs){
+					document.getElementById('car1').remove();
+				}
+				if(hasVehicles){
+					document.getElementById('vehicles').remove();
+				}
+				hasVehiclesGltfs=false;
+				hasVehicles=false;
+
+				if(hasPlantsGltfs){
+					document.getElementById('tree1').remove();
+				}
+				if(hasPlants){
+					document.getElementById('plants').remove();
+				}
+				hasPlantsGltfs=false;
+				hasPlants=false;
+
 				showed = false;
 			}
 
