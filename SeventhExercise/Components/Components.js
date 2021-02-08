@@ -6,6 +6,8 @@ let hasPlants= false;
 let hasPlantsGltfs= false;
 let hasAnimals= false;
 let hasAnimalsGltfs = false;
+let hasGadgets= false;
+let hasGadgetsGltfs = false;
 
 function coloredOnSelect() {
 	let showeditor = document.getElementById('showeditor');
@@ -181,6 +183,17 @@ function createEntity(entity){
 			newEntity.setAttribute('droppable',{});
 			newEntity.setAttribute('shadow',{});
 			break;
+		case 'gadget1':
+			newEntity.setAttribute('gltf-model', '#iMac');
+			newEntity.setAttribute('scale',{x:0.8,y:0.8,z:0.8});
+			newEntity.setAttribute('rotation',{x:0,y:180,z:0});
+			newEntity.setAttribute('grabbable',{});
+			newEntity.setAttribute('stretchable',{});
+			newEntity.setAttribute('hoverable',{});
+			newEntity.setAttribute('draggable',{});
+			newEntity.setAttribute('droppable',{});
+			newEntity.setAttribute('shadow',{});
+			break;
 	}
 
 	created = true;
@@ -190,7 +203,7 @@ function createEntity(entity){
 function setClickable(){
 	if (hasVehiclesGltfs) {
 		let car1 = document.getElementById('car1');
-		console.log('dentro de clickable con gltfs')
+		console.log('dentro de clickable con vehiclesgltfs')
 		//let tree1 = document.querySelector('#tree1');
 
 		car1.addEventListener('grab-start', function () {
@@ -203,7 +216,10 @@ function setClickable(){
 		car1.addEventListener('raycaster-intersected-cleared', function () {
 			car1.setAttribute('scale', {x: 0.00015, y: 0.00015, z: 0.00015});
 		});
+		hasVehiclesGltfs = false;
 	}else if(hasPlantsGltfs){
+		let tree1 = document.getElementById('tree1');
+		console.log('dentro de clickable con tree')
 		tree1.addEventListener('grab-start', function(){
 			createEntity('tree1')
 			console.log('dentro2')
@@ -214,8 +230,10 @@ function setClickable(){
 		tree1.addEventListener('raycaster-intersected-cleared', function () {
 			tree1.setAttribute('scale',{x:0.00015,y:0.00015,z:0.00015});
 		});
-
+		hasPlantsGltfs = false;
 	}else if(hasAnimalsGltfs){
+		let animal1 = document.getElementById('animal1');
+		console.log('dentro de clickable con animal')
 		animal1.addEventListener('grab-start', function(){
 			createEntity('animal1')
 			console.log('dentro2')
@@ -226,13 +244,28 @@ function setClickable(){
 		animal1.addEventListener('raycaster-intersected-cleared', function () {
 			animal1.setAttribute('scale',{x:0.007,y:0.007,z:0.007});
 		});
+		hasAnimalsGltfs = false;
 
+	}else if(hasGadgetsGltfs){
+		let gadget1 = document.getElementById('gadget1');
+		console.log('dentro de clickable con animal')
+		gadget1.addEventListener('grab-start', function(){
+			createEntity('gadget1')
+			console.log('dentro2')
+		});
+		gadget1.addEventListener('raycaster-intersected', function () {
+			gadget1.setAttribute('scale',{x:0.06,y:0.06,z:0.06});
+		});
+		gadget1.addEventListener('raycaster-intersected-cleared', function () {
+			gadget1.setAttribute('scale',{x:0.05,y:0.05,z:0.05});
+		});
+		hasGadgetsGltfs = false;
 	}else{
 		console.log('dentro de clickable')
 		let cubeFig = document.querySelector('#cubeClick')
 		console.log(cubeFig);
 		let sphereFig = document.querySelector('#sphereClick')
-		let planeFig = document.querySelector('#planeClick')
+		//let planeFig = document.querySelector('#planeClick')
 		let cylinderFig = document.querySelector('#cylinderClick')
 
 
@@ -714,89 +747,6 @@ AFRAME.registerComponent('sizedownxgltf',{
 		});
 	}
 });
-
-/*
-AFRAME.registerComponent('axisselectorgltf',{
-	init:function(){
-		let el = this.el;
-		el.addEventListener('grab-start', function () {
-			let menu= document.createElement('a-box');
-			menu.setAttribute('src', '#attributeAxisImg');
-			menu.setAttribute('position', {x:0.3,y:0.1,z:0});
-			menu.setAttribute('width', '0.25');
-			menu.setAttribute('height', '0.1');
-			menu.setAttribute('depth', '0.01');
-
-			let att = document.getElementById('attributemenu');
-			att.appendChild(menu);
-
-			let sizeChooserUpx = document.createElement('a-text');
-			sizeChooserUpx.setAttribute('id', 'buttonupxgltf');
-			sizeChooserUpx.setAttribute('class', 'remote');
-			sizeChooserUpx.setAttribute('position', '0.19 0.119 0.011');
-			sizeChooserUpx.setAttribute('value', '+');
-			sizeChooserUpx.setAttribute('scale', '0.12 0.12 0.12');
-			sizeChooserUpx.setAttribute('sizeupxgltf', {});
-			sizeChooserUpx.setAttribute('clickable', {});
-			att.appendChild(sizeChooserUpx);
-
-			let sizeChooserDownX = document.createElement('a-text');
-			sizeChooserDownX.setAttribute('id', 'buttondownxgltf');
-			sizeChooserDownX.setAttribute('class', 'remote');
-			sizeChooserDownX.setAttribute('position', '0.24 0.119 0.011');
-			sizeChooserDownX.setAttribute('value', '-');
-			sizeChooserDownX.setAttribute('scale', '0.14 0.14 0.14');
-			sizeChooserDownX.setAttribute('sizedownxgltf', {});
-			sizeChooserDownX.setAttribute('clickable', {});
-			att.appendChild(sizeChooserDownX);
-
-
-			let sizeChooserUpY = document.createElement('a-text');
-			sizeChooserUpY.setAttribute('id', 'buttonupYgltf');
-			sizeChooserUpY.setAttribute('class', 'remote');
-			sizeChooserUpY.setAttribute('position', '0.27 0.08 0.011');
-			sizeChooserUpY.setAttribute('value', '+');
-			sizeChooserUpY.setAttribute('scale', '0.12 0.12 0.12');
-			sizeChooserUpY.setAttribute('sizeupygltf', {});
-			sizeChooserUpY.setAttribute('clickable', {});
-			att.appendChild(sizeChooserUpY);
-
-			let sizeChooserDownY = document.createElement('a-text');
-			sizeChooserDownY.setAttribute('id', 'buttondownygltf');
-			sizeChooserDownY.setAttribute('class', 'remote');
-			sizeChooserDownY.setAttribute('position', '0.31 0.08 0.011');
-			sizeChooserDownY.setAttribute('value', '-');
-			sizeChooserDownY.setAttribute('scale', '0.14 0.14 0.14');
-			sizeChooserDownY.setAttribute('sizedownYgltf', {});
-			sizeChooserDownY.setAttribute('clickable', {});
-			att.appendChild(sizeChooserDownY);
-
-			let sizeChooserUpZ = document.createElement('a-text');
-			sizeChooserUpZ.setAttribute('id', 'buttonupZgltf');
-			sizeChooserUpZ.setAttribute('class', 'remote');
-			sizeChooserUpZ.setAttribute('position', '0.34 0.119 0.011');
-			sizeChooserUpZ.setAttribute('value', '+');
-			sizeChooserUpZ.setAttribute('scale', '0.12 0.12 0.12');
-			sizeChooserUpZ.setAttribute('sizeupzgltf', {});
-			sizeChooserUpZ.setAttribute('clickable', {});
-			att.appendChild(sizeChooserUpZ);
-
-			let sizeChooserDownZ = document.createElement('a-text');
-			sizeChooserDownZ.setAttribute('id', 'buttondownzgltf');
-			sizeChooserDownZ.setAttribute('class', 'remote');
-			sizeChooserDownZ.setAttribute('position', '0.39 0.119 0.011');
-			sizeChooserDownZ.setAttribute('value', '-');
-			sizeChooserDownZ.setAttribute('scale', '0.14 0.14 0.14');
-			sizeChooserDownZ.setAttribute('sizedownzgltf', {});
-			sizeChooserDownZ.setAttribute('clickable', {});
-			att.appendChild(sizeChooserDownZ);
-		});
-
-	}
-});
-
-*/
-
 AFRAME.registerComponent('base',{
 	schema:{
 		event: {type: 'string', default: 'click'}
@@ -1062,6 +1012,50 @@ AFRAME.registerComponent('showanimals',{
 	}
 });
 
+AFRAME.registerComponent('showgadgets',{
+	init:function(){
+		let el = this.el;
+		let showGradgets = false;
+		let img = document.getElementById('gadgetsimg');
+		el.addEventListener('grab-start', function () {
+			if (showGradgets === false) {
+				//text.setAttribute('src', '#closeeditorImg');
+				img.setAttribute('src', '#closegadgets')
+				showGradgets = true;
+
+				let gadget1 = document.createElement('a-entity');
+				gadget1.setAttribute('position', {x:-0.3,y:-0.45,z:0});
+				gadget1.setAttribute('scale', {x:0.05,y:0.05,z:0.05});
+				gadget1.setAttribute('id', 'gadget1');
+				gadget1.setAttribute('class', 'remote');
+				gadget1.setAttribute('gltf-model', '#iMac');
+				gadget1.setAttribute('animation', 'property:rotation;to:0 360 0;loop:true;dur:20000')
+				gadget1.setAttribute('clickable', {});
+				gadget1.setAttribute('editgltf',{} );
+				//model3.setAttribute('posibilityofchange',{} );
+				document.getElementById('menu').appendChild(gadget1);
+				hasGadgetsGltfs = true;
+				setClickable();
+			}else{
+				console.log('no muestra');
+				img.setAttribute('src', '#opengadgets');
+				document.getElementById('gadget1').remove();
+				//document.getElementById('tree1').remove();
+				showGradgets = false;
+				hasGadgetsGltfs = false;
+
+			}
+
+		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('material',"color:#adadad; opacity: 0.5");
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('material',"color:white; opacity: 0.25");
+		});
+	}
+});
+
 AFRAME.registerComponent('showmorefigure',{
 	init:function(){
 		let el = this.el;
@@ -1128,22 +1122,44 @@ AFRAME.registerComponent('showmorefigure',{
 				document.getElementById('animals').appendChild(animalsImg);
 				hasAnimals = true;
 
+				let gadgets = document.createElement('a-box');
+				gadgets.setAttribute('position',{x:-0.225,y:-0.45,z:0});
+				gadgets.setAttribute('id','gadgets');
+				gadgets.setAttribute('class','remote');
+				gadgets.setAttribute('height', '0.05');
+				gadgets.setAttribute('depth', '0.015');
+				gadgets.setAttribute('width', '0.05');
+				gadgets.setAttribute('material', 'color:white; opacity:0.25');
+				gadgets.setAttribute('showgadgets', {});
+				document.getElementById('menu').appendChild(gadgets)
+				let gadgetsImg = document.createElement('a-plane');
+				gadgetsImg.setAttribute('position',{x:0,y:0,z:0.0076});
+				gadgetsImg.setAttribute('height', '0.05');
+				gadgetsImg.setAttribute('id', 'gadgetsimg');
+				gadgetsImg.setAttribute('width', '0.05');
+				gadgetsImg.setAttribute('src', '#opengadgets');
+				document.getElementById('gadgets').appendChild(gadgetsImg);
+				hasGadgets = true;
+
 			}else{
 				console.log('no muestra');
 				img.setAttribute('src', '#openmore');
 				document.getElementById('vehicles').remove();
 				document.getElementById('plants').remove();
 				document.getElementById('animals').remove();
-				if (hasVehiclesGltfs){
+				document.getElementById('gadgets').remove();
+				if (document.getElementById('car1')){
 					document.getElementById('car1').remove();
 				}
-				if (hasPlantsGltfs){
+				if (document.getElementById('tree1')){
 					document.getElementById('tree1').remove();
 				}
-				if (hasAnimalsGltfs){
+				if (document.getElementById('animal1')){
 					document.getElementById('animal1').remove();
 				}
-
+				if (document.getElementById('gadget1')){
+					document.getElementById('gadget1').remove();
+				}
 
 				//document.getElementById('tree1').remove();
 				show = false;
@@ -1153,6 +1169,8 @@ AFRAME.registerComponent('showmorefigure',{
 				hasPlants = false;
 				hasAnimals = false;
 				hasAnimalsGltfs = false;
+				hasGadgets = false;
+				hasGadgetsGltfs = false;
 			}
 
 		});
@@ -1339,7 +1357,7 @@ AFRAME.registerComponent('showeditor',{
 				document.getElementById('sphereClick').remove();
 				//document.getElementById('basemenu').remove();
 				document.getElementById('morefiguremenu').remove();
-				if(hasVehiclesGltfs){
+				if (document.getElementById('car1')){
 					document.getElementById('car1').remove();
 				}
 				if(hasVehicles){
@@ -1348,7 +1366,7 @@ AFRAME.registerComponent('showeditor',{
 				hasVehiclesGltfs=false;
 				hasVehicles=false;
 
-				if(hasPlantsGltfs){
+				if (document.getElementById('tree1')){
 					document.getElementById('tree1').remove();
 				}
 				if(hasPlants){
@@ -1360,7 +1378,7 @@ AFRAME.registerComponent('showeditor',{
 				if (hasAnimals){
 					document.getElementById('animals').remove();
 				}
-				if (hasAnimalsGltfs){
+				if (document.getElementById('animal1')){
 					document.getElementById('animal1').remove();
 				}
 				hasAnimals = false;
