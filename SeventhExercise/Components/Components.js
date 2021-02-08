@@ -163,6 +163,28 @@ function createEntity(entity){
 			newEntity.setAttribute('shadow',{});
 			console.log(newEntity)
 			break;
+		case 'car2':
+			newEntity.setAttribute('gltf-model', '#cybertruck');
+			newEntity.setAttribute('scale',{x:0.003,y:0.003,z:0.003});
+			newEntity.setAttribute('grabbable',{});
+			newEntity.setAttribute('stretchable',{});
+			newEntity.setAttribute('hoverable',{});
+			newEntity.setAttribute('draggable',{});
+			newEntity.setAttribute('droppable',{});
+			newEntity.setAttribute('shadow',{});
+			console.log(newEntity)
+			break;
+		case 'car3':
+			newEntity.setAttribute('gltf-model', '#lamborghini');
+			newEntity.setAttribute('scale',{x:0.002,y:0.002,z:0.002});
+			newEntity.setAttribute('grabbable',{});
+			newEntity.setAttribute('stretchable',{});
+			newEntity.setAttribute('hoverable',{});
+			newEntity.setAttribute('draggable',{});
+			newEntity.setAttribute('droppable',{});
+			newEntity.setAttribute('shadow',{});
+			console.log(newEntity)
+			break;
 		case 'tree1':
 			newEntity.setAttribute('gltf-model', '#trees');
 			newEntity.setAttribute('scale',{x:0.001,y:0.001,z:0.001});
@@ -203,6 +225,9 @@ function createEntity(entity){
 function setClickable(){
 	if (hasVehiclesGltfs) {
 		let car1 = document.getElementById('car1');
+		let car2 = document.getElementById('car2');
+		let car3 = document.getElementById('car3');
+
 		console.log('dentro de clickable con vehiclesgltfs')
 		//let tree1 = document.querySelector('#tree1');
 
@@ -215,6 +240,26 @@ function setClickable(){
 		});
 		car1.addEventListener('raycaster-intersected-cleared', function () {
 			car1.setAttribute('scale', {x: 0.00015, y: 0.00015, z: 0.00015});
+		});
+		car2.addEventListener('grab-start', function () {
+			createEntity('car2')
+			console.log('dentro2')
+		});
+		car2.addEventListener('raycaster-intersected', function () {
+			car2.setAttribute('scale', {x: 0.0005, y: 0.0005, z: 0.0005});
+		});
+		car2.addEventListener('raycaster-intersected-cleared', function () {
+			car2.setAttribute('scale', {x: 0.0004, y: 0.0004, z: 0.0004});
+		});
+		car3.addEventListener('grab-start', function () {
+			createEntity('car3')
+			console.log('dentro2')
+		});
+		car3.addEventListener('raycaster-intersected', function () {
+			car3.setAttribute('scale', {x: 0.0003, y: 0.0003, z: 0.0003});
+		});
+		car3.addEventListener('raycaster-intersected-cleared', function () {
+			car3.setAttribute('scale', {x: 0.0002, y: 0.0002, z: 0.0002});
 		});
 		hasVehiclesGltfs = false;
 	}else if(hasPlantsGltfs){
@@ -899,14 +944,41 @@ AFRAME.registerComponent('showvehicles',{
 				car1.setAttribute('animation', 'property:rotation;to:0 360 0;loop:true;dur:20000')
 				car1.setAttribute('clickable', {});
 				car1.setAttribute('editgltf',{} );
-				//model3.setAttribute('posibilityofchange',{} );
-				document.getElementById('menu').appendChild(car1)
+				document.getElementById('menu').appendChild(car1);
+
+				let car2 = document.createElement('a-entity');
+				car2.setAttribute('position', {x:-0.4,y:-0.23,z:0});
+				car2.setAttribute('scale', {x:0.001,y:0.001,z:0.001});
+				car2.setAttribute('id', 'car2');
+				car2.setAttribute('class', 'remote');
+				car2.setAttribute('gltf-model', '#cybertruck');
+				//car2.setAttribute('light', 'intensity: 1');
+				car2.setAttribute('animation', 'property:rotation;to:0 360 0;loop:true;dur:20000')
+				car2.setAttribute('clickable', {});
+				car2.setAttribute('editgltf',{} );
+				document.getElementById('menu').appendChild(car2);
+
+				let car3 = document.createElement('a-entity');
+				car3.setAttribute('position', {x:-0.5,y:-0.23,z:0});
+				car3.setAttribute('scale', {x:0.0001,y:0.0001,z:0.0001});
+				car3.setAttribute('id', 'car3');
+				car3.setAttribute('class', 'remote');
+				car3.setAttribute('gltf-model', '#lamborghini');
+				car3.setAttribute('animation', 'property:rotation;to:0 360 0;loop:true;dur:20000')
+				car3.setAttribute('clickable', {});
+				car3.setAttribute('editgltf',{} );
+				document.getElementById('menu').appendChild(car3);
+
+
+
 				hasVehiclesGltfs = true;
 				setClickable();
 			}else{
 				console.log('no muestra');
 				img.setAttribute('src', '#openvehicles');
 				document.getElementById('car1').remove();
+				document.getElementById('car2').remove();
+				document.getElementById('car3').remove();
 				//document.getElementById('tree1').remove();
 				showVehicles = false;
 				hasVehiclesGltfs = false;
@@ -1151,6 +1223,12 @@ AFRAME.registerComponent('showmorefigure',{
 				if (document.getElementById('car1')){
 					document.getElementById('car1').remove();
 				}
+				if (document.getElementById('car2')){
+					document.getElementById('car2').remove();
+				}
+				if (document.getElementById('car3')){
+					document.getElementById('car3').remove();
+				}
 				if (document.getElementById('tree1')){
 					document.getElementById('tree1').remove();
 				}
@@ -1360,6 +1438,12 @@ AFRAME.registerComponent('showeditor',{
 				if (document.getElementById('car1')){
 					document.getElementById('car1').remove();
 				}
+				if (document.getElementById('car2')){
+					document.getElementById('car2').remove();
+				}
+				if (document.getElementById('car3')){
+					document.getElementById('car3').remove();
+				}
 				if(hasVehicles){
 					document.getElementById('vehicles').remove();
 				}
@@ -1383,6 +1467,13 @@ AFRAME.registerComponent('showeditor',{
 				}
 				hasAnimals = false;
 
+				if (hasGadgets){
+					document.getElementById('gadgets').remove();
+				}
+				if (document.getElementById('gadget1')){
+					document.getElementById('gadget1').remove();
+				}
+				hasGadgets = false;
 
 				showed = false;
 			}
