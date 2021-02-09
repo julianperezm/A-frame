@@ -225,6 +225,27 @@ function createEntity(entity){
 			newEntity.setAttribute('droppable',{});
 			newEntity.setAttribute('shadow',{});
 			break;
+		case 'animal2':
+			newEntity.setAttribute('gltf-model', '#rabbit');
+			newEntity.setAttribute('scale',{x:0.01,y:0.01,z:0.01});
+			newEntity.setAttribute('grabbable',{});
+			newEntity.setAttribute('stretchable',{});
+			newEntity.setAttribute('hoverable',{});
+			newEntity.setAttribute('draggable',{});
+			newEntity.setAttribute('droppable',{});
+			newEntity.setAttribute('shadow',{});
+			break;
+		case 'animal3':
+			newEntity.setAttribute('gltf-model', '#horse');
+			newEntity.setAttribute('scale',{x:0.001,y:0.001,z:0.001});
+			newEntity.setAttribute('rotation',{x:0,y:90,z:0});
+			newEntity.setAttribute('grabbable',{});
+			newEntity.setAttribute('stretchable',{});
+			newEntity.setAttribute('hoverable',{});
+			newEntity.setAttribute('draggable',{});
+			newEntity.setAttribute('droppable',{});
+			newEntity.setAttribute('shadow',{});
+			break;
 		case 'gadget1':
 			newEntity.setAttribute('gltf-model', '#iphone11');
 			newEntity.setAttribute('scale',{x:0.001,y:0.001,z:0.001});
@@ -355,6 +376,30 @@ function setClickable(){
 		});
 		animal1.addEventListener('raycaster-intersected-cleared', function () {
 			animal1.setAttribute('scale',{x:0.007,y:0.007,z:0.007});
+		});
+		let animal2 = document.getElementById('animal2');
+		console.log('dentro de clickable con animal')
+		animal2.addEventListener('grab-start', function(){
+			createEntity('animal2')
+			console.log('dentro2')
+		});
+		animal2.addEventListener('raycaster-intersected', function () {
+			animal2.setAttribute('scale',{x:0.003,y:0.003,z:0.003});
+		});
+		animal2.addEventListener('raycaster-intersected-cleared', function () {
+			animal2.setAttribute('scale',{x:0.002,y:0.002,z:0.002});
+		});
+		let animal3 = document.getElementById('animal3');
+		console.log('dentro de clickable con animal')
+		animal3.addEventListener('grab-start', function(){
+			createEntity('animal3')
+			console.log('dentro2')
+		});
+		animal3.addEventListener('raycaster-intersected', function () {
+			animal3.setAttribute('scale',{x:0.00008,y:0.00008,z:0.00008});
+		});
+		animal3.addEventListener('raycaster-intersected-cleared', function () {
+			animal3.setAttribute('scale',{x:0.00007,y:0.00007,z:0.00007});
 		});
 		hasAnimalsGltfs = false;
 
@@ -1175,14 +1220,38 @@ AFRAME.registerComponent('showanimals',{
 				animal1.setAttribute('animation', 'property:rotation;to:0 360 0;loop:true;dur:20000')
 				animal1.setAttribute('clickable', {});
 				animal1.setAttribute('editgltf',{} );
-				//model3.setAttribute('posibilityofchange',{} );
 				document.getElementById('menu').appendChild(animal1);
+
+				let animal2 = document.createElement('a-entity');
+				animal2.setAttribute('position', {x:-0.4,y:-0.4,z:0});
+				animal2.setAttribute('scale', {x:0.002,y:0.002,z:0.002});
+				animal2.setAttribute('id', 'animal2');
+				animal2.setAttribute('class', 'remote');
+				animal2.setAttribute('gltf-model', '#rabbit');
+				animal2.setAttribute('animation', 'property:rotation;to:0 360 0;loop:true;dur:20000')
+				animal2.setAttribute('clickable', {});
+				animal2.setAttribute('editgltf',{} );
+				document.getElementById('menu').appendChild(animal2);
+
+				let animal3 = document.createElement('a-entity');
+				animal3.setAttribute('position', {x:-0.5,y:-0.4,z:0});
+				animal3.setAttribute('scale', {x:0.00007,y:0.00007,z:0.00007});
+				animal3.setAttribute('rotation', {x:0,y:90,z:0});
+				animal3.setAttribute('id', 'animal3');
+				animal3.setAttribute('class', 'remote');
+				animal3.setAttribute('gltf-model', '#horse');
+				animal3.setAttribute('animation', 'property:rotation;to:0 360 0;loop:true;dur:20000')
+				animal3.setAttribute('clickable', {});
+				animal3.setAttribute('editgltf',{} );
+				document.getElementById('menu').appendChild(animal3);
 				hasAnimalsGltfs = true;
 				setClickable();
 			}else{
 				console.log('no muestra');
 				img.setAttribute('src', '#openanimals');
 				document.getElementById('animal1').remove();
+				document.getElementById('animal2').remove();
+				document.getElementById('animal3').remove();
 				//document.getElementById('tree1').remove();
 				showAnimals = false;
 				hasAnimalsGltfs = false;
@@ -1384,6 +1453,12 @@ AFRAME.registerComponent('showmorefigure',{
 				}
 				if (document.getElementById('animal1')){
 					document.getElementById('animal1').remove();
+				}
+				if (document.getElementById('animal2')){
+					document.getElementById('animal2').remove();
+				}
+				if (document.getElementById('animal3')){
+					document.getElementById('animal3').remove();
 				}
 				if (document.getElementById('gadget1')){
 					document.getElementById('gadget1').remove();
@@ -1626,6 +1701,12 @@ AFRAME.registerComponent('showeditor',{
 				}
 				if (document.getElementById('animal1')){
 					document.getElementById('animal1').remove();
+				}
+				if (document.getElementById('animal2')){
+					document.getElementById('animal2').remove();
+				}
+				if (document.getElementById('animal3')){
+					document.getElementById('animal3').remove();
 				}
 				hasAnimals = false;
 
