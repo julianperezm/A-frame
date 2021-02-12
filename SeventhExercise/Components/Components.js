@@ -524,6 +524,7 @@ AFRAME.registerComponent('posibilityofgroup',{
 				newEl.setAttribute('id', 'newentity');
 				newEl.setAttribute('mixin', el.getAttribute('mixin'));
 				newEl.setAttribute('scale', el.getAttribute('scale'));
+				newEl.setAttribute('rotation', el.getAttribute('rotation'));
 				newEl.setAttribute('opacity', '0.5');
 				newEl.setAttribute('material', el.getAttribute('material') );
 				newEl.setAttribute('class', "remote newen");
@@ -574,17 +575,17 @@ AFRAME.registerComponent('removeattributemenu',{
 });
 
 AFRAME.registerComponent('sizeupx',{
-	init:function(){
+	init:function() {
 		let el = this.el;
 		el.addEventListener('grab-start', function () {
 			let entityToChange = document.getElementById('entitytochange')
 			entityToChange.object3D.scale.x += 0.5;
 		});
 		el.addEventListener('raycaster-intersected', function () {
-			el.setAttribute('scale',{x:0.17,y:0.17,z:0.17});
+			el.setAttribute('scale',{x:2,y:2,z:2});
 		});
 		el.addEventListener('raycaster-intersected-cleared', function () {
-			el.setAttribute('scale',{x:0.12,y:0.12,z:0.12});
+			el.setAttribute('scale',{x:1,y:1,z:1});
 		});
 	}
 });
@@ -597,10 +598,10 @@ AFRAME.registerComponent('sizedownx',{
 			entityToChange.object3D.scale.x -= 0.5;
 		});
 		el.addEventListener('raycaster-intersected', function () {
-			el.setAttribute('scale',{x:0.2,y:0.2,z:0.2});
+			el.setAttribute('scale',{x:2,y:2,z:2});
 		});
 		el.addEventListener('raycaster-intersected-cleared', function () {
-			el.setAttribute('scale',{x:0.14,y:0.14,z:0.14});
+			el.setAttribute('scale',{x:1,y:1,z:1});
 		});
 	}
 });
@@ -613,10 +614,10 @@ AFRAME.registerComponent('sizeupy',{
 			entityToChange.object3D.scale.y += 0.5;
 		});
 		el.addEventListener('raycaster-intersected', function () {
-			el.setAttribute('scale',{x:0.17,y:0.17,z:0.17});
+			el.setAttribute('scale',{x:2,y:2,z:2});
 		});
 		el.addEventListener('raycaster-intersected-cleared', function () {
-			el.setAttribute('scale',{x:0.12,y:0.12,z:0.12});
+			el.setAttribute('scale',{x:1,y:1,z:1});
 		});
 	}
 });
@@ -629,10 +630,10 @@ AFRAME.registerComponent('sizedowny',{
 			entityToChange.object3D.scale.y -= 0.5;
 		});
 		el.addEventListener('raycaster-intersected', function () {
-			el.setAttribute('scale',{x:0.2,y:0.2,z:0.2});
+			el.setAttribute('scale',{x:2,y:2,z:2});
 		});
 		el.addEventListener('raycaster-intersected-cleared', function () {
-			el.setAttribute('scale',{x:0.14,y:0.14,z:0.14});
+			el.setAttribute('scale',{x:1,y:1,z:1});
 		});
 	}
 });
@@ -646,10 +647,10 @@ AFRAME.registerComponent('sizeupz',{
 			console.log(entityToChange.object3D.scale.z)
 		});
 		el.addEventListener('raycaster-intersected', function () {
-			el.setAttribute('scale',{x:0.17,y:0.17,z:0.17});
+			el.setAttribute('scale',{x:2,y:2,z:2});
 		});
 		el.addEventListener('raycaster-intersected-cleared', function () {
-			el.setAttribute('scale',{x:0.12,y:0.12,z:0.12});
+			el.setAttribute('scale',{x:1,y:1,z:1});
 		});
 	}
 });
@@ -663,106 +664,105 @@ AFRAME.registerComponent('sizedownz',{
 			console.log(entityToChange.object3D.scale.z)
 		});
 		el.addEventListener('raycaster-intersected', function () {
-			el.setAttribute('scale',{x:0.2,y:0.2,z:0.2});
+			el.setAttribute('scale',{x:2,y:2,z:2});
 		});
 		el.addEventListener('raycaster-intersected-cleared', function () {
-			el.setAttribute('scale',{x:0.14,y:0.14,z:0.14});
+			el.setAttribute('scale',{x:1,y:1,z:1});
 		});
 	}
 });
 
-
-/*
-AFRAME.registerComponent('sliderActionX',{
-	init:function(){
+AFRAME.registerComponent('rotationupx',{
+	init:function() {
 		let el = this.el;
 		el.addEventListener('grab-start', function () {
-			if(evt.detail.intersection.point.x >= 0){
-			evt.detail.intersection.point.x = evt.detail.intersection.point.x*2;
-			}
-		entity.setAttribute('scale', (2+evt.detail.intersection.point.x) + " " +(2+evt.detail.intersection.point.x) + " " +(2+evt.detail.intersection.point.x));
-		});
-	}
-});
-*/
-
-AFRAME.registerComponent('axisselector',{
-	init:function(){
-		let el = this.el;
-		el.addEventListener('grab-start', function () {
-			let menu= document.createElement('a-box');
-			menu.setAttribute('src', '#attributeAxisImg');
-			menu.setAttribute('position', {x:0.3,y:0.1,z:0});
-			menu.setAttribute('width', '0.25');
-			menu.setAttribute('height', '0.1');
-			menu.setAttribute('depth', '0.01');
-
-			let att = document.getElementById('attributemenu');
-			att.appendChild(menu);
-
-			let sizeChooserUpx = document.createElement('a-text');
-			sizeChooserUpx.setAttribute('id', 'buttonupx');
-			sizeChooserUpx.setAttribute('class', 'remote');
-			sizeChooserUpx.setAttribute('position', '0.19 0.119 0.011');
-			sizeChooserUpx.setAttribute('value', '+');
-			sizeChooserUpx.setAttribute('scale', '0.12 0.12 0.12');
-			sizeChooserUpx.setAttribute('sizeupx', {});
-			sizeChooserUpx.setAttribute('clickable', {});
-			att.appendChild(sizeChooserUpx);
-
-			let sizeChooserDownX = document.createElement('a-text');
-			sizeChooserDownX.setAttribute('id', 'buttondownx');
-			sizeChooserDownX.setAttribute('class', 'remote');
-			sizeChooserDownX.setAttribute('position', '0.24 0.119 0.011');
-			sizeChooserDownX.setAttribute('value', '-');
-			sizeChooserDownX.setAttribute('scale', '0.14 0.14 0.14');
-			sizeChooserDownX.setAttribute('sizedownx', {});
-			sizeChooserDownX.setAttribute('clickable', {});
-			att.appendChild(sizeChooserDownX);
-
-
-			let sizeChooserUpY = document.createElement('a-text');
-			sizeChooserUpY.setAttribute('id', 'buttonupY');
-			sizeChooserUpY.setAttribute('class', 'remote');
-			sizeChooserUpY.setAttribute('position', '0.27 0.08 0.011');
-			sizeChooserUpY.setAttribute('value', '+');
-			sizeChooserUpY.setAttribute('scale', '0.12 0.12 0.12');
-			sizeChooserUpY.setAttribute('sizeupy', {});
-			sizeChooserUpY.setAttribute('clickable', {});
-			att.appendChild(sizeChooserUpY);
-
-			let sizeChooserDownY = document.createElement('a-text');
-			sizeChooserDownY.setAttribute('id', 'buttondowny');
-			sizeChooserDownY.setAttribute('class', 'remote');
-			sizeChooserDownY.setAttribute('position', '0.31 0.08 0.011');
-			sizeChooserDownY.setAttribute('value', '-');
-			sizeChooserDownY.setAttribute('scale', '0.14 0.14 0.14');
-			sizeChooserDownY.setAttribute('sizedownY', {});
-			sizeChooserDownY.setAttribute('clickable', {});
-			att.appendChild(sizeChooserDownY);
-
-			let sizeChooserUpZ = document.createElement('a-text');
-			sizeChooserUpZ.setAttribute('id', 'buttonupZ');
-			sizeChooserUpZ.setAttribute('class', 'remote');
-			sizeChooserUpZ.setAttribute('position', '0.34 0.119 0.011');
-			sizeChooserUpZ.setAttribute('value', '+');
-			sizeChooserUpZ.setAttribute('scale', '0.12 0.12 0.12');
-			sizeChooserUpZ.setAttribute('sizeupz', {});
-			sizeChooserUpZ.setAttribute('clickable', {});
-			att.appendChild(sizeChooserUpZ);
-
-			let sizeChooserDownZ = document.createElement('a-text');
-			sizeChooserDownZ.setAttribute('id', 'buttondownz');
-			sizeChooserDownZ.setAttribute('class', 'remote');
-			sizeChooserDownZ.setAttribute('position', '0.39 0.119 0.011');
-			sizeChooserDownZ.setAttribute('value', '-');
-			sizeChooserDownZ.setAttribute('scale', '0.14 0.14 0.14');
-			sizeChooserDownZ.setAttribute('sizedownz', {});
-			sizeChooserDownZ.setAttribute('clickable', {});
-			att.appendChild(sizeChooserDownZ);
+			let entityToChange = document.getElementById('entitytochange')
+			entityToChange.object3D.rotation.x += 0.5;
 		});
 		el.addEventListener('raycaster-intersected', function () {
-			el.setAttribute('scale',{x:1.5,y:1.5,z:1.5});
+			el.setAttribute('scale',{x:2,y:2,z:2});
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('scale',{x:1,y:1,z:1});
+		});
+	}
+});
+
+AFRAME.registerComponent('rotationdownx',{
+	init:function(){
+		let el = this.el;
+		el.addEventListener('grab-start', function () {
+			let entityToChange = document.getElementById('entitytochange')
+			entityToChange.object3D.rotation.x -= 0.5;
+		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('scale',{x:2,y:2,z:2});
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('scale',{x:1,y:1,z:1});
+		});
+	}
+});
+
+AFRAME.registerComponent('rotationupy',{
+	init:function(){
+		let el = this.el;
+		el.addEventListener('grab-start', function () {
+			let entityToChange = document.getElementById('entitytochange')
+			entityToChange.object3D.rotation.y += 0.5;
+		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('scale',{x:2,y:2,z:2});
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('scale',{x:1,y:1,z:1});
+		});
+	}
+});
+
+AFRAME.registerComponent('rotationdowny',{
+	init:function(){
+		let el = this.el;
+		el.addEventListener('grab-start', function () {
+			let entityToChange = document.getElementById('entitytochange')
+			entityToChange.object3D.rotation.y -= 0.5;
+		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('scale',{x:2,y:2,z:2});
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('scale',{x:1,y:1,z:1});
+		});
+	}
+});
+
+AFRAME.registerComponent('rotationupz',{
+	init:function(){
+		let el = this.el;
+		el.addEventListener('grab-start', function () {
+			let entityToChange = document.getElementById('entitytochange')
+			entityToChange.object3D.rotation.z += 0.5;
+			console.log(entityToChange.object3D.scale.z)
+		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('scale',{x:2,y:2,z:2});
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('scale',{x:1,y:1,z:1});
+		});
+	}
+});
+
+AFRAME.registerComponent('rotationdownz',{
+	init:function(){
+		let el = this.el;
+		el.addEventListener('grab-start', function () {
+			let entityToChange = document.getElementById('entitytochange')
+			entityToChange.object3D.rotation.z -= 0.5;
+			console.log(entityToChange.object3D.scale.z)
+		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('scale',{x:2,y:2,z:2});
 		});
 		el.addEventListener('raycaster-intersected-cleared', function () {
 			el.setAttribute('scale',{x:1,y:1,z:1});
@@ -783,7 +783,6 @@ AFRAME.registerComponent('sliderActionX',{
 	}
 });
 */
-
 
 function sliderActionX(evt) {
 	var entity = document.querySelector('#entitytochange');
@@ -818,56 +817,259 @@ AFRAME.registerComponent('editentity', {
 			let attributesSelector= document.createElement('a-box');
 			attributesSelector.setAttribute('src', '#attributeSelectorImg');
 			attributesSelector.setAttribute('id', 'attributemenu');
-			attributesSelector.setAttribute('position', {x:-0.225,y:1.4,z:-0.6});
+			attributesSelector.setAttribute('position', {x:-0.225,y:1.3,z:-0.6});
+			attributesSelector.setAttribute('rotation', {x:-15,y:0,z:0});
 			attributesSelector.setAttribute('width', '0.3');
-			attributesSelector.setAttribute('height', '0.3');
+			attributesSelector.setAttribute('height', '0.14');
 			attributesSelector.setAttribute('depth', '0.01');
-
-			let axisBtn= document.createElement('a-sphere');
-			axisBtn.setAttribute('id', 'attributemenu');
-			axisBtn.setAttribute('axisselector', "");
-			axisBtn.setAttribute('position', {x:0.1,y:0.105,z:0});
-			axisBtn.setAttribute('radius', '0.01');
-			axisBtn.setAttribute('color', 'white');
-			axisBtn.setAttribute('clickable', "");
-			axisBtn.setAttribute('static-body', {});
-			axisBtn.setAttribute('class', " remote");
-
-			let sliderX = document.createElement('a-gui-slider');
-			sliderX.setAttribute('id', "slider");
-			sliderX.setAttribute('class', "remote");
-			sliderX.setAttribute('width', "0.25");
-			sliderX.setAttribute('height', "0.1");
-			sliderX.setAttribute('percent', "0.2");
-			sliderX.setAttribute('gui-interactable', "");
-			sliderX.setAttribute('gui-item', "");
-			sliderX.setAttribute('gui-slider', "");
-			sliderX.setAttribute('position', "0 0.35 0.049");
-			sliderX.setAttribute('clickable', "");
-			sliderX.setAttribute('hoverable', "");
-			sliderX.setAttribute('opacity', "0");
-			//sliderX.setAttribute('sliderActionX', "");
-			sliderX.setAttribute('onclick', "sliderActionX");
-			sliderX.setAttribute('onhover', "sliderActionX");
-			sliderX.setAttribute('border-color', "white");
-			sliderX.setAttribute('background-color', "#8a8a8a");
-			sliderX.setAttribute('active-color', "#f5cf5d");
-
 			let scene = document.querySelector('#editor');
 			scene.appendChild(attributesSelector);
-			//attributesSelector.appendChild(sliderX);
-			attributesSelector.appendChild(axisBtn);
 
+
+			let scaleMenu= document.createElement('a-box');
+			scaleMenu.setAttribute('src', '#attributeAxisImg');
+			scaleMenu.setAttribute('id', 'scalemenu');
+			scaleMenu.setAttribute('position', {x:0,y:0.15,z:0});
+			scaleMenu.setAttribute('width', '0.3');
+			scaleMenu.setAttribute('height', '0.14');
+			scaleMenu.setAttribute('depth', '0.01');
+			attributesSelector.appendChild(scaleMenu);
+
+			let sizeChooserUpx = document.createElement('a-box');
+			sizeChooserUpx.setAttribute('position',{x:-0.11,y:0.022,z:0.02});
+			sizeChooserUpx.setAttribute('id','buttonupx');
+			sizeChooserUpx.setAttribute('class','remote');
+			sizeChooserUpx.setAttribute('height', '0.02');
+			sizeChooserUpx.setAttribute('depth', '0.001');
+			sizeChooserUpx.setAttribute('width', '0.02');
+			sizeChooserUpx.setAttribute('material', 'color:#5E5E5E;');
+			sizeChooserUpx.setAttribute('sizeupx', {});
+			document.getElementById('scalemenu').appendChild(sizeChooserUpx);
+			let sizeChooserUpxImg = document.createElement('a-text');
+			sizeChooserUpxImg.setAttribute('position',{x:-0.008,y:0.004,z:0.0011});
+			sizeChooserUpxImg.setAttribute('id', 'sizeChooserUpxImg');
+			sizeChooserUpxImg.setAttribute('value', '+');
+			sizeChooserUpxImg.setAttribute('scale', '0.1 0.1 0.1');
+			sizeChooserUpxImg.setAttribute('color', 'black');
+			document.getElementById('buttonupx').appendChild(sizeChooserUpxImg);
+
+
+			let sizeChooserDownX = document.createElement('a-box');
+			sizeChooserDownX.setAttribute('position',{x:-0.05,y:0.022,z:0.02});
+			sizeChooserDownX.setAttribute('id','buttondownx');
+			sizeChooserDownX.setAttribute('class','remote');
+			sizeChooserDownX.setAttribute('height', '0.02');
+			sizeChooserDownX.setAttribute('depth', '0.001');
+			sizeChooserDownX.setAttribute('width', '0.02');
+			sizeChooserDownX.setAttribute('material', 'color:#5E5E5E;');
+			sizeChooserDownX.setAttribute('sizedownx', {});
+			document.getElementById('scalemenu').appendChild(sizeChooserDownX);
+			let sizeChooserDownxImg = document.createElement('a-text');
+			sizeChooserDownxImg.setAttribute('position',{x:-0.008,y:0.004,z:0.0011});
+			sizeChooserDownxImg.setAttribute('id', 'sizeChooserDownxImg');
+			sizeChooserDownxImg.setAttribute('value', '-');
+			sizeChooserDownxImg.setAttribute('scale', '0.16 0.16 0.16');
+			sizeChooserDownxImg.setAttribute('color', 'black');
+			document.getElementById('buttondownx').appendChild(sizeChooserDownxImg);
+
+			let sizeChooserUpY = document.createElement('a-box');
+			sizeChooserUpY.setAttribute('position',{x:-0.025,y:-0.025,z:0.02});
+			sizeChooserUpY.setAttribute('id','buttonupY');
+			sizeChooserUpY.setAttribute('class','remote');
+			sizeChooserUpY.setAttribute('height', '0.02');
+			sizeChooserUpY.setAttribute('depth', '0.001');
+			sizeChooserUpY.setAttribute('width', '0.02');
+			sizeChooserUpY.setAttribute('material', 'color:#5E5E5E;');
+			sizeChooserUpY.setAttribute('sizeupy', {});
+			document.getElementById('scalemenu').appendChild(sizeChooserUpY);
+			let sizeChooserUpYImg = document.createElement('a-text');
+			sizeChooserUpYImg.setAttribute('position',{x:-0.008,y:0.004,z:0.0011});
+			sizeChooserUpYImg.setAttribute('id', 'sizeChooserDownxImg');
+			sizeChooserUpYImg.setAttribute('value', '+');
+			sizeChooserUpYImg.setAttribute('scale', '0.1 0.1	0.1');
+			sizeChooserUpYImg.setAttribute('color', 'black');
+			document.getElementById('buttonupY').appendChild(sizeChooserUpYImg);
+
+			let sizeChooserDownY = document.createElement('a-box');
+			sizeChooserDownY.setAttribute('position',{x:0.032,y:-0.025,z:0.02});
+			sizeChooserDownY.setAttribute('id','buttondowny');
+			sizeChooserDownY.setAttribute('class','remote');
+			sizeChooserDownY.setAttribute('height', '0.02');
+			sizeChooserDownY.setAttribute('depth', '0.001');
+			sizeChooserDownY.setAttribute('width', '0.02');
+			sizeChooserDownY.setAttribute('material', 'color:#5E5E5E;');
+			sizeChooserDownY.setAttribute('sizedownY', {});
+			document.getElementById('scalemenu').appendChild(sizeChooserDownY);
+			let sizeChooserDownYImg = document.createElement('a-text');
+			sizeChooserDownYImg.setAttribute('position',{x:-0.008,y:0.004,z:0.0011});
+			sizeChooserDownYImg.setAttribute('id', 'sizeChooserDownYImg');
+			sizeChooserDownYImg.setAttribute('value', '-');
+			sizeChooserDownYImg.setAttribute('scale', '0.16 0.16	0.16');
+			sizeChooserDownYImg.setAttribute('color', 'black');
+			document.getElementById('buttondowny').appendChild(sizeChooserDownYImg);
+
+			let sizeChooserUpZ = document.createElement('a-box');
+			sizeChooserUpZ.setAttribute('position',{x:0.06,y:0.022,z:0.02});
+			sizeChooserUpZ.setAttribute('id','buttonupZ');
+			sizeChooserUpZ.setAttribute('class','remote');
+			sizeChooserUpZ.setAttribute('height', '0.02');
+			sizeChooserUpZ.setAttribute('depth', '0.001');
+			sizeChooserUpZ.setAttribute('width', '0.02');
+			sizeChooserUpZ.setAttribute('material', 'color:#5E5E5E;');
+			sizeChooserUpZ.setAttribute('sizeupz', {});
+			document.getElementById('scalemenu').appendChild(sizeChooserUpZ);
+			let sizeChooserUpZImg = document.createElement('a-text');
+			sizeChooserUpZImg.setAttribute('position',{x:-0.008,y:0.004,z:0.0011});
+			sizeChooserUpZImg.setAttribute('id', 'sizeChooserUpZImg');
+			sizeChooserUpZImg.setAttribute('value', '+');
+			sizeChooserUpZImg.setAttribute('scale', '0.1 0.1	0.1');
+			sizeChooserUpZImg.setAttribute('color', 'black');
+			document.getElementById('buttonupZ').appendChild(sizeChooserUpZImg);
+
+			let sizeChooserDownZ = document.createElement('a-box');
+			sizeChooserDownZ.setAttribute('position',{x:0.12,y:0.022,z:0.02});
+			sizeChooserDownZ.setAttribute('id','buttondownz');
+			sizeChooserDownZ.setAttribute('class','remote');
+			sizeChooserDownZ.setAttribute('height', '0.02');
+			sizeChooserDownZ.setAttribute('depth', '0.001');
+			sizeChooserDownZ.setAttribute('width', '0.02');
+			sizeChooserDownZ.setAttribute('material', 'color:#5E5E5E;');
+			sizeChooserDownZ.setAttribute('sizedownz', {});
+			document.getElementById('scalemenu').appendChild(sizeChooserDownZ);
+			let sizeChooserDownZImg = document.createElement('a-text');
+			sizeChooserDownZImg.setAttribute('position',{x:-0.008,y:0.004,z:0.0011});
+			sizeChooserDownZImg.setAttribute('id', 'sizeChooserDownZImg');
+			sizeChooserDownZImg.setAttribute('value', '-');
+			sizeChooserDownZImg.setAttribute('scale', '0.16 0.16 0.16');
+			sizeChooserDownZImg.setAttribute('color', 'black');
+			document.getElementById('buttondownz').appendChild(sizeChooserDownZImg);
+
+			let rotationMenu= document.createElement('a-box');
+			rotationMenu.setAttribute('src', '#rotationimg');
+			rotationMenu.setAttribute('id', 'rotationmenu');
+			rotationMenu.setAttribute('position', {x:0.31,y:0.15,z:0});
+			rotationMenu.setAttribute('width', '0.3');
+			rotationMenu.setAttribute('height', '0.14');
+			rotationMenu.setAttribute('depth', '0.01');
+			attributesSelector.appendChild(rotationMenu);
+
+            let rotationChooserUpx = document.createElement('a-box');
+			rotationChooserUpx.setAttribute('position',{x:-0.12,y:0.022,z:0.02});
+			rotationChooserUpx.setAttribute('id','buttonrotationupx');
+			rotationChooserUpx.setAttribute('class','remote');
+			rotationChooserUpx.setAttribute('height', '0.02');
+			rotationChooserUpx.setAttribute('depth', '0.001');
+			rotationChooserUpx.setAttribute('width', '0.02');
+			rotationChooserUpx.setAttribute('material', 'color:#5E5E5E;');
+			rotationChooserUpx.setAttribute('rotationupx', {});
+			document.getElementById('rotationmenu').appendChild(rotationChooserUpx);
+			let rotationChooserUpxImg = document.createElement('a-text');
+			rotationChooserUpxImg.setAttribute('position',{x:-0.008,y:0.004,z:0.0011});
+			rotationChooserUpxImg.setAttribute('id', 'rotationChooserUpxImg');
+			rotationChooserUpxImg.setAttribute('value', '+');
+			rotationChooserUpxImg.setAttribute('scale', '0.1 0.1 0.1');
+			rotationChooserUpxImg.setAttribute('color', 'black');
+            document.getElementById('buttonrotationupx').appendChild(rotationChooserUpxImg);
+
+            let rotationChooserDownx = document.createElement('a-box');
+			rotationChooserDownx.setAttribute('position',{x:-0.06,y:0.022,z:0.02});
+			rotationChooserDownx.setAttribute('id','buttonrotationdownx');
+			rotationChooserDownx.setAttribute('class','remote');
+			rotationChooserDownx.setAttribute('height', '0.02');
+			rotationChooserDownx.setAttribute('depth', '0.001');
+			rotationChooserDownx.setAttribute('width', '0.02');
+			rotationChooserDownx.setAttribute('material', 'color:#5E5E5E;');
+			rotationChooserDownx.setAttribute('rotationdownx', {});
+			document.getElementById('rotationmenu').appendChild(rotationChooserDownx);
+			let rotationChooserDownxImg = document.createElement('a-text');
+			rotationChooserDownxImg.setAttribute('position',{x:-0.008,y:0.004,z:0.0011});
+			rotationChooserDownxImg.setAttribute('id', 'rotationChooserDownxImg');
+			rotationChooserDownxImg.setAttribute('value', '-');
+			rotationChooserDownxImg.setAttribute('scale', '0.16 0.16 0.16');
+			rotationChooserDownxImg.setAttribute('color', 'black');
+			document.getElementById('buttonrotationdownx').appendChild(rotationChooserDownxImg);
+
+			let rotationChooserUpY = document.createElement('a-box');
+			rotationChooserUpY.setAttribute('position',{x:-0.027,y:-0.025,z:0.02});
+			rotationChooserUpY.setAttribute('id','buttonrotationupY');
+			rotationChooserUpY.setAttribute('class','remote');
+			rotationChooserUpY.setAttribute('height', '0.02');
+			rotationChooserUpY.setAttribute('depth', '0.001');
+			rotationChooserUpY.setAttribute('width', '0.02');
+			rotationChooserUpY.setAttribute('material', 'color:#5E5E5E;');
+			rotationChooserUpY.setAttribute('rotationupy', {});
+			document.getElementById('rotationmenu').appendChild(rotationChooserUpY);
+			let rotationChooserUpYImg = document.createElement('a-text');
+			rotationChooserUpYImg.setAttribute('position',{x:-0.008,y:0.004,z:0.0011});
+			rotationChooserUpYImg.setAttribute('id', 'rotationChooserUpYImg');
+			rotationChooserUpYImg.setAttribute('value', '+');
+			rotationChooserUpYImg.setAttribute('scale', '0.1 0.1	0.1');
+			rotationChooserUpYImg.setAttribute('color', 'black');
+			document.getElementById('buttonrotationupY').appendChild(rotationChooserUpYImg);
+
+			let rotationChooserDownY = document.createElement('a-box');
+			rotationChooserDownY.setAttribute('position',{x:0.030,y:-0.025,z:0.02});
+			rotationChooserDownY.setAttribute('id','buttonrotationdowny');
+			rotationChooserDownY.setAttribute('class','remote');
+			rotationChooserDownY.setAttribute('height', '0.02');
+			rotationChooserDownY.setAttribute('depth', '0.001');
+			rotationChooserDownY.setAttribute('width', '0.02');
+			rotationChooserDownY.setAttribute('material', 'color:#5E5E5E;');
+			rotationChooserDownY.setAttribute('rotationdownY', {});
+			document.getElementById('rotationmenu').appendChild(rotationChooserDownY);
+			let rotationChooserDownYImg = document.createElement('a-text');
+			rotationChooserDownYImg.setAttribute('position',{x:-0.008,y:0.004,z:0.0011});
+			rotationChooserDownYImg.setAttribute('id', 'rotationChooserDownYImg');
+			rotationChooserDownYImg.setAttribute('value', '-');
+			rotationChooserDownYImg.setAttribute('scale', '0.16 0.16	0.16');
+			rotationChooserDownYImg.setAttribute('color', 'black');
+			document.getElementById('buttonrotationdowny').appendChild(rotationChooserDownYImg);
+
+			let rotationChooserUpZ = document.createElement('a-box');
+			rotationChooserUpZ.setAttribute('position',{x:0.055,y:0.022,z:0.02});
+			rotationChooserUpZ.setAttribute('id','buttorotationnupZ');
+			rotationChooserUpZ.setAttribute('class','remote');
+			rotationChooserUpZ.setAttribute('height', '0.02');
+			rotationChooserUpZ.setAttribute('depth', '0.001');
+			rotationChooserUpZ.setAttribute('width', '0.02');
+			rotationChooserUpZ.setAttribute('material', 'color:#5E5E5E;');
+			rotationChooserUpZ.setAttribute('rotationupz', {});
+			document.getElementById('rotationmenu').appendChild(rotationChooserUpZ);
+			let rotationChooserUpZImg = document.createElement('a-text');
+			rotationChooserUpZImg.setAttribute('position',{x:-0.008,y:0.004,z:0.0011});
+			rotationChooserUpZImg.setAttribute('id', 'rotationChooserUpZImg');
+			rotationChooserUpZImg.setAttribute('value', '+');
+			rotationChooserUpZImg.setAttribute('scale', '0.1 0.1	0.1');
+			rotationChooserUpZImg.setAttribute('color', 'black');
+			document.getElementById('buttorotationnupZ').appendChild(rotationChooserUpZImg);
+
+			let rotationChooserDownZ = document.createElement('a-box');
+			rotationChooserDownZ.setAttribute('position',{x:0.115,y:0.022,z:0.02});
+			rotationChooserDownZ.setAttribute('id','buttonrotationdownz');
+			rotationChooserDownZ.setAttribute('class','remote');
+			rotationChooserDownZ.setAttribute('height', '0.02');
+			rotationChooserDownZ.setAttribute('depth', '0.001');
+			rotationChooserDownZ.setAttribute('width', '0.02');
+			rotationChooserDownZ.setAttribute('material', 'color:#5E5E5E;');
+			rotationChooserDownZ.setAttribute('rotationdownz', {});
+			document.getElementById('rotationmenu').appendChild(rotationChooserDownZ);
+			let rotationChooserDownZImg = document.createElement('a-text');
+			rotationChooserDownZImg.setAttribute('position',{x:-0.008,y:0.004,z:0.0011});
+			rotationChooserDownZImg.setAttribute('id', 'rotationChooserDownZImg');
+			rotationChooserDownZImg.setAttribute('value', '-');
+			rotationChooserDownZImg.setAttribute('scale', '0.16 0.16 0.16');
+			rotationChooserDownZImg.setAttribute('color', 'black');
+			document.getElementById('buttonrotationdownz').appendChild(rotationChooserDownZImg);
 
 
 			for (let color of colors) {
 				let colorButton = document.createElement('a-entity');
 				if (el.getAttribute('class').search('sphere') >= 0) {
 					colorButton.setAttribute('geometry', {primitive: 'sphere', radius: 0.01});
-					colorButton.setAttribute('position', ((colors.indexOf(color) * 0.0235) - 0.13) + " -0.11 0");
+					colorButton.setAttribute('position', ((colors.indexOf(color) * 0.0235) - 0.13) + " -0.025 0");
 				} else if (el.getAttribute('class').search('plane') >= 0) {
 					colorButton.setAttribute('geometry', {primitive: 'plane', width: 0.017, height: 0.017});
-					colorButton.setAttribute('position', ((colors.indexOf(color) * 0.0235) - 0.13) + " -0.105 0.0100001");
+					colorButton.setAttribute('position', ((colors.indexOf(color) * 0.0235) - 0.13) + " -0.025 0.0100001");
 				} else if (el.getAttribute('class').search('cube') >= 0) {
 					colorButton.setAttribute('geometry', {
 						primitive: 'box',
@@ -875,10 +1077,10 @@ AFRAME.registerComponent('editentity', {
 						height: 0.017,
 						depth: 0.01
 					});
-					colorButton.setAttribute('position', ((colors.indexOf(color) * 0.0235) - 0.13) + " -0.105 0.0100001");
+					colorButton.setAttribute('position', ((colors.indexOf(color) * 0.0235) - 0.13) + " -0.025 0.0100001");
 				} else {
 					colorButton.setAttribute('geometry', {primitive: 'cylinder', radius: 0.01, height: 0.01});
-					colorButton.setAttribute('position', ((colors.indexOf(color) * 0.0235) - 0.13) + " -0.105 0.0100001");
+					colorButton.setAttribute('position', ((colors.indexOf(color) * 0.0235) - 0.13) + " -0.025 0.0100001");
 				}
 				colorButton.setAttribute('class', 'button');
 				//colorButton.setAttribute('id', 'colours');
@@ -903,10 +1105,10 @@ AFRAME.registerComponent('sizeupxgltf',{
 			console.log(entityToChange.object3D.scale.x)
 		});
 		el.addEventListener('raycaster-intersected', function () {
-			el.setAttribute('scale',{x:0.2,y:0.2,z:0.2});
+			el.setAttribute('scale',{x:2,y:2,z:2});
 		});
 		el.addEventListener('raycaster-intersected-cleared', function () {
-			el.setAttribute('scale',{x:0.14,y:0.14,z:0.14});
+			el.setAttribute('scale',{x:1,y:1,z:1});
 		});
 	}
 });
@@ -921,10 +1123,10 @@ AFRAME.registerComponent('sizedownxgltf',{
 			entityToChange.object3D.scale.z -= 0.001;
 		});
 		el.addEventListener('raycaster-intersected', function () {
-			el.setAttribute('scale',{x:0.23,y:0.23,z:0.23});
+			el.setAttribute('scale',{x:2,y:2,z:2});
 		});
 		el.addEventListener('raycaster-intersected-cleared', function () {
-			el.setAttribute('scale',{x:0.17,y:0.17,z:0.17});
+			el.setAttribute('scale',{x:1,y:1,z:1});
 		});
 	}
 });
@@ -1027,33 +1229,170 @@ AFRAME.registerComponent('editgltf', {
 			let attributesSelector= document.createElement('a-box');
 			attributesSelector.setAttribute('src', '#sizes');
 			attributesSelector.setAttribute('id', 'attributemenu');
-			attributesSelector.setAttribute('position', {x:-0.225,y:1.4,z:-0.6});
+			attributesSelector.setAttribute('position', {x:-0.225,y:1.3,z:-0.6});
+			attributesSelector.setAttribute('rotation', {x:-15,y:0,z:0});
 			attributesSelector.setAttribute('width', '0.3');
-			attributesSelector.setAttribute('height', '0.15');
+			attributesSelector.setAttribute('height', '0.14');
 			attributesSelector.setAttribute('depth', '0.01');
 
 			let scene = document.querySelector('#editor');
 			scene.appendChild(attributesSelector);
 
-			let sizeChooserUpx = document.createElement('a-text');
-			sizeChooserUpx.setAttribute('id', 'buttonupxgltf');
-			sizeChooserUpx.setAttribute('class', 'remote');
-			sizeChooserUpx.setAttribute('position', '-0.05 -0.01 0.011');
-			sizeChooserUpx.setAttribute('value', '+');
-			sizeChooserUpx.setAttribute('scale', '0.15 0.15 0.15');
+			let sizeChooserUpx = document.createElement('a-box');
+			sizeChooserUpx.setAttribute('position',{x:-0.01,y:0.02,z:0.11});
+			sizeChooserUpx.setAttribute('id','buttonupxgltf');
+			sizeChooserUpx.setAttribute('class','remote');
+			sizeChooserUpx.setAttribute('height', '0.02');
+			sizeChooserUpx.setAttribute('depth', '0.001');
+			sizeChooserUpx.setAttribute('width', '0.02');
+			sizeChooserUpx.setAttribute('material', 'color:#5E5E5E;');
 			sizeChooserUpx.setAttribute('sizeupxgltf', {});
-			sizeChooserUpx.setAttribute('clickable', {});
-			attributesSelector.appendChild(sizeChooserUpx);
+			document.getElementById('attributemenu').appendChild(sizeChooserUpx);
+			let sizeChooserUpxImg = document.createElement('a-text');
+			sizeChooserUpxImg.setAttribute('position',{x:-0.008,y:0.004,z:0.0011});
+			sizeChooserUpxImg.setAttribute('id', 'sizeChooserUpxImg');
+			sizeChooserUpxImg.setAttribute('value', '+');
+			sizeChooserUpxImg.setAttribute('scale', '0.15 0.15 0.15');
+			sizeChooserUpxImg.setAttribute('color', 'black');
+			document.getElementById('buttonupxgltf').appendChild(sizeChooserUpxImg);
 
-			let sizeChooserDownX = document.createElement('a-text');
-			sizeChooserDownX.setAttribute('id', 'buttondownxgltf');
-			sizeChooserDownX.setAttribute('class', 'remote');
-			sizeChooserDownX.setAttribute('position', '0.04 -0.01 0.011');
-			sizeChooserDownX.setAttribute('value', '-');
-			sizeChooserDownX.setAttribute('scale', '0.17 0.17 0.17');
+
+			let sizeChooserDownX = document.createElement('a-box');
+			sizeChooserDownX.setAttribute('position',{x:0.07,y:0.02,z:0.11});
+			sizeChooserDownX.setAttribute('id','buttondownxgltf');
+			sizeChooserDownX.setAttribute('class','remote');
+			sizeChooserDownX.setAttribute('height', '0.02');
+			sizeChooserDownX.setAttribute('depth', '0.001');
+			sizeChooserDownX.setAttribute('width', '0.02');
+			sizeChooserDownX.setAttribute('material', 'color:#5E5E5E;');
 			sizeChooserDownX.setAttribute('sizedownxgltf', {});
-			sizeChooserDownX.setAttribute('clickable', {});
-			attributesSelector.appendChild(sizeChooserDownX);
+			document.getElementById('attributemenu').appendChild(sizeChooserDownX);
+			let sizeChooserDownxImg = document.createElement('a-text');
+			sizeChooserDownxImg.setAttribute('position',{x:-0.008,y:0.004,z:0.0011});
+			sizeChooserDownxImg.setAttribute('id', 'sizeChooserDownxImg');
+			sizeChooserDownxImg.setAttribute('value', '-');
+			sizeChooserDownxImg.setAttribute('scale', '0.17 0.17 0.17');
+			sizeChooserDownxImg.setAttribute('color', 'black');
+			document.getElementById('buttondownxgltf').appendChild(sizeChooserDownxImg);
+
+
+			let rotationMenu= document.createElement('a-box');
+			rotationMenu.setAttribute('src', '#rotationimg');
+			rotationMenu.setAttribute('id', 'rotationmenu');
+			rotationMenu.setAttribute('position', {x:0,y:0.15,z:0});
+			rotationMenu.setAttribute('width', '0.3');
+			rotationMenu.setAttribute('height', '0.14');
+			rotationMenu.setAttribute('depth', '0.01');
+			attributesSelector.appendChild(rotationMenu);
+
+            let rotationChooserUpx = document.createElement('a-box');
+			rotationChooserUpx.setAttribute('position',{x:-0.12,y:0.022,z:0.02});
+			rotationChooserUpx.setAttribute('id','buttonrotationupx');
+			rotationChooserUpx.setAttribute('class','remote');
+			rotationChooserUpx.setAttribute('height', '0.02');
+			rotationChooserUpx.setAttribute('depth', '0.001');
+			rotationChooserUpx.setAttribute('width', '0.02');
+			rotationChooserUpx.setAttribute('material', 'color:#5E5E5E;');
+			rotationChooserUpx.setAttribute('rotationupx', {});
+			document.getElementById('rotationmenu').appendChild(rotationChooserUpx);
+			let rotationChooserUpxImg = document.createElement('a-text');
+			rotationChooserUpxImg.setAttribute('position',{x:-0.008,y:0.004,z:0.0011});
+			rotationChooserUpxImg.setAttribute('id', 'rotationChooserUpxImg');
+			rotationChooserUpxImg.setAttribute('value', '+');
+			rotationChooserUpxImg.setAttribute('scale', '0.1 0.1 0.1');
+			rotationChooserUpxImg.setAttribute('color', 'black');
+            document.getElementById('buttonrotationupx').appendChild(rotationChooserUpxImg);
+
+            let rotationChooserDownx = document.createElement('a-box');
+			rotationChooserDownx.setAttribute('position',{x:-0.06,y:0.022,z:0.02});
+			rotationChooserDownx.setAttribute('id','buttonrotationdownx');
+			rotationChooserDownx.setAttribute('class','remote');
+			rotationChooserDownx.setAttribute('height', '0.02');
+			rotationChooserDownx.setAttribute('depth', '0.001');
+			rotationChooserDownx.setAttribute('width', '0.02');
+			rotationChooserDownx.setAttribute('material', 'color:#5E5E5E;');
+			rotationChooserDownx.setAttribute('rotationdownx', {});
+			document.getElementById('rotationmenu').appendChild(rotationChooserDownx);
+			let rotationChooserDownxImg = document.createElement('a-text');
+			rotationChooserDownxImg.setAttribute('position',{x:-0.008,y:0.004,z:0.0011});
+			rotationChooserDownxImg.setAttribute('id', 'rotationChooserDownxImg');
+			rotationChooserDownxImg.setAttribute('value', '-');
+			rotationChooserDownxImg.setAttribute('scale', '0.16 0.16 0.16');
+			rotationChooserDownxImg.setAttribute('color', 'black');
+			document.getElementById('buttonrotationdownx').appendChild(rotationChooserDownxImg);
+
+			let rotationChooserUpY = document.createElement('a-box');
+			rotationChooserUpY.setAttribute('position',{x:-0.027,y:-0.025,z:0.02});
+			rotationChooserUpY.setAttribute('id','buttonrotationupY');
+			rotationChooserUpY.setAttribute('class','remote');
+			rotationChooserUpY.setAttribute('height', '0.02');
+			rotationChooserUpY.setAttribute('depth', '0.001');
+			rotationChooserUpY.setAttribute('width', '0.02');
+			rotationChooserUpY.setAttribute('material', 'color:#5E5E5E;');
+			rotationChooserUpY.setAttribute('rotationupy', {});
+			document.getElementById('rotationmenu').appendChild(rotationChooserUpY);
+			let rotationChooserUpYImg = document.createElement('a-text');
+			rotationChooserUpYImg.setAttribute('position',{x:-0.008,y:0.004,z:0.0011});
+			rotationChooserUpYImg.setAttribute('id', 'rotationChooserUpYImg');
+			rotationChooserUpYImg.setAttribute('value', '+');
+			rotationChooserUpYImg.setAttribute('scale', '0.1 0.1	0.1');
+			rotationChooserUpYImg.setAttribute('color', 'black');
+			document.getElementById('buttonrotationupY').appendChild(rotationChooserUpYImg);
+
+			let rotationChooserDownY = document.createElement('a-box');
+			rotationChooserDownY.setAttribute('position',{x:0.030,y:-0.025,z:0.02});
+			rotationChooserDownY.setAttribute('id','buttonrotationdowny');
+			rotationChooserDownY.setAttribute('class','remote');
+			rotationChooserDownY.setAttribute('height', '0.02');
+			rotationChooserDownY.setAttribute('depth', '0.001');
+			rotationChooserDownY.setAttribute('width', '0.02');
+			rotationChooserDownY.setAttribute('material', 'color:#5E5E5E;');
+			rotationChooserDownY.setAttribute('rotationdownY', {});
+			document.getElementById('rotationmenu').appendChild(rotationChooserDownY);
+			let rotationChooserDownYImg = document.createElement('a-text');
+			rotationChooserDownYImg.setAttribute('position',{x:-0.008,y:0.004,z:0.0011});
+			rotationChooserDownYImg.setAttribute('id', 'rotationChooserDownYImg');
+			rotationChooserDownYImg.setAttribute('value', '-');
+			rotationChooserDownYImg.setAttribute('scale', '0.16 0.16	0.16');
+			rotationChooserDownYImg.setAttribute('color', 'black');
+			document.getElementById('buttonrotationdowny').appendChild(rotationChooserDownYImg);
+
+			let rotationChooserUpZ = document.createElement('a-box');
+			rotationChooserUpZ.setAttribute('position',{x:0.055,y:0.022,z:0.02});
+			rotationChooserUpZ.setAttribute('id','buttorotationnupZ');
+			rotationChooserUpZ.setAttribute('class','remote');
+			rotationChooserUpZ.setAttribute('height', '0.02');
+			rotationChooserUpZ.setAttribute('depth', '0.001');
+			rotationChooserUpZ.setAttribute('width', '0.02');
+			rotationChooserUpZ.setAttribute('material', 'color:#5E5E5E;');
+			rotationChooserUpZ.setAttribute('rotationupz', {});
+			document.getElementById('rotationmenu').appendChild(rotationChooserUpZ);
+			let rotationChooserUpZImg = document.createElement('a-text');
+			rotationChooserUpZImg.setAttribute('position',{x:-0.008,y:0.004,z:0.0011});
+			rotationChooserUpZImg.setAttribute('id', 'rotationChooserUpZImg');
+			rotationChooserUpZImg.setAttribute('value', '+');
+			rotationChooserUpZImg.setAttribute('scale', '0.1 0.1	0.1');
+			rotationChooserUpZImg.setAttribute('color', 'black');
+			document.getElementById('buttorotationnupZ').appendChild(rotationChooserUpZImg);
+
+			let rotationChooserDownZ = document.createElement('a-box');
+			rotationChooserDownZ.setAttribute('position',{x:0.115,y:0.022,z:0.02});
+			rotationChooserDownZ.setAttribute('id','buttonrotationdownz');
+			rotationChooserDownZ.setAttribute('class','remote');
+			rotationChooserDownZ.setAttribute('height', '0.02');
+			rotationChooserDownZ.setAttribute('depth', '0.001');
+			rotationChooserDownZ.setAttribute('width', '0.02');
+			rotationChooserDownZ.setAttribute('material', 'color:#5E5E5E;');
+			rotationChooserDownZ.setAttribute('rotationdownz', {});
+			document.getElementById('rotationmenu').appendChild(rotationChooserDownZ);
+			let rotationChooserDownZImg = document.createElement('a-text');
+			rotationChooserDownZImg.setAttribute('position',{x:-0.008,y:0.004,z:0.0011});
+			rotationChooserDownZImg.setAttribute('id', 'rotationChooserDownZImg');
+			rotationChooserDownZImg.setAttribute('value', '-');
+			rotationChooserDownZImg.setAttribute('scale', '0.16 0.16 0.16');
+			rotationChooserDownZImg.setAttribute('color', 'black');
+			document.getElementById('buttonrotationdownz').appendChild(rotationChooserDownZImg);
+
 		});
 	}
 });
