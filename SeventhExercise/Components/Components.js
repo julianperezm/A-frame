@@ -836,7 +836,7 @@ AFRAME.registerComponent('editentity', {
 			attributesSelector.appendChild(scaleMenu);
 
 			let sizeChooserUpx = document.createElement('a-box');
-			sizeChooserUpx.setAttribute('position',{x:-0.11,y:0.022,z:0.02});
+			sizeChooserUpx.setAttribute('position',{x:-0.12,y:0.022,z:0.0045});
 			sizeChooserUpx.setAttribute('id','buttonupx');
 			sizeChooserUpx.setAttribute('class','remote');
 			sizeChooserUpx.setAttribute('height', '0.02');
@@ -855,7 +855,7 @@ AFRAME.registerComponent('editentity', {
 
 
 			let sizeChooserDownX = document.createElement('a-box');
-			sizeChooserDownX.setAttribute('position',{x:-0.05,y:0.022,z:0.02});
+			sizeChooserDownX.setAttribute('position',{x:-0.06,y:0.022,z:0.0045});
 			sizeChooserDownX.setAttribute('id','buttondownx');
 			sizeChooserDownX.setAttribute('class','remote');
 			sizeChooserDownX.setAttribute('height', '0.02');
@@ -873,7 +873,7 @@ AFRAME.registerComponent('editentity', {
 			document.getElementById('buttondownx').appendChild(sizeChooserDownxImg);
 
 			let sizeChooserUpY = document.createElement('a-box');
-			sizeChooserUpY.setAttribute('position',{x:-0.025,y:-0.025,z:0.02});
+			sizeChooserUpY.setAttribute('position',{x:-0.025,y:-0.03,z:0.0045});
 			sizeChooserUpY.setAttribute('id','buttonupY');
 			sizeChooserUpY.setAttribute('class','remote');
 			sizeChooserUpY.setAttribute('height', '0.02');
@@ -891,7 +891,7 @@ AFRAME.registerComponent('editentity', {
 			document.getElementById('buttonupY').appendChild(sizeChooserUpYImg);
 
 			let sizeChooserDownY = document.createElement('a-box');
-			sizeChooserDownY.setAttribute('position',{x:0.032,y:-0.025,z:0.02});
+			sizeChooserDownY.setAttribute('position',{x:0.032,y:-0.03,z:0.0045});
 			sizeChooserDownY.setAttribute('id','buttondowny');
 			sizeChooserDownY.setAttribute('class','remote');
 			sizeChooserDownY.setAttribute('height', '0.02');
@@ -909,7 +909,7 @@ AFRAME.registerComponent('editentity', {
 			document.getElementById('buttondowny').appendChild(sizeChooserDownYImg);
 
 			let sizeChooserUpZ = document.createElement('a-box');
-			sizeChooserUpZ.setAttribute('position',{x:0.06,y:0.022,z:0.02});
+			sizeChooserUpZ.setAttribute('position',{x:0.06,y:0.022,z:0.0045});
 			sizeChooserUpZ.setAttribute('id','buttonupZ');
 			sizeChooserUpZ.setAttribute('class','remote');
 			sizeChooserUpZ.setAttribute('height', '0.02');
@@ -927,7 +927,7 @@ AFRAME.registerComponent('editentity', {
 			document.getElementById('buttonupZ').appendChild(sizeChooserUpZImg);
 
 			let sizeChooserDownZ = document.createElement('a-box');
-			sizeChooserDownZ.setAttribute('position',{x:0.12,y:0.022,z:0.02});
+			sizeChooserDownZ.setAttribute('position',{x:0.12,y:0.022,z:0.0045});
 			sizeChooserDownZ.setAttribute('id','buttondownz');
 			sizeChooserDownZ.setAttribute('class','remote');
 			sizeChooserDownZ.setAttribute('height', '0.02');
@@ -954,7 +954,7 @@ AFRAME.registerComponent('editentity', {
 			attributesSelector.appendChild(rotationMenu);
 
             let rotationChooserUpx = document.createElement('a-box');
-			rotationChooserUpx.setAttribute('position',{x:-0.12,y:0.022,z:0.02});
+			rotationChooserUpx.setAttribute('position',{x:-0.12,y:0.022,z:0.0045});
 			rotationChooserUpx.setAttribute('id','buttonrotationupx');
 			rotationChooserUpx.setAttribute('class','remote');
 			rotationChooserUpx.setAttribute('height', '0.02');
@@ -972,7 +972,7 @@ AFRAME.registerComponent('editentity', {
             document.getElementById('buttonrotationupx').appendChild(rotationChooserUpxImg);
 
             let rotationChooserDownx = document.createElement('a-box');
-			rotationChooserDownx.setAttribute('position',{x:-0.06,y:0.022,z:0.02});
+			rotationChooserDownx.setAttribute('position',{x:-0.06,y:0.022,z:0.0045});
 			rotationChooserDownx.setAttribute('id','buttonrotationdownx');
 			rotationChooserDownx.setAttribute('class','remote');
 			rotationChooserDownx.setAttribute('height', '0.02');
@@ -990,7 +990,7 @@ AFRAME.registerComponent('editentity', {
 			document.getElementById('buttonrotationdownx').appendChild(rotationChooserDownxImg);
 
 			let rotationChooserUpY = document.createElement('a-box');
-			rotationChooserUpY.setAttribute('position',{x:-0.027,y:-0.025,z:0.02});
+			rotationChooserUpY.setAttribute('position',{x:-0.027,y:-0.03,z:0.0045});
 			rotationChooserUpY.setAttribute('id','buttonrotationupY');
 			rotationChooserUpY.setAttribute('class','remote');
 			rotationChooserUpY.setAttribute('height', '0.02');
@@ -1008,7 +1008,7 @@ AFRAME.registerComponent('editentity', {
 			document.getElementById('buttonrotationupY').appendChild(rotationChooserUpYImg);
 
 			let rotationChooserDownY = document.createElement('a-box');
-			rotationChooserDownY.setAttribute('position',{x:0.030,y:-0.025,z:0.02});
+			rotationChooserDownY.setAttribute('position',{x:0.030,y:-0.03,z:0.0045});
 			rotationChooserDownY.setAttribute('id','buttonrotationdowny');
 			rotationChooserDownY.setAttribute('class','remote');
 			rotationChooserDownY.setAttribute('height', '0.02');
@@ -1026,7 +1026,7 @@ AFRAME.registerComponent('editentity', {
 			document.getElementById('buttonrotationdowny').appendChild(rotationChooserDownYImg);
 
 			let rotationChooserUpZ = document.createElement('a-box');
-			rotationChooserUpZ.setAttribute('position',{x:0.055,y:0.022,z:0.02});
+			rotationChooserUpZ.setAttribute('position',{x:0.055,y:0.022,z:0.0045});
 			rotationChooserUpZ.setAttribute('id','buttorotationnupZ');
 			rotationChooserUpZ.setAttribute('class','remote');
 			rotationChooserUpZ.setAttribute('height', '0.02');
@@ -1044,7 +1044,7 @@ AFRAME.registerComponent('editentity', {
 			document.getElementById('buttorotationnupZ').appendChild(rotationChooserUpZImg);
 
 			let rotationChooserDownZ = document.createElement('a-box');
-			rotationChooserDownZ.setAttribute('position',{x:0.115,y:0.022,z:0.02});
+			rotationChooserDownZ.setAttribute('position',{x:0.115,y:0.022,z:0.0045});
 			rotationChooserDownZ.setAttribute('id','buttonrotationdownz');
 			rotationChooserDownZ.setAttribute('class','remote');
 			rotationChooserDownZ.setAttribute('height', '0.02');
@@ -1239,7 +1239,7 @@ AFRAME.registerComponent('editgltf', {
 			scene.appendChild(attributesSelector);
 
 			let sizeChooserUpx = document.createElement('a-box');
-			sizeChooserUpx.setAttribute('position',{x:-0.01,y:0.02,z:0.11});
+			sizeChooserUpx.setAttribute('position',{x:-0.05,y:-0.015,z:0.0045});
 			sizeChooserUpx.setAttribute('id','buttonupxgltf');
 			sizeChooserUpx.setAttribute('class','remote');
 			sizeChooserUpx.setAttribute('height', '0.02');
@@ -1258,7 +1258,7 @@ AFRAME.registerComponent('editgltf', {
 
 
 			let sizeChooserDownX = document.createElement('a-box');
-			sizeChooserDownX.setAttribute('position',{x:0.07,y:0.02,z:0.11});
+			sizeChooserDownX.setAttribute('position',{x:0.04,y:-0.015,z:0.0045});
 			sizeChooserDownX.setAttribute('id','buttondownxgltf');
 			sizeChooserDownX.setAttribute('class','remote');
 			sizeChooserDownX.setAttribute('height', '0.02');
@@ -1271,7 +1271,7 @@ AFRAME.registerComponent('editgltf', {
 			sizeChooserDownxImg.setAttribute('position',{x:-0.008,y:0.004,z:0.0011});
 			sizeChooserDownxImg.setAttribute('id', 'sizeChooserDownxImg');
 			sizeChooserDownxImg.setAttribute('value', '-');
-			sizeChooserDownxImg.setAttribute('scale', '0.17 0.17 0.17');
+			sizeChooserDownxImg.setAttribute('scale', '0.2 0.2 0.2');
 			sizeChooserDownxImg.setAttribute('color', 'black');
 			document.getElementById('buttondownxgltf').appendChild(sizeChooserDownxImg);
 
@@ -1286,7 +1286,7 @@ AFRAME.registerComponent('editgltf', {
 			attributesSelector.appendChild(rotationMenu);
 
             let rotationChooserUpx = document.createElement('a-box');
-			rotationChooserUpx.setAttribute('position',{x:-0.12,y:0.022,z:0.02});
+			rotationChooserUpx.setAttribute('position',{x:-0.12,y:0.022,z:0.0045});
 			rotationChooserUpx.setAttribute('id','buttonrotationupx');
 			rotationChooserUpx.setAttribute('class','remote');
 			rotationChooserUpx.setAttribute('height', '0.02');
@@ -1304,7 +1304,7 @@ AFRAME.registerComponent('editgltf', {
             document.getElementById('buttonrotationupx').appendChild(rotationChooserUpxImg);
 
             let rotationChooserDownx = document.createElement('a-box');
-			rotationChooserDownx.setAttribute('position',{x:-0.06,y:0.022,z:0.02});
+			rotationChooserDownx.setAttribute('position',{x:-0.06,y:0.022,z:0.0045});
 			rotationChooserDownx.setAttribute('id','buttonrotationdownx');
 			rotationChooserDownx.setAttribute('class','remote');
 			rotationChooserDownx.setAttribute('height', '0.02');
@@ -1322,7 +1322,7 @@ AFRAME.registerComponent('editgltf', {
 			document.getElementById('buttonrotationdownx').appendChild(rotationChooserDownxImg);
 
 			let rotationChooserUpY = document.createElement('a-box');
-			rotationChooserUpY.setAttribute('position',{x:-0.027,y:-0.025,z:0.02});
+			rotationChooserUpY.setAttribute('position',{x:-0.027,y:-0.03,z:0.0045});
 			rotationChooserUpY.setAttribute('id','buttonrotationupY');
 			rotationChooserUpY.setAttribute('class','remote');
 			rotationChooserUpY.setAttribute('height', '0.02');
@@ -1340,7 +1340,7 @@ AFRAME.registerComponent('editgltf', {
 			document.getElementById('buttonrotationupY').appendChild(rotationChooserUpYImg);
 
 			let rotationChooserDownY = document.createElement('a-box');
-			rotationChooserDownY.setAttribute('position',{x:0.030,y:-0.025,z:0.02});
+			rotationChooserDownY.setAttribute('position',{x:0.030,y:-0.03,z:0.0045});
 			rotationChooserDownY.setAttribute('id','buttonrotationdowny');
 			rotationChooserDownY.setAttribute('class','remote');
 			rotationChooserDownY.setAttribute('height', '0.02');
@@ -1358,7 +1358,7 @@ AFRAME.registerComponent('editgltf', {
 			document.getElementById('buttonrotationdowny').appendChild(rotationChooserDownYImg);
 
 			let rotationChooserUpZ = document.createElement('a-box');
-			rotationChooserUpZ.setAttribute('position',{x:0.055,y:0.022,z:0.02});
+			rotationChooserUpZ.setAttribute('position',{x:0.055,y:0.022,z:0.0045});
 			rotationChooserUpZ.setAttribute('id','buttorotationnupZ');
 			rotationChooserUpZ.setAttribute('class','remote');
 			rotationChooserUpZ.setAttribute('height', '0.02');
@@ -1376,7 +1376,7 @@ AFRAME.registerComponent('editgltf', {
 			document.getElementById('buttorotationnupZ').appendChild(rotationChooserUpZImg);
 
 			let rotationChooserDownZ = document.createElement('a-box');
-			rotationChooserDownZ.setAttribute('position',{x:0.115,y:0.022,z:0.02});
+			rotationChooserDownZ.setAttribute('position',{x:0.115,y:0.022,z:0.0045});
 			rotationChooserDownZ.setAttribute('id','buttonrotationdownz');
 			rotationChooserDownZ.setAttribute('class','remote');
 			rotationChooserDownZ.setAttribute('height', '0.02');
