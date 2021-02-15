@@ -574,12 +574,109 @@ AFRAME.registerComponent('removeattributemenu',{
 	}
 });
 
+AFRAME.registerComponent('metalnessup',{
+	init:function() {
+		let el = this.el;
+		el.addEventListener('grab-start', function () {
+			let entityToChange = document.getElementById('entitytochange')
+			entityToChange.components.material.material.metalness += 0.1;
+		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('scale',{x:2,y:2,z:2});
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('scale',{x:1,y:1,z:1});
+		});
+	}
+});
+
+AFRAME.registerComponent('metalnessdown',{
+	init:function() {
+		let el = this.el;
+		el.addEventListener('grab-start', function () {
+			let entityToChange = document.getElementById('entitytochange')
+			entityToChange.components.material.material.metalness -= 0.1;
+		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('scale',{x:2,y:2,z:2});
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('scale',{x:1,y:1,z:1});
+		});
+	}
+});
+
+AFRAME.registerComponent('roughnessup',{
+	init:function() {
+		let el = this.el;
+		let entityToChange = document.getElementById('entitytochange')
+		//entityToChange.components.material.material.emissive ='red';
+		el.addEventListener('grab-start', function () {
+			entityToChange.components.material.material.roughness += 0.1;
+		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('scale',{x:2,y:2,z:2});
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('scale',{x:1,y:1,z:1});
+		});
+	}
+});
+AFRAME.registerComponent('roughnessdown',{
+	init:function() {
+		let el = this.el;
+		el.addEventListener('grab-start', function () {
+			let entityToChange = document.getElementById('entitytochange')
+			entityToChange.components.material.material.roughness -= 0.1;
+		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('scale',{x:2,y:2,z:2});
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('scale',{x:1,y:1,z:1});
+		});
+	}
+});
+
 AFRAME.registerComponent('sizeupx',{
 	init:function() {
 		let el = this.el;
 		el.addEventListener('grab-start', function () {
 			let entityToChange = document.getElementById('entitytochange')
 			entityToChange.object3D.scale.x += 0.5;
+			//entityToChange.components.material.material.metalness += 0.1;
+		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('scale',{x:2,y:2,z:2});
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('scale',{x:1,y:1,z:1});
+		});
+	}
+});
+
+AFRAME.registerComponent('opacityup',{
+	init:function() {
+		let el = this.el;
+		let entityToChange = document.getElementById('entitytochange')
+		el.addEventListener('grab-start', function () {
+			entityToChange.components.material.material.opacity += 0.1;
+		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('scale',{x:2,y:2,z:2});
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('scale',{x:1,y:1,z:1});
+		});
+	}
+});
+
+AFRAME.registerComponent('opacitydown',{
+	init:function() {
+		let el = this.el;
+		let entityToChange = document.getElementById('entitytochange')
+		el.addEventListener('grab-start', function () {
+			entityToChange.components.material.material.opacity -= 0.1;
 		});
 		el.addEventListener('raycaster-intersected', function () {
 			el.setAttribute('scale',{x:2,y:2,z:2});
@@ -769,20 +866,6 @@ AFRAME.registerComponent('rotationdownz',{
 		});
 	}
 });
-
-/*
-AFRAME.registerComponent('sliderActionX',{
-	init:function(){
-		let el = this.el;
-		el.addEventListener('grab-start', function () {
-			if(evt.detail.intersection.point.x >= 0){
-			evt.detail.intersection.point.x = evt.detail.intersection.point.x*2;
-			}
-		entity.setAttribute('scale', (2+evt.detail.intersection.point.x) + " " +(2+evt.detail.intersection.point.x) + " " +(2+evt.detail.intersection.point.x));
-		});
-	}
-});
-*/
 
 function sliderActionX(evt) {
 	var entity = document.querySelector('#entitytochange');
@@ -1061,6 +1144,119 @@ AFRAME.registerComponent('editentity', {
 			rotationChooserDownZImg.setAttribute('color', 'black');
 			document.getElementById('buttonrotationdownz').appendChild(rotationChooserDownZImg);
 
+			let materialMenu= document.createElement('a-box');
+			materialMenu.setAttribute('src', '#materialimg');
+			materialMenu.setAttribute('id', 'materialMenu');
+			materialMenu.setAttribute('position', {x:0.62,y:0.07,z:0});
+			materialMenu.setAttribute('width', '0.3');
+			materialMenu.setAttribute('height', '0.3');
+			materialMenu.setAttribute('depth', '0.01');
+			attributesSelector.appendChild(materialMenu);
+			let metalnessUp = document.createElement('a-box');
+			metalnessUp.setAttribute('position',{x:-0.1,y:-0.035,z:0.0045});
+			metalnessUp.setAttribute('id','metalnessUp');
+			metalnessUp.setAttribute('class','remote');
+			metalnessUp.setAttribute('height', '0.02');
+			metalnessUp.setAttribute('depth', '0.001');
+			metalnessUp.setAttribute('width', '0.02');
+			metalnessUp.setAttribute('material', 'color:#5E5E5E;');
+			metalnessUp.setAttribute('metalnessup', {});
+			document.getElementById('materialMenu').appendChild(metalnessUp);
+			let metalnessUpImg = document.createElement('a-text');
+			metalnessUpImg.setAttribute('position',{x:-0.015,y:0.004,z:0.0011});
+			metalnessUpImg.setAttribute('id', 'metalnessUpImg');
+			metalnessUpImg.setAttribute('value', '+');
+			metalnessUpImg.setAttribute('scale', '0.16 0.16 0.16');
+			metalnessUpImg.setAttribute('color', 'black');
+			document.getElementById('metalnessUp').appendChild(metalnessUpImg);
+			let metalnessDown = document.createElement('a-box');
+			metalnessDown.setAttribute('position',{x:0.105,y:-0.035,z:0.0045});
+			metalnessDown.setAttribute('id','metalnessDown');
+			metalnessDown.setAttribute('class','remote');
+			metalnessDown.setAttribute('height', '0.02');
+			metalnessDown.setAttribute('depth', '0.001');
+			metalnessDown.setAttribute('width', '0.02');
+			metalnessDown.setAttribute('material', 'color:#5E5E5E;');
+			metalnessDown.setAttribute('metalnessdown', {});
+			document.getElementById('materialMenu').appendChild(metalnessDown);
+			let metalnessDownImg = document.createElement('a-text');
+			metalnessDownImg.setAttribute('position',{x:-0.015,y:0.004,z:0.0011});
+			metalnessDownImg.setAttribute('id', 'metalnessDownImg');
+			metalnessDownImg.setAttribute('value', '-');
+			metalnessDownImg.setAttribute('scale', '0.16 0.16 0.16');
+			metalnessDownImg.setAttribute('color', 'black');
+			document.getElementById('metalnessDown').appendChild(metalnessDownImg);
+
+			let roughnessUp = document.createElement('a-box');
+			roughnessUp.setAttribute('position',{x:-0.1,y:0.05,z:0.0045});
+			roughnessUp.setAttribute('id','roughnessUp');
+			roughnessUp.setAttribute('class','remote');
+			roughnessUp.setAttribute('height', '0.02');
+			roughnessUp.setAttribute('depth', '0.001');
+			roughnessUp.setAttribute('width', '0.02');
+			roughnessUp.setAttribute('material', 'color:#5E5E5E;');
+			roughnessUp.setAttribute('roughnessup', {});
+			document.getElementById('materialMenu').appendChild(roughnessUp);
+			let roughnessUpImg = document.createElement('a-text');
+			roughnessUpImg.setAttribute('position',{x:-0.015,y:0.004,z:0.0011});
+			roughnessUpImg.setAttribute('id', 'roughnessUpImg');
+			roughnessUpImg.setAttribute('value', '+');
+			roughnessUpImg.setAttribute('scale', '0.16 0.16 0.16');
+			roughnessUpImg.setAttribute('color', 'black');
+			document.getElementById('roughnessUp').appendChild(roughnessUpImg);
+			let roughnessDown = document.createElement('a-box');
+			roughnessDown.setAttribute('position',{x:0.105,y:0.05,z:0.0045});
+			roughnessDown.setAttribute('id','roughnessDown');
+			roughnessDown.setAttribute('class','remote');
+			roughnessDown.setAttribute('height', '0.02');
+			roughnessDown.setAttribute('depth', '0.001');
+			roughnessDown.setAttribute('width', '0.02');
+			roughnessDown.setAttribute('material', 'color:#5E5E5E;');
+			roughnessDown.setAttribute('roughnessdown', {});
+			document.getElementById('materialMenu').appendChild(roughnessDown);
+			let roughnessDownImg = document.createElement('a-text');
+			roughnessDownImg.setAttribute('position',{x:-0.015,y:0.004,z:0.0011});
+			roughnessDownImg.setAttribute('id', 'metalnessDownImg');
+			roughnessDownImg.setAttribute('value', '-');
+			roughnessDownImg.setAttribute('scale', '0.16 0.16 0.16');
+			roughnessDownImg.setAttribute('color', 'black');
+			document.getElementById('roughnessDown').appendChild(roughnessDownImg);
+
+			let opacityUp = document.createElement('a-box');
+			opacityUp.setAttribute('position',{x:-0.1,y:-0.12,z:0.0045});
+			opacityUp.setAttribute('id','opacityUp');
+			opacityUp.setAttribute('class','remote');
+			opacityUp.setAttribute('height', '0.02');
+			opacityUp.setAttribute('depth', '0.001');
+			opacityUp.setAttribute('width', '0.02');
+			opacityUp.setAttribute('material', 'color:#5E5E5E;');
+			opacityUp.setAttribute('opacityup', {});
+			document.getElementById('materialMenu').appendChild(opacityUp);
+			let opacityUpImg = document.createElement('a-text');
+			opacityUpImg.setAttribute('position',{x:-0.015,y:0.004,z:0.0011});
+			opacityUpImg.setAttribute('id', 'roughnessUpImg');
+			opacityUpImg.setAttribute('value', '+');
+			opacityUpImg.setAttribute('scale', '0.16 0.16 0.16');
+			opacityUpImg.setAttribute('color', 'black');
+			document.getElementById('opacityUp').appendChild(opacityUpImg);
+			let opacityDown = document.createElement('a-box');
+			opacityDown.setAttribute('position',{x:0.105,y:-0.12,z:0.0045});
+			opacityDown.setAttribute('id','opacityDown');
+			opacityDown.setAttribute('class','remote');
+			opacityDown.setAttribute('height', '0.02');
+			opacityDown.setAttribute('depth', '0.001');
+			opacityDown.setAttribute('width', '0.02');
+			opacityDown.setAttribute('material', 'color:#5E5E5E;');
+			opacityDown.setAttribute('opacitydown', {});
+			document.getElementById('materialMenu').appendChild(opacityDown);
+			let opacityDownImg = document.createElement('a-text');
+			opacityDownImg.setAttribute('position',{x:-0.015,y:0.004,z:0.0011});
+			opacityDownImg.setAttribute('id', 'metalnessDownImg');
+			opacityDownImg.setAttribute('value', '-');
+			opacityDownImg.setAttribute('scale', '0.16 0.16 0.16');
+			opacityDownImg.setAttribute('color', 'black');
+			document.getElementById('opacityDown').appendChild(opacityDownImg);
+
 
 			for (let color of colors) {
 				let colorButton = document.createElement('a-entity');
@@ -1084,7 +1280,7 @@ AFRAME.registerComponent('editentity', {
 				}
 				colorButton.setAttribute('class', 'button');
 				//colorButton.setAttribute('id', 'colours');
-				colorButton.setAttribute('material', 'color :' + color);
+				colorButton.setAttribute('material', ' color :' + color);
 				colorButton.setAttribute('clickable', {});
 				colorButton.setAttribute('changeattribute', {})
 				attributesSelector.appendChild(colorButton)

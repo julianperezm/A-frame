@@ -50,6 +50,7 @@
                 <img id="closegadgets" src="../assets/closegadgets.jpg">
                 <img id="mas" src="../assets/mas.jpg">
                 <img id="menos" src="../assets/menos.jpg">
+                <img id="materialimg" src="../assets/materialsimg.jpg">
 
                 <a-mixin id="cube" geometry="primitive: box; width: 0.3; height: 0.3; depth: 0.3"
                          hoverable grabbable stretchable draggable droppable
@@ -90,7 +91,7 @@
             <!-- Podium -->
             <a-entity class="podium" podium></a-entity>
 
-
+            <a-entity geometry="primitive: cylinder" material="emissive:#ffcc00 ;emissiveIntensity: 1;"></a-entity>
         <!--
             <a-entity class="remote" gltf-model="#horse" position="3 3 -1" scale="0.01 0.01 0.01"   grabbable stretchable></a-entity>
             <a-entity class="remote" gltf-model="#rabbit" position="5 5 -1" scale="0.1 0.1 0.1" grabbable stretchable></a-entity>
