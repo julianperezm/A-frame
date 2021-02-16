@@ -867,19 +867,34 @@ AFRAME.registerComponent('rotationdownz',{
 	}
 });
 
-function sliderActionX(evt) {
-	var entity = document.querySelector('#entitytochange');
 
-	if(evt.detail.intersection.point.x >= 0){
-		evt.detail.intersection.point.x = evt.detail.intersection.point.x*2;
+AFRAME.registerComponent('dotransparent',{
+	init:function(){
+		let el = this.el;
+		let transparent = false;
+		let img = document.getElementById('transparentMenuImg');
+		let entityToChange = document.getElementById('entitytochange')
+		el.addEventListener('grab-start', function () {
+			if (transparent === false) {
+
+				img.setAttribute('src', '#transparenttrue');
+				entityToChange.components.material.material.transparent = true;
+				transparent = true;
+			}else{
+				img.setAttribute('src', '#transparentfalse');
+				entityToChange.components.material.material.transparent = false;
+				transparent = false;
+			}
+
+		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('material',"color:#adadad; opacity: 0.5");
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('material',"color:white; opacity: 0.25");
+		});
 	}
-	//entity.object3D.scale.x = 1+evt.detail.intersection.point.x;
-	/*let textX = document.getElementById('textx');
-			console.log(textX.getAttribute('value'));
-			textX.setAttribute('value',entity.object3D.scale.x )*/
-	entity.setAttribute('scale', (2+evt.detail.intersection.point.x) + " " +(2+evt.detail.intersection.point.x) + " " +(2+evt.detail.intersection.point.x));
-}
-
+});
 
 AFRAME.registerComponent('editentity', {
 	schema:{
@@ -1036,6 +1051,24 @@ AFRAME.registerComponent('editentity', {
 			rotationMenu.setAttribute('depth', '0.01');
 			attributesSelector.appendChild(rotationMenu);
 
+			let transparentMenu = document.createElement('a-box');
+			transparentMenu.setAttribute('position',{x:0.31,y:0,z:0});
+			transparentMenu.setAttribute('id','transparentMenu');
+			transparentMenu.setAttribute('class','remote');
+			transparentMenu.setAttribute('height', '0.14');
+			transparentMenu.setAttribute('depth', '0.015');
+			transparentMenu.setAttribute('width', '0.3');
+			transparentMenu.setAttribute('material', 'color:white; opacity:0.25');
+			transparentMenu.setAttribute('dotransparent', {});
+			attributesSelector.appendChild(transparentMenu)
+			let transparentMenuImg = document.createElement('a-plane');
+			transparentMenuImg.setAttribute('position',{x:0,y:0,z:0});
+			transparentMenuImg.setAttribute('height', '0.14');
+			transparentMenuImg.setAttribute('id', 'transparentMenuImg');
+			transparentMenuImg.setAttribute('width', '0.3');
+			transparentMenuImg.setAttribute('src', '#transparentfalse');
+			document.getElementById('transparentMenu').appendChild(transparentMenuImg);
+
             let rotationChooserUpx = document.createElement('a-box');
 			rotationChooserUpx.setAttribute('position',{x:-0.12,y:0.022,z:0.0045});
 			rotationChooserUpx.setAttribute('id','buttonrotationupx');
@@ -1143,6 +1176,8 @@ AFRAME.registerComponent('editentity', {
 			rotationChooserDownZImg.setAttribute('scale', '0.16 0.16 0.16');
 			rotationChooserDownZImg.setAttribute('color', 'black');
 			document.getElementById('buttonrotationdownz').appendChild(rotationChooserDownZImg);
+
+
 
 			let materialMenu= document.createElement('a-box');
 			materialMenu.setAttribute('src', '#materialimg');
