@@ -8,6 +8,7 @@ let hasAnimals= false;
 let hasAnimalsGltfs = false;
 let hasGadgets= false;
 let hasGadgetsGltfs = false;
+let transparent = false;
 
 function coloredOnSelect() {
 	let showeditor = document.getElementById('showeditor');
@@ -39,7 +40,8 @@ AFRAME.registerComponent('handlereditor',{
 				mode.setAttribute('src', '#modeImgGroup');
 				let newEntity = document.createElement('a-box');
 				let podium = document.getElementById('podium');
-				console.log(podium)
+				let instructionpos = document.getElementById('showhandler');
+				console.log(podium);
 				let scene = document.querySelector('a-scene');
 				newEntity.setAttribute('static-body', {});
 				newEntity.setAttribute('class', "remote");
@@ -51,17 +53,31 @@ AFRAME.registerComponent('handlereditor',{
 				console.log('group');
 				group = true;
 				console.log(group);
+
+				let instructions= document.createElement('a-box');
+				instructions.setAttribute('src', '#instructionsimg');
+				instructions.setAttribute('id', 'instructiosmenu');
+				instructions.setAttribute('position', {x:0,y:0.2,z:0});
+				instructions.setAttribute('rotation', {x:0,y:0,z:0});
+				instructions.setAttribute('width', '0.3');
+				instructions.setAttribute('height', '0.14');
+				instructions.setAttribute('depth', '0.01');
+ 				instructionpos.appendChild(instructions);
+
 			}else{
 				mode.setAttribute('src', '#modeImgNormal');
 				let newEl = document.getElementsByClassName('newen');
 				for (let elem of newEl){
 					elem.removeAttribute('animation');
 				}
+
 				//console.log(newEl)
 				//console.log(newEl)
 				let father = document.getElementById('fatherofgroup');
+				let instructions = document.getElementById('instructiosmenu');
 				console.log(father);
 				father.removeAttribute('id');
+				instructions.remove()
 				group=false;
 				console.log('group');
 	}
@@ -76,9 +92,7 @@ document.addEventListener('keypress', function(e) {
   	let text = mode.getAttribute('src')
   	if (group === false ){
 		mode.setAttribute('src', '#modeImgGroup');
-		//let entityToCopy = document.getElementById('newentity');
-		//if (entityToCopy){
-		//<a-entity class="remote" gltf-model="#handler" position="3.7 0.3 4.4"  scale="0.003 0.008 0.003" rotation="0 90 0" grabbable stretchable ></a-entity>
+		let instructionpos = document.getElementById('showhandler');
 		let newEntity = document.createElement('a-box');
 		let podium = document.getElementById('podium');
 		let scene = document.querySelector('a-scene');
@@ -92,7 +106,15 @@ document.addEventListener('keypress', function(e) {
 		console.log('group');
 		group = true;
 		console.log(group);
-		//}
+		let instructions= document.createElement('a-box');
+		instructions.setAttribute('src', '#instructionsimg');
+		instructions.setAttribute('id', 'instructiosmenu');
+		instructions.setAttribute('position', {x:0,y:0.2,z:0});
+		instructions.setAttribute('rotation', {x:0,y:0,z:0});
+		instructions.setAttribute('width', '0.3');
+		instructions.setAttribute('height', '0.14');
+		instructions.setAttribute('depth', '0.01');
+		instructionpos.appendChild(instructions);
 
 	}else{
   		mode.setAttribute('src', '#modeImgNormal');
@@ -100,11 +122,14 @@ document.addEventListener('keypress', function(e) {
 		for (let elem of newEl){
 			elem.removeAttribute('animation');
 		}
+
 		//console.log(newEl)
 		//console.log(newEl)
   		let father = document.getElementById('fatherofgroup');
   		console.log(father);
   		father.removeAttribute('id');
+  		let instructions = document.getElementById('instructiosmenu');
+  		instructions.remove()
   		group=false;
 		console.log('group');
 	}
@@ -524,10 +549,11 @@ AFRAME.registerComponent('posibilityofgroup',{
 				newEl.setAttribute('id', 'newentity');
 				newEl.setAttribute('mixin', el.getAttribute('mixin'));
 				newEl.setAttribute('scale', el.getAttribute('scale'));
-				newEl.setAttribute('rotation', el.getAttribute('rotation'));
-				newEl.setAttribute('opacity', '0.5');
+				newEl.setAttribute('rotation', el.getAttribute('rotation'))
 				newEl.setAttribute('material', el.getAttribute('material') );
+				newEl.setAttribute('transparent', el.getAttribute('transparent') );
 				newEl.setAttribute('class', "remote newen");
+				newEl.setAttribute('editable', {});
 				newEl.setAttribute('editable', {});
 				console.log(newEl.object3D.position.x);
 				console.log(newEl.object3D.position.y);
@@ -565,6 +591,7 @@ AFRAME.registerComponent('removeattributemenu',{
 	init:function(){
 		let el = this.el;
 		el.addEventListener('grab-start', function () {
+			console.log(el)
 			let menu = document.getElementById('attributemenu')
 			if (menu){
 				menu.remove();
@@ -871,7 +898,6 @@ AFRAME.registerComponent('rotationdownz',{
 AFRAME.registerComponent('dotransparent',{
 	init:function(){
 		let el = this.el;
-		let transparent = false;
 		let img = document.getElementById('transparentMenuImg');
 		let entityToChange = document.getElementById('entitytochange')
 		el.addEventListener('grab-start', function () {
