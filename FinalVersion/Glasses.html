@@ -1,0 +1,158 @@
+<!DOCTYPE html>a
+<html>
+
+    <head>
+        <title>Seventh Exercise</title>
+        <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+        <script src="../assets/kinema.js"></script>
+        <script src="https://unpkg.com/super-hands@3.0.0/dist/super-hands.min.js"></script>
+        <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
+        <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>-
+        <script src="https://unpkg.com/aframe-event-set-component@^4.1.1/dist/aframe-event-set-component.min.js"></script>
+        <script src="Components/Components.js"></script>
+    </head>
+
+    <body>
+		<a-scene>
+            <a-assets>
+                <img id="FiguresSelectorImg" src="../assets/FiguresSelector.jpg">
+                <img id="cubeImg" src="../assets/cubeImg.jpg">
+                <img id="cylinderImg" src="../assets/cylinderImg.jpg">
+                <img id="sphereImg" src="../assets/sphereImg.jpg">
+                <img id="planeImg" src="../assets/planeImg.jpg">
+                <img id="modeImgNormal" src="../assets/modeImgNormal.jpg">
+                <img id="modeImgGroup" src="../assets/modeImgGroup.jpg">
+                <img id="figureSelectedImg" src="../assets/figSele.jpg">
+                <img id="attributeSelectorImg" src="../assets/AttributesSelector.jpg">
+                <img id="attributeAxisImg" src="../assets/AxisSelector.jpg">
+                <img id="handlerImg" src="../assets/handlerImg.jpg">
+                <img id="openeditorImg" src="../assets/openeditorA.jpg">
+                <img id="closeeditorImg" src="../assets/closeeditorA.jpg">
+                <img id="openmore" src="../assets/openmore.jpg">
+                <img id="closemore" src="../assets/closemore.jpg">
+                <img id="sizes" src="../assets/size.jpg">
+                <img id="openvehicles" src="../assets/openvehicles.jpg">
+                <img id="closevehicles" src="../assets/closevehicles.jpg">
+                <img id="openplants" src="../assets/openplants.jpg">
+                <img id="closeplants" src="../assets/closeplants.jpg">
+                <img id="openanimals" src="../assets/openanimals.jpg">
+                <img id="closeanimals" src="../assets/closeanimals.jpg">
+                <img id="opengadgets" src="../assets/opengadgets.jpg">
+                <img id="closegadgets" src="../assets/closegadgets.jpg">
+                <img id="rotationimg" src="../assets/RotationSelector.jpg">
+                <img id="transparenttrue" src="../assets/transparentImgTrue.jpg">
+                <img id="transparentfalse" src="../assets/transparentImgFalse.jpg">
+                <img id="materialimg" src="../assets/materialsimg.jpg">
+                <img id="instructionsimg" src="../assets/instructionsImg.jpg">
+
+
+                <a-mixin id="cube" geometry="primitive: box; width: 0.3; height: 0.3; depth: 0.3"
+                         hoverable grabbable stretchable draggable droppable
+                         shadow
+                </a-mixin>
+                <a-mixin id="sphere" geometry="primitive: sphere; radius: 0.2"
+                         hoverable grabbable stretchable draggable droppable
+                         shadow
+                </a-mixin>
+                <a-mixin id="cylinder" geometry="primitive: cylinder; radius: 0.2; height: 0.3"
+                         hoverable grabbable stretchable draggable droppable
+                         shadow
+                </a-mixin>
+                <a-mixin id="plane" geometry="primitive: plane; width: 0.3; height: 0.3"
+                         hoverable grabbable stretchable draggable droppable
+                         shadow
+                </a-mixin>
+                <a-mixin id="touch"
+                 	 physics-collider phase-shift
+                 	 collision-filter="collisionForces: false"
+                 	 static-body="shape: sphere; sphereRadius: 0.02"
+                 	 super-hands="colliderEvent: collisions;
+                              	  colliderEventProperty: els;
+                              	  colliderEndEvent: collisions;
+                              	  colliderEndEventProperty: clearedEls;">
+				<a-mixin id="pointer" raycaster="showLine: true; objects: .button, .remote, a-link"
+				     super-hands="colliderEvent: raycaster-intersection;
+				                  colliderEventProperty: els;
+				                  colliderEndEvent:raycaster-intersection-cleared;
+				                  colliderEndEventProperty: clearedEls;"></a-mixin>
+				<a-mixin id="controller-right" mixin="pointer" line="color: blue; opacity: 0.75"
+				     vive-controls="hand: right" oculus-touch-controls="hand: right"
+				     windows-motion-controls="hand: right"
+				     gearvr-controls daydream-controls oculus-go-controls></a-mixin>
+				<a-mixin id="controller-left" mixin="pointer" line="color: blue; opacity: 0.75"
+				     vive-controls="hand: left" oculus-touch-controls="hand: left"
+				     windows-motion-controls="hand: left"></a-mixin>
+
+                <a-asset-item id="handler" src="../handler/hand.gltf" ></a-asset-item>
+                <a-asset-item id="lefthand" src="../assets/oculus-touch-controller-left.obj"></a-asset-item>
+    			<a-asset-item id="righthand" src="../assets/oculus-touch-controller-right.obj"></a-asset-item>
+                <a-asset-item id="model3" src="../tesla_model_3/scene.gltf" ></a-asset-item>
+                <a-asset-item id="trees" src="../tree/scene.gltf" ></a-asset-item>
+                <a-asset-item id="furtree" src="../fur_tree/scene.gltf" ></a-asset-item>
+                <a-asset-item id="monsteratree" src="../monstera_tree/scene.gltf" ></a-asset-item>
+                <a-asset-item id="shiba" src="../shiba_inu_dog/scene.gltf" ></a-asset-item>
+                <a-asset-item id="rabbit" src="../rabbit/scene.gltf" ></a-asset-item>
+                <a-asset-item id="horse" src="../horse/scene.gltf" ></a-asset-item>
+                <a-asset-item id="iphone11" src="../iPhone/scene.gltf" ></a-asset-item>
+                <a-asset-item id="ipad" src="../apple_ipad/scene.gltf" ></a-asset-item>
+                <a-asset-item id="watch" src="../apple_watch/scene.gltf" ></a-asset-item>
+                <a-asset-item id="cybertruck" src="../cybertruck/scene.gltf" ></a-asset-item>
+                <a-asset-item id="lamborghini" src="../lamborghini/scene.gltf" ></a-asset-item>
+            </a-assets>
+
+
+            <!--Construction Zone-->
+            <a-entity id="index" base></a-entity>
+
+            <!-- Podium -->
+            <a-entity class="podium" podium>
+
+            </a-entity>
+
+
+            <a-box position="0 -0.25 0" color="#bababa" width="15" height="1" depth="10">
+                <a-text value="Construction Zone" position="0 4 0" align="center"></a-text>
+            </a-box>
+
+
+            <a-entity id="player" position="0 0 10" movement-controls="fly: false" edit-mode gamepad-controls="" trackpad-controls="" keyboard-controls="" touch-controls="">
+				<a-entity camera position="0 1.7 0" look-controls
+				capture-mouse
+				static-body
+				raycaster="objects: .button, .remote; showLine: true" cursor="rayOrigin:mouse"
+				super-hands="colliderEvent: raycaster-intersection;
+					   		 colliderEventProperty: els;
+					   		 colliderEndEvent:raycaster-intersection-cleared;
+					   	 	 colliderEndEventProperty: clearedEls;">
+				</a-entity>
+                <!--<a-box position="0 1.1 -0.5" material="color:white; opacity: 0.25" width="1" height="0.01" depth="0.1" rotation="22.5 0 0" ></a-box>-->
+
+                <a-box id="showeditor" class="remote" position="-0.5 1.1 -0.5" width="0.15" height="0.1" depth="0.01" rotation="-22.5 0 0" material="color:white; opacity: 0.25" showeditor>
+                    <a-plane id="showphoto" src="#openeditorImg" width="0.15" height="0.1"></a-plane>
+                </a-box>
+                <!--Menu-->
+                <a-entity id="menu" menu position="-0.5 1.75 -0.5" Rotation="0 45 0"></a-entity>
+
+                <a-box id="showhandler" class="remote" position="0.5 1.1 -0.5" width="0.15" height="0.1" depth="0.01" rotation="-22.5 0 0" material="color:white;opacity: 0.25" handlereditor>
+                    <a-plane id="mode" src="#modeImgNormal" width="0.15" height="0.1"></a-plane>
+                </a-box>
+
+                <a-entity id="editor"></a-entity>
+
+				<a-entity id="rh" mixin="controller-right"></a-entity>
+        		<a-entity id="lh" mixin="controller-left"></a-entity>
+            </a-entity>
+        </a-scene>
+        <script>
+            coloredOnSelect();
+        </script>
+        <!-- GitHub Corner.-->
+        <a href="https://github.com/julianperezm/A-frame/tree/master/SeventhExercise" class="github-corner">
+            <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#222; color:#fff; position: absolute; top: 0; border: 0; right: 0;">
+            <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+            </svg>
+        </a>
+        <style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
+	</body>
+</html>
