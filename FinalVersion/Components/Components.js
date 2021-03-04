@@ -9,10 +9,13 @@ let hasAnimalsGltfs = false;
 let hasGadgets= false;
 let hasGadgetsGltfs = false;
 let transparent = false;
+let hide = false;
+let fathers = false;
 
 function coloredOnSelect() {
 	let showeditor = document.getElementById('showeditor');
 	let showhandler = document.getElementById('showhandler');
+	let deletehandler = document.getElementById('deletehandler');
 	//let cubeclick = document.getElementById('cubeClick');
 
 	showeditor.addEventListener('raycaster-intersected', function () {
@@ -26,6 +29,12 @@ function coloredOnSelect() {
 	});
 	showhandler.addEventListener('raycaster-intersected-cleared', function () {
 		showhandler.setAttribute('material',"color:white; opacity: 0.25");
+	});
+	deletehandler.addEventListener('raycaster-intersected', function () {
+		deletehandler.setAttribute('material',"color:#adadad; opacity: 0.25");
+	});
+	deletehandler.addEventListener('raycaster-intersected-cleared', function () {
+		deletehandler.setAttribute('material',"color:white; opacity: 0.25");
 	});
 }
 
@@ -44,7 +53,7 @@ AFRAME.registerComponent('handlereditor',{
 				console.log(podium);
 				let scene = document.querySelector('a-scene');
 				newEntity.setAttribute('static-body', {});
-				newEntity.setAttribute('class', "remote");
+				newEntity.setAttribute('class', "remote handler");
 				newEntity.setAttribute('mixin', 'cube');
 				newEntity.setAttribute('src', '#handlerImg');
 				newEntity.setAttribute('id', "fatherofgroup");
@@ -66,21 +75,30 @@ AFRAME.registerComponent('handlereditor',{
 
 			}else{
 				mode.setAttribute('src', '#modeImgNormal');
-				let newEl = document.getElementsByClassName('newen');
-				for (let elem of newEl){
-					elem.removeAttribute('animation');
-				}
-
-				//console.log(newEl)
-				//console.log(newEl)
 				let father = document.getElementById('fatherofgroup');
 				let instructions = document.getElementById('instructiosmenu');
-				console.log(father);
-				father.removeAttribute('id');
-				instructions.remove()
 				group=false;
-				console.log('group');
-	}
+				if (fathers === false){
+					console.log(father)
+					father.remove();
+					instructions.remove()
+
+				}else{
+					let newEl = document.getElementsByClassName('newen');
+					for (let elem of newEl){
+						elem.removeAttribute('animation');
+					}
+
+					//console.log(newEl)
+					//console.log(newEl)
+					console.log(father);
+					father.removeAttribute('id');
+					instructions.remove()
+
+					console.log('group');
+				}
+				}
+
 		});
 	}
 });
@@ -561,7 +579,33 @@ AFRAME.registerComponent('posibilityofgroup',{
 				console.log('prueba')
 				el.remove()
 				father.appendChild(newEl)
+				fathers = true;
 			}
+		});
+	}
+});
+
+AFRAME.registerComponent('deletehandler',{
+	init:function(){
+		let el = this.el;
+		let newEl = document.getElementsByClassName('handler');
+		el.addEventListener('grab-start', function () {
+			if (hide === false){
+				console.log(newEl)
+				for (let elem of newEl){
+					elem.style.visibility = "hidden"
+					//elem.setAttribute('hidden', "true");
+				}
+				hide = true;
+			}else{
+				console.log(newEl)
+				for (let elem of newEl){
+					elem.style.visibility = "visible"
+					//elem.remove('hidden');
+				}
+				hide = false;
+			}
+
 		});
 	}
 });
