@@ -591,19 +591,22 @@ AFRAME.registerComponent('deletehandler',{
 		let newEl = document.getElementsByClassName('handler');
 		el.addEventListener('grab-start', function () {
 			if (hide === false){
-				console.log(newEl)
 				for (let elem of newEl){
 					elem.style.visibility = "hidden"
+
 					//elem.setAttribute('hidden', "true");
 				}
 				hide = true;
-			}else{
 				console.log(newEl)
+			}else{
+
 				for (let elem of newEl){
 					elem.style.visibility = "visible"
+					console.log(newEl)
 					//elem.remove('hidden');
 				}
 				hide = false;
+				console.log(newEl)
 			}
 
 		});
