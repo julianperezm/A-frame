@@ -11,6 +11,10 @@ let hasGadgetsGltfs = false;
 let transparent = false;
 let hide = false;
 let fathers = false;
+let hasEnv1 = false;
+let hasEnv2 = false;
+let hasEnv3 = false;
+let hasEnv4 = false;
 
 function coloredOnSelect() {
 	let showeditor = document.getElementById('showeditor');
@@ -66,10 +70,10 @@ AFRAME.registerComponent('handlereditor',{
 				let instructions= document.createElement('a-box');
 				instructions.setAttribute('src', '#instructionsimg');
 				instructions.setAttribute('id', 'instructiosmenu');
-				instructions.setAttribute('position', {x:0,y:0.2,z:0});
-				instructions.setAttribute('rotation', {x:0,y:0,z:0});
-				instructions.setAttribute('width', '0.3');
-				instructions.setAttribute('height', '0.14');
+				instructions.setAttribute('position', {x:0,y:0.1,z:0});
+				instructions.setAttribute('rotation', {x:0,y:-5,z:0});
+				instructions.setAttribute('width', '0.2');
+				instructions.setAttribute('height', '0.1');
 				instructions.setAttribute('depth', '0.01');
  				instructionpos.appendChild(instructions);
 
@@ -127,8 +131,8 @@ document.addEventListener('keypress', function(e) {
 		let instructions= document.createElement('a-box');
 		instructions.setAttribute('src', '#instructionsimg');
 		instructions.setAttribute('id', 'instructiosmenu');
-		instructions.setAttribute('position', {x:0,y:0.2,z:0});
-		instructions.setAttribute('rotation', {x:0,y:0,z:0});
+		instructions.setAttribute('position', {x:0,y:0.1,z:0});
+		instructions.setAttribute('rotation', {x:0,y:-5,z:0});
 		instructions.setAttribute('width', '0.3');
 		instructions.setAttribute('height', '0.14');
 		instructions.setAttribute('depth', '0.01');
@@ -136,20 +140,28 @@ document.addEventListener('keypress', function(e) {
 
 	}else{
   		mode.setAttribute('src', '#modeImgNormal');
-		let newEl = document.getElementsByClassName('newen');
-		for (let elem of newEl){
-			elem.removeAttribute('animation');
-		}
+				let father = document.getElementById('fatherofgroup');
+				let instructions = document.getElementById('instructiosmenu');
+				group=false;
+				if (fathers === false){
+					console.log(father)
+					father.remove();
+					instructions.remove()
 
-		//console.log(newEl)
-		//console.log(newEl)
-  		let father = document.getElementById('fatherofgroup');
-  		console.log(father);
-  		father.removeAttribute('id');
-  		let instructions = document.getElementById('instructiosmenu');
-  		instructions.remove()
-  		group=false;
-		console.log('group');
+				}else{
+					let newEl = document.getElementsByClassName('newen');
+					for (let elem of newEl){
+						elem.removeAttribute('animation');
+					}
+
+					//console.log(newEl)
+					//console.log(newEl)
+					console.log(father);
+					father.removeAttribute('id');
+					instructions.remove()
+
+					console.log('group');
+				}
 	}
   }
 });
@@ -592,7 +604,7 @@ AFRAME.registerComponent('deletehandler',{
 		el.addEventListener('grab-start', function () {
 			if (hide === false){
 				for (let elem of newEl){
-					elem.style.visibility = "hidden"
+					elem.setAttribute("visible",false);
 
 					//elem.setAttribute('hidden', "true");
 				}
@@ -601,7 +613,7 @@ AFRAME.registerComponent('deletehandler',{
 			}else{
 
 				for (let elem of newEl){
-					elem.style.visibility = "visible"
+					elem.setAttribute("visible",true);
 					console.log(newEl)
 					//elem.remove('hidden');
 				}
@@ -1000,6 +1012,71 @@ AFRAME.registerComponent('dotransparent',{
 	}
 });
 
+AFRAME.registerComponent('selectenv',{
+	init:function(){
+		let el = this.el;
+		let show = false;
+		el.addEventListener('grab-start', function () {
+		if (show === false){
+			show = true
+			let env1 = document.createElement('a-box');
+			env1.setAttribute('position',{x:0,y:0.1,z:0});
+			env1.setAttribute('rotation',{x:0,y:-25,z:0});
+			env1.setAttribute('id','env1');
+			env1.setAttribute('class','remote');
+			env1.setAttribute('height', '0.1');
+			env1.setAttribute('depth', '0.01');
+			env1.setAttribute('width', '0.15');
+			env1.setAttribute('material', 'color:white; opacity:0.25');
+			env1.setAttribute('env1', {});
+			document.getElementById('selectenviroments').appendChild(env1)
+			let env1Img = document.createElement('a-plane');
+			env1Img.setAttribute('position',{x:0,y:0,z:0.0076});
+			env1Img.setAttribute('height', '0.05');
+			env1Img.setAttribute('id', 'env1Img');
+			env1Img.setAttribute('width', '0.05');
+			env1Img.setAttribute('src', '#openplants');
+			document.getElementById('env1').appendChild(env1Img);
+			hasEnv1 = true;
+
+
+			let env2 = document.createElement('a-box');
+			env2.setAttribute('position',{x:0,y:0.22,z:0});
+			env2.setAttribute('rotation',{x:0,y:-25,z:0});
+			env2.setAttribute('id','env2');
+			env2.setAttribute('class','remote');
+			env2.setAttribute('height', '0.1');
+			env2.setAttribute('depth', '0.01');
+			env2.setAttribute('width', '0.15');
+			env2.setAttribute('material', 'color:white; opacity:0.25');
+			env2.setAttribute('env2', {});
+			document.getElementById('selectenviroments').appendChild(env2)
+			let env2Img = document.createElement('a-plane');
+			env2Img.setAttribute('position',{x:0,y:0,z:0.0076});
+			env2Img.setAttribute('height', '0.05');
+			env2Img.setAttribute('id', 'env2Img');
+			env2Img.setAttribute('width', '0.05');
+			env2Img.setAttribute('src', '#openplants');
+			document.getElementById('env2').appendChild(env2Img);
+			hasEnv2 = true;
+		}else{
+			document.getElementById('env1').remove();
+			document.getElementById('env2').remove();
+			show = false
+		}
+
+
+		});
+
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('material',"color:#adadad; opacity: 0.5");
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('material',"color:white; opacity: 0.25");
+		});
+	}
+});
+
 AFRAME.registerComponent('editentity', {
 	schema:{
 	    active:{type:'boolean', default: false},
@@ -1019,8 +1096,8 @@ AFRAME.registerComponent('editentity', {
 			let attributesSelector= document.createElement('a-box');
 			attributesSelector.setAttribute('src', '#attributeSelectorImg');
 			attributesSelector.setAttribute('id', 'attributemenu');
-			attributesSelector.setAttribute('position', {x:-0.225,y:1.3,z:-0.6});
-			attributesSelector.setAttribute('rotation', {x:-15,y:0,z:0});
+			attributesSelector.setAttribute('position', {x:-0.45,y:1.3,z:-0.6});
+			attributesSelector.setAttribute('rotation', {x:0,y:0,z:0});
 			attributesSelector.setAttribute('width', '0.3');
 			attributesSelector.setAttribute('height', '0.14');
 			attributesSelector.setAttribute('depth', '0.01');

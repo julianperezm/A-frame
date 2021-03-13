@@ -128,17 +128,23 @@
 				</a-entity>
                 <!--<a-box position="0 1.1 -0.5" material="color:white; opacity: 0.25" width="1" height="0.01" depth="0.1" rotation="22.5 0 0" ></a-box>-->
 
-                <a-box id="showeditor" class="remote" position="-0.5 1.1 -0.5" width="0.15" height="0.1" depth="0.01" rotation="-22.5 0 0" material="color:white; opacity: 0.25" showeditor>
+                <a-box id="showeditor" class="remote" position="-0.6 1.4 -0.5" width="0.15" height="0.1" depth="0.01" rotation="-15 0 0" material="color:white; opacity: 0.25" showeditor>
                     <a-plane id="showphoto" src="#openeditorImg" width="0.15" height="0.1"></a-plane>
                 </a-box>
                 <!--Menu-->
-                <a-entity id="menu" menu position="-0.5 1.75 -0.5" Rotation="0 45 0"></a-entity>
-
-                <a-box id="showhandler" class="remote" position="0.5 1.1 -0.5" width="0.15" height="0.1" depth="0.01" rotation="-22.5 0 0" material="color:white;opacity: 0.25" handlereditor>
-                    <a-plane id="mode" src="#modeImgNormal" width="0.15" height="0.1"></a-plane>
-                </a-box>
+                <a-entity id="menu" menu position="-0.4 1.8 -0.5" Rotation="0 45 0"></a-entity>
 
                 <a-entity id="editor"></a-entity>
+
+                <a-box id="showhandler" class="remote" position="0.375 1.4 -0.5" width="0.15" height="0.1" depth="0.01" rotation="-15 0 0" material="color:white;opacity: 0.25" handlereditor>
+                    <a-plane id="mode" src="#modeImgNormal" width="0.15" height="0.1"></a-plane>
+                </a-box>
+                <!--<a-box id="deletehandler" class="remote" position="0.8 1.4s -0.5" width="0.15" height="0.1" depth="0.01" rotation="-22.5 0 0" material="color:white;opacity: 0.25" deletehandler>
+                    <a-plane id="mode" src="#modeImgNormal" width="0.15" height="0.1"></a-plane>
+                </a-box>-->
+                <a-box id="selectenviroments" class="remote" position="0.6 1.4 -0.5" width="0.15" height="0.1" depth="0.01" rotation="-15 0 0" material="color:white;opacity: 0.25" selectenv>
+                    <a-plane id="mode" src="#modeImgNormal" width="0.15" height="0.1"></a-plane>
+                </a-box>
 
 				<a-entity id="rh" mixin="controller-right"></a-entity>
         		<a-entity id="lh" mixin="controller-left"></a-entity>
