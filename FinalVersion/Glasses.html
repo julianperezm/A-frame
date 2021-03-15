@@ -1,6 +1,5 @@
-<!DOCTYPE html>a
+<!DOCTYPE html>
 <html>
-
     <head>
         <title>Seventh Exercise</title>
         <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
@@ -8,13 +7,14 @@
         <script src="../assets/kinema.js"></script>
         <script src="https://unpkg.com/super-hands@3.0.0/dist/super-hands.min.js"></script>
         <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
+        <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
         <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>-
         <script src="https://unpkg.com/aframe-event-set-component@^4.1.1/dist/aframe-event-set-component.min.js"></script>
         <script src="Components/Components.js"></script>
     </head>
 
     <body>
-		<a-scene>
+		<a-scene id="scn">
             <a-assets>
                 <img id="FiguresSelectorImg" src="../assets/FiguresSelector.jpg">
                 <img id="cubeImg" src="../assets/cubeImg.jpg">
@@ -128,23 +128,26 @@
 				</a-entity>
                 <!--<a-box position="0 1.1 -0.5" material="color:white; opacity: 0.25" width="1" height="0.01" depth="0.1" rotation="22.5 0 0" ></a-box>-->
 
-                <a-box id="showeditor" class="remote" position="-0.6 1.4 -0.5" width="0.15" height="0.1" depth="0.01" rotation="-15 0 0" material="color:white; opacity: 0.25" showeditor>
+                <a-box id="showeditor" class="remote" position="-0.6 1.4 -0.5" width="0.15" height="0.1" depth="0.01" rotation="0 0 0" material="color:white; opacity: 0.25" showeditor>
                     <a-plane id="showphoto" src="#openeditorImg" width="0.15" height="0.1"></a-plane>
                 </a-box>
                 <!--Menu-->
                 <a-entity id="menu" menu position="-0.4 1.8 -0.5" Rotation="0 45 0"></a-entity>
 
+                <a-entity id="menuenv" position="0.6 1.4 -0.5"></a-entity>
+
                 <a-entity id="editor"></a-entity>
 
-                <a-box id="showhandler" class="remote" position="0.375 1.4 -0.5" width="0.15" height="0.1" depth="0.01" rotation="-15 0 0" material="color:white;opacity: 0.25" handlereditor>
+                <a-box id="showhandler" class="remote" position="0.375 1.4 -0.5" width="0.15" height="0.1" depth="0.01" rotation="0 0 0" material="color:white;opacity: 0.25" handlereditor>
                     <a-plane id="mode" src="#modeImgNormal" width="0.15" height="0.1"></a-plane>
                 </a-box>
                 <!--<a-box id="deletehandler" class="remote" position="0.8 1.4s -0.5" width="0.15" height="0.1" depth="0.01" rotation="-22.5 0 0" material="color:white;opacity: 0.25" deletehandler>
                     <a-plane id="mode" src="#modeImgNormal" width="0.15" height="0.1"></a-plane>
                 </a-box>-->
-                <a-box id="selectenviroments" class="remote" position="0.6 1.4 -0.5" width="0.15" height="0.1" depth="0.01" rotation="-15 0 0" material="color:white;opacity: 0.25" selectenv>
+                <a-box id="selectenviroments" class="remote" position="0.6 1.4 -0.5" width="0.15" height="0.1" depth="0.01" rotation="0 0 0" material="color:white;opacity: 0.25" selectenv>
                     <a-plane id="mode" src="#modeImgNormal" width="0.15" height="0.1"></a-plane>
                 </a-box>
+                <a-box id="tip" height="0.1" depth="0.01" width="0.15" rotation="0 -10 0" position="0.6 1.5 -0.5" src="#instructionsimg"></a-box>
 
 				<a-entity id="rh" mixin="controller-right"></a-entity>
         		<a-entity id="lh" mixin="controller-left"></a-entity>

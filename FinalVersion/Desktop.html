@@ -15,7 +15,7 @@
     </head>
 
     <body>
-		<a-scene>
+		<a-scene id="scn">
             <a-assets>
                 <img id="FiguresSelectorImg" src="../assets/FiguresSelector.jpg">
                 <img id="cubeImg" src="../assets/cubeImg.jpg">
@@ -82,7 +82,7 @@
                 <a-asset-item id="lamborghini" src="../lamborghini/scene.gltf" ></a-asset-item>
             </a-assets>
 
-            <!--<a-entity environment="preset:default"></a-entity>-->
+            <!--<a-entity id="env" environment="preset:default"></a-entity>-->
             <!--Construction Zone-->
            <a-entity id="index" base></a-entity>
 
@@ -119,6 +119,8 @@
                 <!--Menu-->
                 <a-entity id="menu" menu position="-0.4 1.8 -0.5" Rotation="0 25 0"></a-entity>
 
+                <a-entity id="menuenv" position="0.6 1.4 -0.5"></a-entity>
+
                 <a-entity id="editor"></a-entity>
 
                 <a-box id="showhandler" class="remote" position="0.375 1.4 -0.5" width="0.15" height="0.1" depth="0.01" rotation="0 0 0" material="color:white;opacity: 0.25" handlereditor>
@@ -130,6 +132,7 @@
                 <a-box id="selectenviroments" class="remote" position="0.6 1.4 -0.5" width="0.15" height="0.1" depth="0.01" rotation="0 0 0" material="color:white;opacity: 0.25" selectenv>
                     <a-plane id="mode" src="#modeImgNormal" width="0.15" height="0.1"></a-plane>
                 </a-box>
+                <a-box id="tip" height="0.1" depth="0.01" width="0.15" rotation="0 -25 0" position="0.6 1.5 -0.5" src="#instructionsimg"></a-box>
 
             </a-entity>
 				<!--<a-entity sphere-collider="objects: a-box" super-hands hand-controls="left"></a-entity>
