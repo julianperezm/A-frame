@@ -1160,6 +1160,7 @@ AFRAME.registerComponent('selectenv',{
 		let el = this.el;
 		let show = false;
 		el.addEventListener('grab-start', function () {
+		tip = document.getElementById('tip')
 		if (show === false){
 			show = true
 			let env1 = document.createElement('a-box');
@@ -1174,11 +1175,11 @@ AFRAME.registerComponent('selectenv',{
 			env1.setAttribute('env1', {});
 			document.getElementById('menuenv').appendChild(env1)
 			let env1Img = document.createElement('a-plane');
-			env1Img.setAttribute('position',{x:0,y:0,z:0.0076});
-			env1Img.setAttribute('height', '0.05');
+			env1Img.setAttribute('position',{x:0,y:0,z:0});
+			env1Img.setAttribute('height', '0.1');
 			env1Img.setAttribute('id', 'env1Img');
-			env1Img.setAttribute('width', '0.05');
-			env1Img.setAttribute('src', '#openplants');
+			env1Img.setAttribute('width', '0.15');
+			env1Img.setAttribute('src', '#forestimg');
 			document.getElementById('env1').appendChild(env1Img);
 			hasEnv1 = true;
 
@@ -1195,11 +1196,11 @@ AFRAME.registerComponent('selectenv',{
 			env2.setAttribute('env2', {});
 			document.getElementById('menuenv').appendChild(env2)
 			let env2Img = document.createElement('a-plane');
-			env2Img.setAttribute('position',{x:0,y:0,z:0.0076});
-			env2Img.setAttribute('height', '0.05');
+			env2Img.setAttribute('position',{x:0,y:0,z:0});
+			env2Img.setAttribute('height', '0.1');
 			env2Img.setAttribute('id', 'env2Img');
-			env2Img.setAttribute('width', '0.05');
-			env2Img.setAttribute('src', '#openplants');
+			env2Img.setAttribute('width', '0.15');
+			env2Img.setAttribute('src', '#dreamimg');
 			document.getElementById('env2').appendChild(env2Img);
 			hasEnv2 = true;
 
@@ -1215,11 +1216,11 @@ AFRAME.registerComponent('selectenv',{
 			env3.setAttribute('env3', {});
 			document.getElementById('menuenv').appendChild(env3)
 			let env3Img = document.createElement('a-plane');
-			env3Img.setAttribute('position',{x:0,y:0,z:0.0076});
-			env3Img.setAttribute('height', '0.05');
+			env3Img.setAttribute('position',{x:0,y:0,z:0});
+			env3Img.setAttribute('height', '0.1');
 			env3Img.setAttribute('id', 'env3Img');
-			env3Img.setAttribute('width', '0.05');
-			env3Img.setAttribute('src', '#openplants');
+			env3Img.setAttribute('width', '0.15');
+			env3Img.setAttribute('src', '#japanimg');
 			document.getElementById('env3').appendChild(env3Img);
 			hasEnv3 = true;
 
@@ -1235,11 +1236,11 @@ AFRAME.registerComponent('selectenv',{
 			env4.setAttribute('env4', {});
 			document.getElementById('menuenv').appendChild(env4)
 			let env4Img = document.createElement('a-plane');
-			env4Img.setAttribute('position',{x:0,y:0,z:0.0076});
-			env4Img.setAttribute('height', '0.05');
+			env4Img.setAttribute('position',{x:0,y:0,z:0});
+			env4Img.setAttribute('height', '0.1');
 			env4Img.setAttribute('id', 'env4Img');
-			env4Img.setAttribute('width', '0.05');
-			env4Img.setAttribute('src', '#openplants');
+			env4Img.setAttribute('width', '0.15');
+			env4Img.setAttribute('src', '#Yavapaiimg');
 			document.getElementById('env4').appendChild(env4Img);
 			hasEnv4 = true;
 
@@ -1255,21 +1256,21 @@ AFRAME.registerComponent('selectenv',{
 			env5.setAttribute('env5', {});
 			document.getElementById('menuenv').appendChild(env5)
 			let env5Img = document.createElement('a-plane');
-			env5Img.setAttribute('position',{x:0,y:0,z:0.0076});
-			env5Img.setAttribute('height', '0.05');
+			env5Img.setAttribute('position',{x:0,y:0,z:0.0});
+			env5Img.setAttribute('height', '0.1');
 			env5Img.setAttribute('id', 'env4Img');
-			env5Img.setAttribute('width', '0.05');
-			env5Img.setAttribute('src', '#openplants');
+			env5Img.setAttribute('width', '0.15');
+			env5Img.setAttribute('src', '#defaultimg');
 			document.getElementById('env5').appendChild(env5Img);
 			hasEnv5 = true;
-
-
+			tip.setAttribute('visible', 'false')
 		}else{
 			document.getElementById('env1').remove();
 			document.getElementById('env2').remove();
 			document.getElementById('env3').remove();
 			document.getElementById('env4').remove();
 			document.getElementById('env5').remove();
+			tip.setAttribute('visible', 'true')
 			show = false
 		}
 

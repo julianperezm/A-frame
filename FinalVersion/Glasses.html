@@ -45,6 +45,8 @@
                 <img id="transparentfalse" src="../assets/transparentImgFalse.jpg">
                 <img id="materialimg" src="../assets/materialsimg.jpg">
                 <img id="instructionsimg" src="../assets/instructionsImg.jpg">
+                <img id="enviromentimg" src="../assets/EnviromentsImg.jpg">
+                <img id="tipimg" src="../assets/TipImg.jpg">
 
 
                 <a-mixin id="cube" geometry="primitive: box; width: 0.3; height: 0.3; depth: 0.3"
@@ -145,9 +147,9 @@
                     <a-plane id="mode" src="#modeImgNormal" width="0.15" height="0.1"></a-plane>
                 </a-box>-->
                 <a-box id="selectenviroments" class="remote" position="0.6 1.4 -0.5" width="0.15" height="0.1" depth="0.01" rotation="0 0 0" material="color:white;opacity: 0.25" selectenv>
-                    <a-plane id="mode" src="#modeImgNormal" width="0.15" height="0.1"></a-plane>
+                    <a-plane id="mode" src="#enviromentimg" width="0.15" height="0.1"></a-plane>
                 </a-box>
-                <a-box id="tip" height="0.1" depth="0.01" width="0.15" rotation="0 -10 0" position="0.6 1.5 -0.5" src="#instructionsimg"></a-box>
+                <a-box id="tip" height="0.1" depth="0.01" width="0.15" rotation="0 -10 0" position="0.6 1.5 -0.5" src="#tipimg"></a-box>
 
 				<a-entity id="rh" mixin="controller-right"></a-entity>
         		<a-entity id="lh" mixin="controller-left"></a-entity>
