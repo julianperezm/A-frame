@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Seventh Exercise</title>
+        <title>Editor Scene</title>
         <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
         <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
         <script src="../assets/kinema.js"></script>
@@ -142,22 +142,22 @@
                     <a-plane id="showphoto" src="#openeditorImg" width="0.15" height="0.1"></a-plane>
                 </a-box>
                 <!--Menu-->
-                <a-entity id="menu" menu position="-0.4 1.8 -0.5" Rotation="0 45 0"></a-entity>
+                <a-entity id="menu" menu position="-0.4 1.8 -0.5" Rotation="0 25 0"></a-entity>
 
                 <a-entity id="menuenv" position="0.6 1.4 -0.5"></a-entity>
 
                 <a-entity id="editor"></a-entity>
 
-                <a-box id="showhandler" class="remote" position="0.375 1.4 -0.5" width="0.15" height="0.1" depth="0.01" rotation="0 0 0" material="color:white;opacity: 0.25" handlereditor>
-                    <a-plane id="mode" src="#modeImgNormal" width="0.15" height="0.1"></a-plane>
+                <a-box id="showhandler" class="remote" position="0.36 1.4 -0.5" width="0.1" height="0.1" depth="0.01" rotation="0 0 0" material="color:white;opacity: 0.25" handlereditor>
+                    <a-plane id="mode" src="#modeImgNormal" width="0.1" height="0.1"></a-plane>
                 </a-box>
-                <a-box id="deletehandler" class="remote" position="0.375 1.5 -0.5" width="0.15" height="0.1" depth="0.01" rotation="0  0 0" material="color:white;opacity: 0.25" m deletehandler>
-                    <a-plane id="mode" src="#modeImgNormal" width="0.15" height="0.1"></a-plane>
+                <a-box id="deletehandler" class="remote" position="0.465 1.4 -0.5" width="0.1" height="0.1" depth="0.01" rotation="0 0 0" material="color:white;opacity: 0.25" deletehandler>
+                    <a-plane id="modehnd" src="#hideimg" width="0.1" height="0.1"></a-plane>
                 </a-box>
                 <a-box id="selectenviroments" class="remote" position="0.6 1.4 -0.5" width="0.15" height="0.1" depth="0.01" rotation="0 0 0" material="color:white;opacity: 0.25" selectenv>
                     <a-plane id="mode" src="#enviromentimg" width="0.15" height="0.1"></a-plane>
                 </a-box>
-                <a-box id="tip" height="0.1" depth="0.01" width="0.15" rotation="0 -10 0" position="0.6 1.5 -0.5" src="#tipimg"></a-box>
+                <a-box id="tip" height="0.1" depth="0.01" width="0.15" rotation="0 -25 0" position="0.6 1.5 -0.5" src="#tipimg"></a-box>
 
 				<a-entity id="rh" mixin="controller-right"></a-entity>
         		<a-entity id="lh" mixin="controller-left"></a-entity>
