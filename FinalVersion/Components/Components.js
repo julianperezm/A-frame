@@ -602,6 +602,7 @@ AFRAME.registerComponent('deletehandler',{
 	init:function(){
 		let el = this.el;
 		let newEl = document.getElementsByClassName('handler');
+		btnhnd = document.getElementById('modehnd');
 		el.addEventListener('grab-start', function () {
 			if (hide === false){
 				for (let elem of newEl){
@@ -609,6 +610,7 @@ AFRAME.registerComponent('deletehandler',{
 
 					//elem.setAttribute('hidden', "true");
 				}
+				btnhnd.setAttribute('src', '#Unhideimg')
 				hide = true;
 				console.log(newEl)
 			}else{
@@ -618,6 +620,7 @@ AFRAME.registerComponent('deletehandler',{
 					console.log(newEl)
 					//elem.remove('hidden');
 				}
+				btnhnd.setAttribute('src', '#hideimg')
 				hide = false;
 				console.log(newEl)
 			}
