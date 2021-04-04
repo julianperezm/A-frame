@@ -1022,18 +1022,15 @@ AFRAME.registerComponent('env1',{
 			env = document.getElementById('env')
 
 			if (env) {
-				env.setAttribute('environment',"preset:forest")
-			}else{
-				env = document.createElement('a-entity')
+				env.remove()
+			}
+			env = document.createElement('a-entity')
 			env.setAttribute('environment',"preset:forest")
 			env.setAttribute('id',"env")
 			let scene = document.querySelector('#scn');
 			console.log(scene)
 			scene.appendChild(env);
-			}
 
-			envJul = document.getElementById('index')
-			envJul.setAttribute('visible', 'false')
 
 		});
 		el.addEventListener('raycaster-intersected', function () {
@@ -1048,21 +1045,19 @@ AFRAME.registerComponent('env2',{
 	init:function(){
 		let el = this.el;
 		el.addEventListener('grab-start', function () {
-			env = document.getElementById('env')
+			env = document.getElementById('env');
 
 			if (env) {
-				env.setAttribute('environment',"preset:dream")
-			}else{
-				env = document.createElement('a-entity')
+				env.remove()
+			}
+			env = document.createElement('a-entity')
 			env.setAttribute('environment',"preset:dream")
 			env.setAttribute('id',"env")
 			let scene = document.querySelector('#scn');
 			console.log(scene)
 			scene.appendChild(env);
-			}
 
-			envJul = document.getElementById('index')
-			envJul.setAttribute('visible', 'false')
+
 
 		});
 		el.addEventListener('raycaster-intersected', function () {
@@ -1080,18 +1075,15 @@ AFRAME.registerComponent('env3',{
 			env = document.getElementById('env')
 
 			if (env) {
-				env.setAttribute('environment',"preset:japan")
-			}else{
+				env.remove()
+			}
 				env = document.createElement('a-entity')
 			env.setAttribute('environment',"preset:japan")
 			env.setAttribute('id',"env")
 			let scene = document.querySelector('#scn');
 			console.log(scene)
 			scene.appendChild(env);
-			}
 
-			envJul = document.getElementById('index')
-			envJul.setAttribute('visible', 'false')
 
 		});
 		el.addEventListener('raycaster-intersected', function () {
@@ -1109,17 +1101,15 @@ AFRAME.registerComponent('env4',{
 			env = document.getElementById('env')
 
 			if (env) {
-				env.setAttribute('environment',"preset:yavapai")
-			}else{
+				env.remove()
+			}
 				env = document.createElement('a-entity')
 			env.setAttribute('environment',"preset:yavapai")
 			env.setAttribute('id',"env")
 			let scene = document.querySelector('#scn');
 			console.log(scene)
 			scene.appendChild(env);
-			}
-			envJul = document.getElementById('index')
-			envJul.setAttribute('visible', 'false')
+
 		});
 		el.addEventListener('raycaster-intersected', function () {
 			el.setAttribute('material',"color:#adadad; opacity: 0.5");
@@ -1137,17 +1127,15 @@ AFRAME.registerComponent('env5',{
 			env = document.getElementById('env')
 
 			if (env) {
-				env.setAttribute('environment',"preset:default")
-			}else{
+				env.remove()
+			}
 				env = document.createElement('a-entity')
 				env.setAttribute('environment',"preset:default")
 				env.setAttribute('id',"env")
 				let scene = document.querySelector('#scn');
 				console.log(scene)
 				scene.appendChild(env);
-			}
-			envJul = document.getElementById('index')
-			envJul.setAttribute('visible', 'false')
+
 		});
 		el.addEventListener('raycaster-intersected', function () {
 			el.setAttribute('material',"color:#adadad; opacity: 0.5");
@@ -1780,21 +1768,115 @@ AFRAME.registerComponent('base',{
 
 	init: function(){
 		console.log("dentro del componente base");
-		let planePrincipal = document.createElement('a-cylinder');
-		planePrincipal.setAttribute('position',{x:0,y:0,z:0});
-		planePrincipal.setAttribute('radius', 32);
-		planePrincipal.setAttribute('height', 0.1);
-		planePrincipal.setAttribute('color', '#c9c9c9')
-		planePrincipal.setAttribute('static-body', {})
-		document.getElementById('index').appendChild(planePrincipal)
-		console.log(planePrincipal);
 
 		let skyPrincipal = document.createElement('a-sky');
 		skyPrincipal.setAttribute('theta-length',90 )
 		skyPrincipal.setAttribute('radius',30 )
-		skyPrincipal.setAttribute('color', '#b5e5ff')
+		skyPrincipal.setAttribute('color', '#000000')
 		document.getElementById('index').appendChild(skyPrincipal)
 
+	},
+});
+
+AFRAME.registerComponent('gotoeditor',{
+
+	init: function(){
+		let el = this.el;
+		this.el.addEventListener('grab-start', function(){
+			window.location.assign("../FinalVersion/Desktop.html");
+		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('scale',{x:1.1,y:1.1,z:1.1});
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('scale',{x:1,y:1,z:1});
+		});
+	},
+
+
+});
+AFRAME.registerComponent('gotoeditorglasses',{
+
+	init: function(){
+		let el = this.el;
+		this.el.addEventListener('grab-start', function(){
+			window.location.assign("../FinalVersion/Glasses.html");
+		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('scale',{x:1.1,y:1.1,z:1.1});
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('scale',{x:1,y:1,z:1});
+		});
+	},
+
+
+});
+
+
+AFRAME.registerComponent('gotohome',{
+
+	init: function(){
+		let el = this.el;
+		this.el.addEventListener('grab-start', function(){
+			window.location.assign("../Home/HomeDesktop.html");
+		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('scale',{x:1.1,y:1.1,z:1.1});
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('scale',{x:1,y:1,z:1});
+		});
+	},
+
+
+});
+
+AFRAME.registerComponent('gotohomeglasses',{
+
+	init: function(){
+		let el = this.el;
+		this.el.addEventListener('grab-start', function(){
+			window.location.assign("../Home/HomeGlasses.html");
+		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('scale',{x:1.1,y:1.1,z:1.1});
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('scale',{x:1,y:1,z:1});
+		});
+	},
+});
+
+AFRAME.registerComponent('goinstructionglasses',{
+
+	init: function(){
+		let el = this.el;
+		this.el.addEventListener('grab-start', function(){
+			window.location.assign("../Home/instructionsGlasses.html");
+		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('scale',{x:1.1,y:1.1,z:1.1});
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('scale',{x:1,y:1,z:1});
+		});
+	},
+});
+
+AFRAME.registerComponent('gotoinstructiondesktop',{
+
+	init: function(){
+		let el = this.el;
+		this.el.addEventListener('grab-start', function(){
+			window.location.assign("../Home/instructionsDesktop.html");
+		});
+		el.addEventListener('raycaster-intersected', function () {
+			el.setAttribute('scale',{x:1.1,y:1.1,z:1.1});
+		});
+		el.addEventListener('raycaster-intersected-cleared', function () {
+			el.setAttribute('scale',{x:1,y:1,z:1});
+		});
 	},
 });
 
