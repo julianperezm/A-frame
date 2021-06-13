@@ -1151,9 +1151,10 @@ AFRAME.registerComponent('selectenv',{
 		let el = this.el;
 		let show = false;
 		el.addEventListener('grab-start', function () {
-		tip = document.getElementById('tip')
+		//tip = document.getElementById('tip');
 		if (show === false){
-			show = true
+			show = true;
+			console.log("Abierto menú")
 			let env1 = document.createElement('a-box');
 			env1.setAttribute('position',{x:0,y:0.1,z:0});
 			env1.setAttribute('rotation',{x:0,y:-25,z:0});
@@ -1261,7 +1262,7 @@ AFRAME.registerComponent('selectenv',{
 			document.getElementById('env3').remove();
 			document.getElementById('env4').remove();
 			document.getElementById('env5').remove();
-			tip.setAttribute('visible', 'true')
+			//tip.setAttribute('visible', 'true')
 			show = false
 		}
 
